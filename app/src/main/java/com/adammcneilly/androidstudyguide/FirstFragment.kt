@@ -11,10 +11,9 @@ import androidx.fragment.app.Fragment
  */
 class FirstFragment : Fragment() {
 
-    // Change something
-    // again
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
