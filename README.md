@@ -7,3 +7,5 @@ If you are confused at any time about this project, create an [issue](https://gi
 ## Stream One - July 8, 2020
 
 Slido Link: https://app.sli.do/event/aiadmt3q/live/questions
+
+Twitch Recording: https://www.twitch.tv/videos/673980449
