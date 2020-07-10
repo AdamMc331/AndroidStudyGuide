@@ -12,11 +12,11 @@ Twitch Recording: https://www.twitch.tv/videos/673980449
 
 ### Resources
 
-Ktlint - https://github.com/pinterest/ktlint
-Ktlint Gradle Plugin - https://github.com/jlleitschuh/ktlint-gradle
-Detekt - https://github.com/detekt/detekt
-GitHub Actions - https://github.com/features/actions
-GitHub Actions Emulator Runner - https://github.com/marketplace/actions/android-emulator-runner
+* Ktlint - https://github.com/pinterest/ktlint
+* Ktlint Gradle Plugin - https://github.com/jlleitschuh/ktlint-gradle
+* Detekt - https://github.com/detekt/detekt
+* GitHub Actions - https://github.com/features/actions
+* GitHub Actions Emulator Runner - https://github.com/marketplace/actions/android-emulator-runner
 
 ## Stream Two - July 15, 2020
 
