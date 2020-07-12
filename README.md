@@ -20,7 +20,7 @@ Twitch Recording: https://www.twitch.tv/videos/673980449
 
 ## Stream Two - July 15, 2020
 
-Slide Link:
+Slido Link: https://app.sli.do/event/pusitli2
 
 Twitch Recording:
 
