@@ -8,22 +8,22 @@ class InMemoryArticleService : ArticleRepository {
             Article(
                 title = "Article One",
                 authorName = "Adam McNeilly",
-                url = ""
+                url = "https://androidessence.com/mastering-room-database-migrations"
             ),
             Article(
                 title = "Article Two",
                 authorName = "Adam McNeilly",
-                url = ""
+                url = "https://androidessence.com/mastering-room-database-migrations"
             ),
             Article(
                 title = "Article Three",
                 authorName = "Jane Doe",
-                url = ""
+                url = "https://androidessence.com/room-relationship-recap"
             ),
             Article(
                 title = "Article Four",
                 authorName = "John Smith",
-                url = ""
+                url = "https://androidessence.com/room-relationship-recap"
             )
         )
     }
