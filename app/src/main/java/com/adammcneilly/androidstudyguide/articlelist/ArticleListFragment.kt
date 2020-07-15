@@ -5,16 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.adammcneilly.androidstudyguide.R
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 
 class ArticleListFragment : Fragment() {
+
+    private lateinit var binding: FragmentArticleListBinding
+    private lateinit var adapter: ArticleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_article_list, container, false)
+        adapter = ArticleAdapter()
+        binding = FragmentArticleListBinding.inflate(inflater, container, false)
+        setupRecyclerView()
+        return binding.root
+    }
+
+    private fun setupRecyclerView() {
+        binding.articleList.adapter = adapter
+        binding.articleList.layoutManager = LinearLayoutManager(context)
+        val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        binding.articleList.addItemDecoration(dividerItemDecoration)
     }
 }
