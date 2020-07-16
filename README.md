@@ -22,6 +22,12 @@ Twitch Recording: https://www.twitch.tv/videos/673980449
 
 Slido Link: https://app.sli.do/event/pusitli2
 
-Twitch Recording:
+Twitch Recording: https://www.twitch.tv/videos/680802978
 
 ### Resources
+
+* Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/5
+* Powerful Layout Previews by Jeroen Mols: https://www.youtube.com/watch?v=TCKb1WfjAC8
+* Android ViewBinding: https://developer.android.com/topic/libraries/view-binding
+* Android DataBinding: https://developer.android.com/topic/libraries/data-binding
+* Epoxy: https://github.com/airbnb/epoxy
