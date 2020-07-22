@@ -36,6 +36,11 @@ Twitch Recording: https://www.twitch.tv/videos/680802978
 
 Slido Link: https://app.sli.do/event/0wk7nsuc
 
-Twitch Recording: 
+Twitch Recording: https://www.twitch.tv/videos/687729987
 
 ### Resources
+
+* ViewModel: https://developer.android.com/topic/libraries/architecture/viewmodel
+* Coroutines: https://developer.android.com/kotlin/coroutines, https://github.com/Kotlin/kotlinx.coroutines
+* Custom Coroutine Context from Mohit: https://codingwithmohit.com/coroutines/custom-coroutine-context-uses-cases/
+* Dave Leeds Coroutine Context Diagram: https://twitter.com/djleeds/status/1189006259023990785?s=19
