@@ -31,3 +31,11 @@ Twitch Recording: https://www.twitch.tv/videos/680802978
 * Android ViewBinding: https://developer.android.com/topic/libraries/view-binding
 * Android DataBinding: https://developer.android.com/topic/libraries/data-binding
 * Epoxy: https://github.com/airbnb/epoxy
+
+## Stream Three - July 22, 2020
+
+Slido Link: https://app.sli.do/event/0wk7nsuc
+
+Twitch Recording: 
+
+### Resources
