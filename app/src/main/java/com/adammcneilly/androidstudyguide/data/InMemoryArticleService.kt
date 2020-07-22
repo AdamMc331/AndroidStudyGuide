@@ -3,7 +3,7 @@ package com.adammcneilly.androidstudyguide.data
 import com.adammcneilly.androidstudyguide.models.Article
 
 class InMemoryArticleService : ArticleRepository {
-    override fun fetchArticles(): List<Article> {
+    override suspend fun fetchArticles(): List<Article> {
         return listOf(
             Article(
                 title = "Article One",
