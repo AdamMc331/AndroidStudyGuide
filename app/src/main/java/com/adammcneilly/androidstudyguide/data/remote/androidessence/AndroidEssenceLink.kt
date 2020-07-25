@@ -11,5 +11,5 @@ import org.simpleframework.xml.Root
 data class AndroidEssenceLink(
     @field:Attribute(name = "href")
     @param:Attribute(name = "href")
-    val href: String = ""
+    val href: String? = null
 )

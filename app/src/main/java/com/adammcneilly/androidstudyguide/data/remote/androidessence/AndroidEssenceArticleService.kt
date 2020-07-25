@@ -9,14 +9,18 @@ class AndroidEssenceArticleService(
 ) : ArticleRepository {
 
     override suspend fun fetchArticles(): List<Article> {
-        return api.getFeed().items.map(AndroidEssenceFeedItem::toArticle)
+        return api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
     }
 }
 
+/**
+ * TODO: If any of these networking values are null, we should throw an error so we're aware.
+ *  but we've decided not to crash, so we don't ruin the UX.
+ */
 private fun AndroidEssenceFeedItem.toArticle(): Article {
     return Article(
-        htmlTitle = HtmlString(this.title),
-        authorName = this.author.name,
-        url = this.link.href
+        htmlTitle = HtmlString(this.title.orEmpty()),
+        authorName = this.author?.name.orEmpty(),
+        url = this.link?.href.orEmpty()
     )
 }
