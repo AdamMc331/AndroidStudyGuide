@@ -2,6 +2,7 @@ package com.adammcneilly.androidstudyguide.data.remote.androidessence
 
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.models.Article
+import com.adammcneilly.androidstudyguide.util.HtmlString
 
 class AndroidEssenceArticleService(
     private val api: AndroidEssenceRetrofitAPI
@@ -14,7 +15,7 @@ class AndroidEssenceArticleService(
 
 private fun AndroidEssenceFeedItem.toArticle(): Article {
     return Article(
-        title = this.title,
+        htmlTitle = HtmlString(this.title),
         authorName = this.author.name,
         url = this.link.href
     )
