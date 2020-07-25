@@ -7,5 +7,11 @@ import org.simpleframework.xml.Root
 data class AndroidEssenceFeedItem(
     @field:Element(name = "title")
     @param:Element(name = "title")
-    val title: String = ""
+    val title: String = "",
+    @field:Element(name = "id")
+    @param:Element(name = "id")
+    val url: String = "",
+    @field:Element(name = "author")
+    @param:Element(name = "author")
+    val author: AndroidEssenceAuthor = AndroidEssenceAuthor()
 )

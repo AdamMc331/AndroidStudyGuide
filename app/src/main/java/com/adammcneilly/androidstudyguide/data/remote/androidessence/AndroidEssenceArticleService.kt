@@ -15,7 +15,7 @@ class AndroidEssenceArticleService(
 private fun AndroidEssenceFeedItem.toArticle(): Article {
     return Article(
         title = this.title,
-        authorName = "",
-        url = ""
+        authorName = this.author.name,
+        url = this.url
     )
 }
