@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.databinding.ListItemArticleBinding
 import com.adammcneilly.androidstudyguide.models.Article
 
@@ -36,21 +37,23 @@ class ArticleAdapter(
         private val binding: ListItemArticleBinding,
         private val clickListener: ArticleClickListener
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        private var article: Article? = null
 
         init {
             binding.root.setOnClickListener(this)
         }
 
         fun bindArticle(article: Article) {
-            binding.article = article
-            binding.executePendingBindings()
+            this.article = article
+            binding.articleTitle.text = article.htmlTitle.getSpanned()
+            binding.articleAuthor.text = itemView.context.getString(
+                R.string.by_author,
+                article.authorName
+            )
         }
 
         override fun onClick(v: View?) {
-            val article = binding.article
-            if (article != null) {
-                clickListener.onArticleClicked(article)
-            }
+            article?.let(clickListener::onArticleClicked)
         }
     }
 }
