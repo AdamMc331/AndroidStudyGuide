@@ -3,6 +3,7 @@ package com.adammcneilly.androidstudyguide.articlelist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.adammcneilly.androidstudyguide.databinding.ListItemArticleBinding
 import com.adammcneilly.androidstudyguide.models.Article
@@ -36,21 +37,19 @@ class ArticleAdapter(
         private val binding: ListItemArticleBinding,
         private val clickListener: ArticleClickListener
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+        private var article: Article? = null
 
         init {
             binding.root.setOnClickListener(this)
         }
 
         fun bindArticle(article: Article) {
-            binding.article = article
-            binding.executePendingBindings()
+            binding.articleTitle.text = HtmlCompat.fromHtml(article.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            binding.articleAuthor.text = article.authorName
         }
 
         override fun onClick(v: View?) {
-            val article = binding.article
-            if (article != null) {
-                clickListener.onArticleClicked(article)
-            }
+            article?.let(clickListener::onArticleClicked)
         }
     }
 }
