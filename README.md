@@ -51,6 +51,14 @@ Twitch Recording: https://www.twitch.tv/videos/687729987
 
 Slido Link: https://app.sli.do/event/xamrrter
 
-Twitch Recording:
+Twitch Recording: https://www.twitch.tv/videos/690424100
 
 ### Resources
+
+* Retrofit Service Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/11
+* UI Tweaks Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/12
+* Unit Testing Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/13
+* Retrofit: https://github.com/square/retrofit
+* Simple XML Converter: https://github.com/square/retrofit/tree/master/retrofit-converters/simplexml
+* OkHttp Logging Interceptor: https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
+* Android Essence RSS Feed: https://androidessence.com/feed.xml
