@@ -40,6 +40,8 @@ Twitch Recording: https://www.twitch.tv/videos/687729987
 
 ### Resources
 
+* ArticleListViewModel Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/8
+* Article Request Coroutine Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/9
 * ViewModel: https://developer.android.com/topic/libraries/architecture/viewmodel
 * Coroutines: https://developer.android.com/kotlin/coroutines, https://github.com/Kotlin/kotlinx.coroutines
 * Custom Coroutine Context from Mohit: https://codingwithmohit.com/coroutines/custom-coroutine-context-uses-cases/
