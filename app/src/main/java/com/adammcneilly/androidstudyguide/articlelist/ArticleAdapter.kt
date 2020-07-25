@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.databinding.ListItemArticleBinding
 import com.adammcneilly.androidstudyguide.models.Article
 
@@ -44,8 +45,12 @@ class ArticleAdapter(
         }
 
         fun bindArticle(article: Article) {
+            this.article = article
             binding.articleTitle.text = HtmlCompat.fromHtml(article.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            binding.articleAuthor.text = article.authorName
+            binding.articleAuthor.text = itemView.context.getString(
+                R.string.by_author,
+                article.authorName
+            )
         }
 
         override fun onClick(v: View?) {
