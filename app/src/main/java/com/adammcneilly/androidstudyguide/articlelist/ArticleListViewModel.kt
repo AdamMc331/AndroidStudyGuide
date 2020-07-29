@@ -5,20 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
-import com.adammcneilly.androidstudyguide.models.Article
 import kotlinx.coroutines.launch
 
 class ArticleListViewModel(
     articleRepository: ArticleRepository
 ) : ViewModel() {
 
-    private val _articles: MutableLiveData<List<Article>> = MutableLiveData()
-    val articles: LiveData<List<Article>> = _articles
+    private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
+    val state: LiveData<ArticleListViewState> = _state
 
     init {
         viewModelScope.launch {
-            val fetchedArticles = articleRepository.fetchArticles()
-            _articles.value = fetchedArticles
+            _state.value = ArticleListViewState.loading()
+
+            val articles = articleRepository.fetchArticles()
+            _state.value = ArticleListViewState.success(articles)
         }
     }
 }
