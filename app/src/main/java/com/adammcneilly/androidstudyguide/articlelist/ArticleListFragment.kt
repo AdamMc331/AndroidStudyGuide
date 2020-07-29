@@ -69,9 +69,12 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     }
 
     private fun displayViewState(viewState: ArticleListViewState) {
-        binding.progressBar.visibleIf(viewState.showLoading)
-        binding.articleList.visibleIf(viewState.showArticles)
-        adapter.articles = viewState.articles
+        binding.progressBar.visibleIf(viewState is ArticleListViewState.Loading)
+        binding.articleList.visibleIf(viewState is ArticleListViewState.Success)
+
+        if (viewState is ArticleListViewState.Success) {
+            adapter.articles = viewState.articles
+        }
     }
 
     private fun setupRecyclerView() {

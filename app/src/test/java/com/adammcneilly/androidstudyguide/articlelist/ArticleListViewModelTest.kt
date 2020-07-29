@@ -31,7 +31,7 @@ class ArticleListViewModelTest {
             .mockArticles(testArticles)
             .buildViewModel()
             .assertViewState(
-                expectedViewState = ArticleListViewState.success(testArticles)
+                expectedViewState = ArticleListViewState.Success(testArticles)
             )
     }
 }
