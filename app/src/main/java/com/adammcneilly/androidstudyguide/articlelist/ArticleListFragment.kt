@@ -16,6 +16,7 @@ import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEsse
 import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEssenceRetrofitAPI
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
+import com.adammcneilly.androidstudyguide.util.visibleIf
 
 class ArticleListFragment : Fragment(), ArticleClickListener {
 
@@ -62,9 +63,18 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     }
 
     private fun subscribeToViewModel() {
-        viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
-            adapter.articles = articles
+        viewModel.state.observe(viewLifecycleOwner, Observer { viewState ->
+            displayViewState(viewState)
         })
+    }
+
+    private fun displayViewState(viewState: ArticleListViewState) {
+        binding.progressBar.visibleIf(viewState is ArticleListViewState.Loading)
+        binding.articleList.visibleIf(viewState is ArticleListViewState.Success)
+
+        if (viewState is ArticleListViewState.Success) {
+            adapter.articles = viewState.articles
+        }
     }
 
     private fun setupRecyclerView() {
