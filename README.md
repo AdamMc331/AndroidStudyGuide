@@ -62,3 +62,11 @@ Twitch Recording: https://www.twitch.tv/videos/690424100
 * Simple XML Converter: https://github.com/square/retrofit/tree/master/retrofit-converters/simplexml
 * OkHttp Logging Interceptor: https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
 * Android Essence RSS Feed: https://androidessence.com/feed.xml
+
+## Stream Five - July 29, 2020
+
+Slido Link: https://app.sli.do/event/9639ftqv
+
+Twitch Recording: 
+
+### Resources
