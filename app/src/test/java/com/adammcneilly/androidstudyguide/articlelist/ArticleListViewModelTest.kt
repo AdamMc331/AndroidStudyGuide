@@ -28,10 +28,14 @@ class ArticleListViewModelTest {
         )
 
         testRobot
-            .mockArticles(testArticles)
             .buildViewModel()
+            .assertViewState(
+                expectedViewState = ArticleListViewState.Loading
+            )
+            .emitArticles(testArticles)
             .assertViewState(
                 expectedViewState = ArticleListViewState.Success(testArticles)
             )
+            .assertNumberOfCallsToFetchArticles(1)
     }
 }

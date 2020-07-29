@@ -9,8 +9,8 @@ class ArticleListViewModelRobot {
     private lateinit var viewModel: ArticleListViewModel
     private val fakeRepository = FakeArticleRepository()
 
-    fun mockArticles(articles: List<Article>) = apply {
-        fakeRepository.setMockedArticles(articles)
+    fun emitArticles(articles: List<Article>) = apply {
+        fakeRepository.emitArticles(articles)
     }
 
     fun buildViewModel() = apply {
@@ -22,5 +22,10 @@ class ArticleListViewModelRobot {
     fun assertViewState(expectedViewState: ArticleListViewState) = apply {
         val actualViewState = viewModel.state.testObserver().observedValue
         assertThat(actualViewState).isEqualTo(expectedViewState)
+    }
+
+    fun assertNumberOfCallsToFetchArticles(expectedCalls: Int) = apply {
+        val actualCalls = fakeRepository.getFetchedArticlesCallCount()
+        assertThat(actualCalls).isEqualTo(expectedCalls)
     }
 }
