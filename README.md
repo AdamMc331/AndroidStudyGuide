@@ -67,6 +67,6 @@ Twitch Recording: https://www.twitch.tv/videos/690424100
 
 Slido Link: https://app.sli.do/event/9639ftqv
 
-Twitch Recording: 
+Twitch Recording: https://www.twitch.tv/videos/694657590
 
 ### Resources
