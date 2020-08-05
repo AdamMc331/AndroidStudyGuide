@@ -54,4 +54,32 @@ class ArticleListViewModelTest {
             )
             .assertNumberOfCallsToFetchArticles(1)
     }
+
+    @Test
+    fun retryFailedRequest() {
+        val testArticles = listOf(
+            Article(htmlTitle = HtmlString("Test Title"))
+        )
+
+        val networkError = Throwable("Network Error")
+
+        testRobot
+            .buildViewModel()
+            .assertViewState(
+                ArticleListViewState.Loading
+            )
+            .emitFailure(networkError)
+            .assertViewState(
+                ArticleListViewState.Error(networkError)
+            )
+            .clickRetry()
+            .assertViewState(
+                ArticleListViewState.Loading
+            )
+            .emitArticles(testArticles)
+            .assertViewState(
+                ArticleListViewState.Success(testArticles)
+            )
+            .assertNumberOfCallsToFetchArticles(2)
+    }
 }

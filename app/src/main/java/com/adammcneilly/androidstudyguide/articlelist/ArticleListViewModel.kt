@@ -9,13 +9,21 @@ import com.adammcneilly.androidstudyguide.data.DataResponse
 import kotlinx.coroutines.launch
 
 class ArticleListViewModel(
-    articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository
 ) : ViewModel() {
 
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
     val state: LiveData<ArticleListViewState> = _state
 
     init {
+        fetchArticlesFromRepository()
+    }
+
+    fun retryClicked() {
+        fetchArticlesFromRepository()
+    }
+
+    private fun fetchArticlesFromRepository() {
         viewModelScope.launch {
             _state.value = ArticleListViewState.Loading
 
