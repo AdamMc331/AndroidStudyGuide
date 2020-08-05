@@ -11,4 +11,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="by_author">By %s</string>
+    <string name="article_fetch_failure">There was an issue requesting articles.</string>
 </resources>
