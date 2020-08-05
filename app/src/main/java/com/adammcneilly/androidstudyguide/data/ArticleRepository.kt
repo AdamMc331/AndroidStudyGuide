@@ -6,5 +6,5 @@ import com.adammcneilly.androidstudyguide.models.Article
  * Represents any source of articles to be displayed.
  */
 interface ArticleRepository {
-    suspend fun fetchArticles(): List<Article>
+    suspend fun fetchArticles(): DataResponse<List<Article>>
 }
