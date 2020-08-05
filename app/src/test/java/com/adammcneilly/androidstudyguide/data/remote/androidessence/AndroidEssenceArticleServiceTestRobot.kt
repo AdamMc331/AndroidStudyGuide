@@ -1,5 +1,6 @@
 package com.adammcneilly.androidstudyguide.data.remote.androidessence
 
+import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
 import com.google.common.truth.Truth.assertThat
 
@@ -18,7 +19,9 @@ class AndroidEssenceArticleServiceTestRobot {
     }
 
     suspend fun assertFetchedArticles(expectedArticles: List<Article>) = apply {
-        val actualArticles = service.fetchArticles()
+        val response = service.fetchArticles()
+        val actualArticles = (response as DataResponse.Success<List<Article>>).data
+
         assertThat(actualArticles).isEqualTo(expectedArticles)
     }
 }
