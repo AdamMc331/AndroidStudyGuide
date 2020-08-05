@@ -60,6 +60,10 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeToViewModel()
+
+        binding.retryButton.setOnClickListener {
+            viewModel.retryClicked()
+        }
     }
 
     private fun subscribeToViewModel() {
