@@ -70,3 +70,9 @@ Slido Link: https://app.sli.do/event/9639ftqv
 Twitch Recording: https://www.twitch.tv/videos/694657590
 
 ### Resources
+
+## Stream Six - August 5, 2020
+
+Slido Link: https://app.sli.do/event/qb9lnzmq
+
+Twitch Recording: 
