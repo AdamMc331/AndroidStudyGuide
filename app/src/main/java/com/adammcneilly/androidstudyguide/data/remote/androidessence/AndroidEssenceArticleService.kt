@@ -1,6 +1,7 @@
 package com.adammcneilly.androidstudyguide.data.remote.androidessence
 
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
+import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 
@@ -8,8 +9,13 @@ class AndroidEssenceArticleService(
     private val api: AndroidEssenceRetrofitAPI
 ) : ArticleRepository {
 
-    override suspend fun fetchArticles(): List<Article> {
-        return api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
+    override suspend fun fetchArticles(): DataResponse<List<Article>> {
+        return try {
+            val articles = api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
+            DataResponse.Success(articles)
+        } catch (e: Throwable) {
+            DataResponse.Error(e)
+        }
     }
 }
 
