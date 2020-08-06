@@ -71,8 +71,26 @@ Twitch Recording: https://www.twitch.tv/videos/694657590
 
 ### Resources
 
+* Loading State Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/19
+
 ## Stream Six - August 5, 2020
 
 Slido Link: https://app.sli.do/event/qb9lnzmq
 
-Twitch Recording: 
+Twitch Recording: https://www.twitch.tv/videos/701549021
+
+### Resources
+
+* Error State Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/20
+* Retry Button Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/21
+* Lottie Animation Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/22
+* Lottie: https://github.com/airbnb/lottie-android
+* Android Studio animation: https://lottiefiles.com/1013-android#
+
+## Stream Seven - August 8, 2020
+
+Slido Link: 
+
+Twitch Recording:
+
+### Resources
