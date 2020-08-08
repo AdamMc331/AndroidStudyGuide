@@ -8,40 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.adammcneilly.androidstudyguide.data.ArticleRepository
-import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEssenceArticleService
-import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEssenceRetrofitAPI
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.visibleIf
+import org.koin.android.ext.android.get
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArticleListFragment : Fragment(), ArticleClickListener {
 
     private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
-    private lateinit var viewModel: ArticleListViewModel
-
-    private val articleListViewModelFactory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            val repository: ArticleRepository = AndroidEssenceArticleService(
-                api = AndroidEssenceRetrofitAPI.getDefaultApi()
-            )
-
-            @Suppress("UNCHECKED_CAST")
-            return ArticleListViewModel(
-                articleRepository = repository
-            ) as T
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this, articleListViewModelFactory).get(ArticleListViewModel::class.java)
-    }
+    private val viewModel: ArticleListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
