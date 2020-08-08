@@ -89,7 +89,7 @@ Twitch Recording: https://www.twitch.tv/videos/701549021
 
 ## Stream Seven - August 8, 2020
 
-Slido Link: 
+Slido Link: https://app.sli.do/event/cdjp38pr
 
 Twitch Recording:
 
