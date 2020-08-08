@@ -5,10 +5,10 @@ import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEsse
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 abstract class DataModule {
 
     @Binds

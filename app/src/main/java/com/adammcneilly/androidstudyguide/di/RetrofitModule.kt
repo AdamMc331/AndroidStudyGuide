@@ -4,10 +4,10 @@ import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEsse
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 object RetrofitModule {
     @Provides
     fun provideAndroidEssenceRetrofitAPI(): AndroidEssenceRetrofitAPI {
