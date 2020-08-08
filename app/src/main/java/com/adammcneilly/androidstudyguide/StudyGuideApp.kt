@@ -5,6 +5,7 @@ import android.content.Context
 import com.adammcneilly.androidstudyguide.di.BaseStudyGuideGraph
 import com.adammcneilly.androidstudyguide.di.DataGraph
 import com.adammcneilly.androidstudyguide.di.StudyGuideGraph
+import com.adammcneilly.androidstudyguide.di.ViewModelFactoryGraph
 
 class StudyGuideApp : Application() {
 
@@ -17,4 +18,8 @@ fun Context.dependencyGraph(): StudyGuideGraph {
 
 fun Context.dataGraph(): DataGraph {
     return this.dependencyGraph().dataGraph
+}
+
+fun Context.viewModelFactoryGraph(): ViewModelFactoryGraph {
+    return this.dependencyGraph().viewModelFactoryGraph
 }

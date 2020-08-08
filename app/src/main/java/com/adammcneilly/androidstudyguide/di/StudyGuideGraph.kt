@@ -5,6 +5,7 @@ package com.adammcneilly.androidstudyguide.di
  */
 interface StudyGuideGraph {
     val dataGraph: DataGraph
+    val viewModelFactoryGraph: ViewModelFactoryGraph
 }
 
 /**
@@ -12,4 +13,6 @@ interface StudyGuideGraph {
  */
 class BaseStudyGuideGraph : StudyGuideGraph {
     override val dataGraph: DataGraph = NetworkDataGraph()
+
+    override val viewModelFactoryGraph: ViewModelFactoryGraph = BaseViewModelFactoryGraph(dataGraph)
 }

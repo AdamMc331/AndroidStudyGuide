@@ -8,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.adammcneilly.androidstudyguide.data.ArticleRepository
-import com.adammcneilly.androidstudyguide.dataGraph
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.visibleIf
+import com.adammcneilly.androidstudyguide.viewModelFactoryGraph
 
 class ArticleListFragment : Fragment(), ArticleClickListener {
 
@@ -23,21 +21,14 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     private lateinit var adapter: ArticleAdapter
     private lateinit var viewModel: ArticleListViewModel
 
-    private val articleListViewModelFactory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            val repository: ArticleRepository = requireContext().dataGraph().articleRepository
-
-            @Suppress("UNCHECKED_CAST")
-            return ArticleListViewModel(
-                articleRepository = repository
-            ) as T
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this, articleListViewModelFactory).get(ArticleListViewModel::class.java)
+        val viewModelFactory = requireContext()
+            .viewModelFactoryGraph()
+            .getArticleListViewModelFactory()
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ArticleListViewModel::class.java)
     }
 
     override fun onCreateView(
