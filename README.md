@@ -4,6 +4,8 @@ This project is going to be built live on [Twitch](https://twitch.tv/adammc331) 
 
 If you are confused at any time about this project, create an [issue](https://github.com/AdamMc331/AndroidStudyGuide/issues), ask a question on stream, or even submit one anonymously on Sli.do (will update link) and I will try to answer it during the next broadcast. 
 
+You can find all of the recordings in [this YouTube playlist](https://www.youtube.com/playlist?list=PLeJI6UYqZX0IppqVFXBleKoRgLExOC19T)!
+
 ## Stream One - July 8, 2020
 
 Slido Link: https://app.sli.do/event/aiadmt3q/live/questions
