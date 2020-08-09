@@ -91,6 +91,14 @@ Twitch Recording: https://www.twitch.tv/videos/701549021
 
 Slido Link: https://app.sli.do/event/cdjp38pr
 
-Twitch Recording:
+Twitch Recording: https://www.twitch.tv/videos/704219569
 
 ### Resources
+
+* Do It Yourself Approach PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/25
+* Do It Yourself Dependency Injection by Sam Edards: https://www.youtube.com/watch?v=ucZnYS7LmGU
+* Koin PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/26
+* Koin Docs: https://insert-koin.io/
+* Hilt PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/27
+* Hilt Docs: https://developer.android.com/training/dependency-injection/hilt-android#hilt-and-dagger
+* Hilt Dagger2 Playlist by Mitch Tabian: https://www.youtube.com/playlist?list=PLgCYzUzKIBE_MUlyvbCiOWsfq0nFgGXQ9
