@@ -6,6 +6,11 @@ import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import javax.inject.Inject
 
+/**
+ * This networking service will request [Article] entities from the Android Essence RSS Feed.
+ *
+ * @property[api] The retrofit instance that will make our networking requests.
+ */
 class AndroidEssenceArticleService @Inject constructor(
     private val api: AndroidEssenceRetrofitAPI
 ) : ArticleRepository {

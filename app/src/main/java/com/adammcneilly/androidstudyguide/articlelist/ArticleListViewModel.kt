@@ -9,6 +9,10 @@ import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import kotlinx.coroutines.launch
 
+/**
+ * This class is responsible for requesting articles from the [articleRepository] and mapping
+ * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
+ */
 class ArticleListViewModel @ViewModelInject constructor(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {

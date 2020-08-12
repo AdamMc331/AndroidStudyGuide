@@ -4,6 +4,9 @@ import android.text.Spanned
 import androidx.core.text.HtmlCompat
 
 /**
+ * This is an inline class that is a helper to convert some [input] String to a [Spanned] that can
+ * render some HTML to the UI.
+ *
  * https://kotlinlang.org/docs/reference/inline-classes.html
  */
 inline class HtmlString(private val input: String) {
