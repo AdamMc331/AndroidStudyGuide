@@ -28,6 +28,7 @@ class AndroidEssenceArticleService @Inject constructor(
 /**
  * TODO: If any of these networking values are null, we should throw an error so we're aware.
  *  but we've decided not to crash, so we don't ruin the UX.
+ *  https://github.com/AdamMc331/AndroidStudyGuide/issues/28
  */
 private fun AndroidEssenceFeedItem.toArticle(): Article {
     return Article(
