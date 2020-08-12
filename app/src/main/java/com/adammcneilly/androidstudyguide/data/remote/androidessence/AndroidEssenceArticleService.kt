@@ -4,8 +4,9 @@ import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
+import javax.inject.Inject
 
-class AndroidEssenceArticleService(
+class AndroidEssenceArticleService @Inject constructor(
     private val api: AndroidEssenceRetrofitAPI
 ) : ArticleRepository {
 

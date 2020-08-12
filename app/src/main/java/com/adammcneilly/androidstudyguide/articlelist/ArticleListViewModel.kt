@@ -1,5 +1,6 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +9,7 @@ import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import kotlinx.coroutines.launch
 
-class ArticleListViewModel(
+class ArticleListViewModel @ViewModelInject constructor(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 
