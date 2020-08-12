@@ -104,3 +104,11 @@ Twitch Recording: https://www.twitch.tv/videos/704219569
 * Hilt PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/27
 * Hilt Docs: https://developer.android.com/training/dependency-injection/hilt-android#hilt-and-dagger
 * Hilt Dagger2 Playlist by Mitch Tabian: https://www.youtube.com/playlist?list=PLgCYzUzKIBE_MUlyvbCiOWsfq0nFgGXQ9
+
+## Stream Eight - August 12, 2020
+
+Slido Link: https://admin.sli.do/event/oeu43wwy/questions
+
+Twitch Recording: 
+
+### Resources
