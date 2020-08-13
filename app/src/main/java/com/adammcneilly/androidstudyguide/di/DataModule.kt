@@ -7,6 +7,12 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 
+/**
+ * This is a Hilt [Module] that defines how to create instances of any data related dependencies
+ * in the application.
+ *
+ * @see RetrofitModule
+ */
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 abstract class DataModule {

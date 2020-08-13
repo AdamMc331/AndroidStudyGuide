@@ -8,6 +8,12 @@ import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.databinding.ListItemArticleBinding
 import com.adammcneilly.androidstudyguide.models.Article
 
+/**
+ * This adapter class is responsible for taking a list of [articles] and binding them into a
+ * [RecyclerView].
+ *
+ * @property[clickListener] This will handle all the callbacks for click events on an article item.
+ */
 class ArticleAdapter(
     private val clickListener: ArticleClickListener
 ) : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
