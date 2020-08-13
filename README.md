@@ -109,6 +109,9 @@ Twitch Recording: https://www.twitch.tv/videos/704219569
 
 Slido Link: https://admin.sli.do/event/oeu43wwy/questions
 
-Twitch Recording: 
+Twitch Recording: https://www.twitch.tv/videos/708430505
 
 ### Resources
+
+* Documentation PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/29
+* //TODO: Write A Better Comment: https://dev.to/adammc331/todo-write-a-better-comment-4c8c
