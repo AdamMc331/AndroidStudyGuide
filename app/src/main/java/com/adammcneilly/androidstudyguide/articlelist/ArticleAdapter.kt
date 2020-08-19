@@ -43,7 +43,7 @@ class ArticleAdapter(
         private val binding: ListItemArticleBinding,
         private val clickListener: ArticleClickListener
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        private var article: Article? = null
+        private val viewModel = ArticleListItemViewModel()
 
         init {
             binding.root.setOnClickListener(this)
@@ -51,25 +51,17 @@ class ArticleAdapter(
         }
 
         fun bindArticle(article: Article) {
-            this.article = article
-            binding.articleTitle.text = article.htmlTitle.getSpanned()
-            binding.articleAuthor.text = itemView.context.getString(
-                R.string.by_author,
-                article.authorName
-            )
+            this.viewModel.article = article
+            binding.articleTitle.text = viewModel.articleTitle
+            binding.articleAuthor.text = viewModel.getAuthorText(itemView.resources)
 
-            val bookmarkIcon = if (article.bookmarked) {
-                R.drawable.ic_bookmark_selected
-            } else {
-                R.drawable.ic_bookmark_unselected
-            }
-            binding.bookmarkButton.setImageResource(bookmarkIcon)
+            binding.bookmarkButton.setImageResource(viewModel.bookmarkButtonRes)
         }
 
         override fun onClick(v: View?) {
             when (v?.id) {
-                R.id.bookmark_button -> article?.let(clickListener::onBookmarkClicked)
-                else -> article?.let(clickListener::onArticleClicked)
+                R.id.bookmark_button -> viewModel.article?.let(clickListener::onBookmarkClicked)
+                else -> viewModel.article?.let(clickListener::onArticleClicked)
             }
         }
     }
