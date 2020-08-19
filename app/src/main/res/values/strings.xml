@@ -13,4 +13,5 @@
     <string name="by_author">By %s</string>
     <string name="article_fetch_failure">There was an issue requesting articles.</string>
     <string name="retry">Retry</string>
+    <string name="bookmark_article">Bookmark Article</string>
 </resources>

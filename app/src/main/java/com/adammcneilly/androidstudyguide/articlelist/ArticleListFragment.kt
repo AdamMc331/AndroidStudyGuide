@@ -77,4 +77,8 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
+
+    override fun onBookmarkClicked(article: Article) {
+        viewModel.bookmarkClicked(article)
+    }
 }

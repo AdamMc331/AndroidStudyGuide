@@ -27,6 +27,10 @@ class ArticleListViewModelRobot {
         viewModel.retryClicked()
     }
 
+    fun clickBookmark(article: Article) = apply {
+        viewModel.bookmarkClicked(article)
+    }
+
     fun assertViewState(expectedViewState: ArticleListViewState) = apply {
         val actualViewState = viewModel.state.testObserver().observedValue
         assertThat(actualViewState).isEqualTo(expectedViewState)
