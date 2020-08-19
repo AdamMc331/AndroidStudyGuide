@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bookmark_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Mastering Room Migrations" />
@@ -23,9 +23,20 @@
         android:id="@+id/article_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bookmark_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/article_title"
         tools:text="By Adam McNeilly" />
+
+    <ImageView
+        android:id="@+id/bookmark_button"
+        android:layout_width="@dimen/bookmark_icon_size"
+        android:layout_height="@dimen/bookmark_icon_size"
+        android:contentDescription="@string/bookmark_article"
+        android:scaleType="center"
+        android:src="@drawable/ic_bookmark_unselected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
