@@ -82,4 +82,26 @@ class ArticleListViewModelTest {
             )
             .assertNumberOfCallsToFetchArticles(2)
     }
+
+    @Test
+    fun bookmarkArticle() {
+        val unbookmarkedArticle = Article(
+            htmlTitle = HtmlString("Test Title")
+        )
+        val bookmarkedArticle = unbookmarkedArticle.copy(bookmarked = true)
+
+        val initialArticles = listOf(unbookmarkedArticle)
+        val updatedArticles = listOf(bookmarkedArticle)
+
+        testRobot
+            .buildViewModel()
+            .emitArticles(initialArticles)
+            .assertViewState(
+                ArticleListViewState.Success(initialArticles)
+            )
+            .clickBookmark(unbookmarkedArticle)
+            .assertViewState(
+                ArticleListViewState.Success(updatedArticles)
+            )
+    }
 }

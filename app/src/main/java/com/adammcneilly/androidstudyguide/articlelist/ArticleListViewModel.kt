@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
+import com.adammcneilly.androidstudyguide.models.Article
 import kotlinx.coroutines.launch
 
 /**
@@ -26,6 +27,19 @@ class ArticleListViewModel @ViewModelInject constructor(
 
     fun retryClicked() {
         fetchArticlesFromRepository()
+    }
+
+    fun bookmarkClicked(article: Article) {
+        val currentArticles = (_state.value as? ArticleListViewState.Success)?.articles.orEmpty()
+        val updatedArticles = currentArticles.map { item ->
+            val isSameItem = item.htmlTitle == article.htmlTitle
+            if (isSameItem) {
+                item.copy(bookmarked = !item.bookmarked)
+            } else {
+                item
+            }
+        }
+        _state.value = ArticleListViewState.Success(updatedArticles)
     }
 
     private fun fetchArticlesFromRepository() {

@@ -79,6 +79,6 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     }
 
     override fun onBookmarkClicked(article: Article) {
-        // TODO: Pass this off to ViewModel
+        viewModel.bookmarkClicked(article)
     }
 }
