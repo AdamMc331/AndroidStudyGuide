@@ -116,3 +116,11 @@ Twitch Recording: https://www.twitch.tv/videos/708430505
 * Documentation PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/29
 * //TODO: Write A Better Comment: https://dev.to/adammc331/todo-write-a-better-comment-4c8c
 * Orchid Documentation Engine: https://orchid.run/wiki/learn/tutorials/how-to-document-kotlin
+
+## Stream Nine - August 19, 2020
+
+Slido Link: https://app.sli.do/event/cxkevitf
+
+Twitch Recording: 
+
+### Resources
