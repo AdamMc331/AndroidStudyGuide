@@ -7,4 +7,5 @@ import com.adammcneilly.androidstudyguide.models.Article
  */
 interface ArticleClickListener {
     fun onArticleClicked(article: Article)
+    fun onBookmarkClicked(article: Article)
 }

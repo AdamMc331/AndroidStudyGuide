@@ -47,6 +47,7 @@ class ArticleAdapter(
 
         init {
             binding.root.setOnClickListener(this)
+            binding.bookmarkButton.setOnClickListener(this)
         }
 
         fun bindArticle(article: Article) {
@@ -59,7 +60,10 @@ class ArticleAdapter(
         }
 
         override fun onClick(v: View?) {
-            article?.let(clickListener::onArticleClicked)
+            when (v?.id) {
+                R.id.bookmark_button -> article?.let(clickListener::onBookmarkClicked)
+                else -> article?.let(clickListener::onArticleClicked)
+            }
         }
     }
 }
