@@ -57,6 +57,13 @@ class ArticleAdapter(
                 R.string.by_author,
                 article.authorName
             )
+
+            val bookmarkIcon = if (article.bookmarked) {
+                R.drawable.ic_bookmark_selected
+            } else {
+                R.drawable.ic_bookmark_unselected
+            }
+            binding.bookmarkButton.setImageResource(bookmarkIcon)
         }
 
         override fun onClick(v: View?) {
