@@ -121,6 +121,8 @@ Twitch Recording: https://www.twitch.tv/videos/708430505
 
 Slido Link: https://app.sli.do/event/cxkevitf
 
-Twitch Recording: 
+Twitch Recording: https://www.twitch.tv/videos/715432783
 
 ### Resources
+
+* Bookmarking UI Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/34
