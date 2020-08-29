@@ -8,9 +8,9 @@ import com.adammcneilly.androidstudyguide.models.Article
 data class PersistableArticle(
     @PrimaryKey(autoGenerate = false)
     val url: String,
-    val title: String,
-    val authorName: String,
-    val bookmarked: Boolean
+    val title: String = "",
+    val authorName: String = "",
+    val bookmarked: Boolean = false
 )
 
 fun Article.toPersistableArticle(): PersistableArticle {
