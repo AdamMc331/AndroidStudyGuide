@@ -5,6 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+/**
+ * This database implementation defines the Room database contracts for ALL information
+ * stored in the study guide application.
+ */
 @Database(
     entities = [PersistableArticle::class],
     version = 1
