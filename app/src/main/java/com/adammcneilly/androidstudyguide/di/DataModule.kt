@@ -11,7 +11,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
  * This is a Hilt [Module] that defines how to create instances of any data related dependencies
  * in the application.
  *
- * @see RetrofitModule
+ * @see ThirdPartyModule
  */
 @Module
 @InstallIn(ActivityRetainedComponent::class)
