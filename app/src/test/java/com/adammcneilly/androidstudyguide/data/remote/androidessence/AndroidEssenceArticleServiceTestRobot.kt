@@ -32,4 +32,12 @@ class AndroidEssenceArticleServiceTestRobot {
 
         assertThat(actualArticles).isEqualTo(expectedArticles)
     }
+
+    suspend fun persistArticle(article: Article) = apply {
+        service.persistArticle(article)
+    }
+
+    fun assertInsertArticleToDBCallCount(expectedCount: Int) = apply {
+        assertThat(fakeDatabase.getInsertArticleCallCount()).isEqualTo(expectedCount)
+    }
 }

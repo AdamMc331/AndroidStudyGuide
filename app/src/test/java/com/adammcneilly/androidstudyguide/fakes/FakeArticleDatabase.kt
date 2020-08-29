@@ -5,16 +5,21 @@ import com.adammcneilly.androidstudyguide.data.local.PersistableArticle
 
 class FakeArticleDatabase : ArticleDatabase {
     private var mockedBookmarks: List<PersistableArticle> = emptyList()
+    private var insertArticleCallCount = 0
 
     override suspend fun fetchBookmarks(): List<PersistableArticle> {
         return mockedBookmarks
     }
 
     override suspend fun insertArticle(article: PersistableArticle) {
-        // NoOP
+        insertArticleCallCount++
     }
 
     fun setMockedBookmarks(bookmarks: List<PersistableArticle>) {
         this.mockedBookmarks = bookmarks
+    }
+
+    fun getInsertArticleCallCount(): Int {
+        return insertArticleCallCount
     }
 }

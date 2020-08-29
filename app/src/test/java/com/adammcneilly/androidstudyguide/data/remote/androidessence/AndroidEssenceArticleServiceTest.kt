@@ -80,4 +80,12 @@ class AndroidEssenceArticleServiceTest {
             .buildService()
             .assertFetchedArticles(expectedArticles)
     }
+
+    @Test
+    fun persistArticleShouldCallDatabaseToInsert() = runBlockingTest {
+        testRobot
+            .buildService()
+            .persistArticle(Article())
+            .assertInsertArticleToDBCallCount(expectedCount = 1)
+    }
 }
