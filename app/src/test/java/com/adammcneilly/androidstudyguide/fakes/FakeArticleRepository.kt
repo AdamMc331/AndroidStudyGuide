@@ -9,6 +9,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class FakeArticleRepository : ArticleRepository {
     private var fetchArticlesCallCount = 0
+    private val persistedArticles: MutableList<Article> = mutableListOf()
 
     private lateinit var articleListContinuation: Continuation<DataResponse<List<Article>>>
 
@@ -18,6 +19,10 @@ class FakeArticleRepository : ArticleRepository {
         return suspendCoroutine { continuation ->
             articleListContinuation = continuation
         }
+    }
+
+    override suspend fun persistArticle(article: Article) {
+        persistedArticles.add(article)
     }
 
     fun emitArticles(articles: List<Article>) {
@@ -32,5 +37,9 @@ class FakeArticleRepository : ArticleRepository {
 
     fun getFetchedArticlesCallCount(): Int {
         return fetchArticlesCallCount
+    }
+
+    fun getPersistedArticles(): List<Article> {
+        return persistedArticles.toList()
     }
 }

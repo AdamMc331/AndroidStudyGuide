@@ -13,4 +13,8 @@ inline class HtmlString(private val input: String) {
     fun getSpanned(): Spanned {
         return HtmlCompat.fromHtml(input, HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
+
+    fun getInput(): String {
+        return input
+    }
 }

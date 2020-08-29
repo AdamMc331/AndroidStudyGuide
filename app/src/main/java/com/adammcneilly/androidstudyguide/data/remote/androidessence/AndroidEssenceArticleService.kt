@@ -2,6 +2,8 @@ package com.adammcneilly.androidstudyguide.data.remote.androidessence
 
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
+import com.adammcneilly.androidstudyguide.data.local.ArticleDatabase
+import com.adammcneilly.androidstudyguide.data.local.toPersistableArticle
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import javax.inject.Inject
@@ -12,16 +14,34 @@ import javax.inject.Inject
  * @property[api] The retrofit instance that will make our networking requests.
  */
 class AndroidEssenceArticleService @Inject constructor(
-    private val api: AndroidEssenceRetrofitAPI
+    private val api: AndroidEssenceRetrofitAPI,
+    private val database: ArticleDatabase
 ) : ArticleRepository {
 
     override suspend fun fetchArticles(): DataResponse<List<Article>> {
         return try {
             val articles = api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
-            DataResponse.Success(articles)
+            val bookmarks = database.fetchBookmarks()
+
+            // This is not efficient as it has two nested loops, see if we can improve this.
+            val updatedBookmarks = articles.map { article ->
+                val isBookmarked = bookmarks.any {
+                    it.url == article.url
+                }
+
+                article.copy(
+                    bookmarked = isBookmarked
+                )
+            }
+
+            DataResponse.Success(updatedBookmarks)
         } catch (e: Throwable) {
             DataResponse.Error(e)
         }
+    }
+
+    override suspend fun persistArticle(article: Article) {
+        database.insertArticle(article.toPersistableArticle())
     }
 }
 
