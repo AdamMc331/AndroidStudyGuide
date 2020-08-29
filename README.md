@@ -126,3 +126,10 @@ Twitch Recording: https://www.twitch.tv/videos/715432783
 ### Resources
 
 * Bookmarking UI Pull Request: https://github.com/AdamMc331/AndroidStudyGuide/pull/34
+* ArticleListItemViewModel PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/35
+
+## Stream Ten - August 29, 2020
+
+Slido Link: https://admin.sli.do/event/1snexjxj/questions
+
+Twitch Recording: 
