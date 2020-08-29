@@ -11,4 +11,9 @@ interface ArticleRepository {
      * both the success and failure scenarios.
      */
     suspend fun fetchArticles(): DataResponse<List<Article>>
+
+    /**
+     * This will take the supplied [article] and persist it on the device.
+     */
+    suspend fun persistArticle(article: Article)
 }

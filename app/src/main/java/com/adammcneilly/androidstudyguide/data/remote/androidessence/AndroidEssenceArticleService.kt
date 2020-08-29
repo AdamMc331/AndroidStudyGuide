@@ -3,6 +3,7 @@ package com.adammcneilly.androidstudyguide.data.remote.androidessence
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.data.local.ArticleDatabase
+import com.adammcneilly.androidstudyguide.data.local.toPersistableArticle
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import javax.inject.Inject
@@ -37,6 +38,10 @@ class AndroidEssenceArticleService @Inject constructor(
         } catch (e: Throwable) {
             DataResponse.Error(e)
         }
+    }
+
+    override suspend fun persistArticle(article: Article) {
+        database.insertArticle(article.toPersistableArticle())
     }
 }
 

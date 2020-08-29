@@ -30,6 +30,16 @@ class ArticleListViewModel @ViewModelInject constructor(
     }
 
     fun bookmarkClicked(article: Article) {
+        val updatedArticle = article.copy(
+            bookmarked = !article.bookmarked
+        )
+
+        viewModelScope.launch {
+            articleRepository.persistArticle(updatedArticle)
+        }
+
+        // NOTE: When we change the repository to return a flow of articles, we won't need
+        // to do this.
         val currentArticles = (_state.value as? ArticleListViewState.Success)?.articles.orEmpty()
         val updatedArticles = currentArticles.map { item ->
             val isSameItem = item.htmlTitle == article.htmlTitle
