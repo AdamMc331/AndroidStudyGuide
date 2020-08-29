@@ -33,6 +33,7 @@
         android:layout_width="@dimen/bookmark_icon_size"
         android:layout_height="@dimen/bookmark_icon_size"
         android:clickable="true"
+        android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="@string/bookmark_article"
         android:focusable="true"
         android:scaleType="center"
