@@ -7,6 +7,8 @@ import com.adammcneilly.androidstudyguide.data.local.toPersistableArticle
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import javax.inject.Inject
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 /**
  * This networking service will request [Article] entities from the Android Essence RSS Feed.
@@ -20,8 +22,16 @@ class AndroidEssenceArticleService @Inject constructor(
 
     override suspend fun fetchArticles(): DataResponse<List<Article>> {
         return try {
-            val articles = api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
-            val bookmarks = database.fetchBookmarks()
+            val articlesFetch = GlobalScope.async {
+                api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
+            }
+
+            val bookmarksFetch = GlobalScope.async {
+                database.fetchBookmarks()
+            }
+
+            val articles = articlesFetch.await()
+            val bookmarks = bookmarksFetch.await()
 
             // This is not efficient as it has two nested loops, see if we can improve this.
             val updatedBookmarks = articles.map { article ->
