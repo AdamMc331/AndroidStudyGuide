@@ -7,7 +7,7 @@ import androidx.room.Query
 
 @Dao
 interface ArticleDAO {
-    @Query("SELECT * FROM PersistableArticle WHERE isBookmarked = 1")
+    @Query("SELECT * FROM PersistableArticle WHERE bookmarked = 1")
     suspend fun fetchBookmarks(): List<PersistableArticle>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

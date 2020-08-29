@@ -9,5 +9,5 @@ data class PersistableArticle(
     val url: String,
     val title: String,
     val authorName: String,
-    val isBookmarked: Boolean
+    val bookmarked: Boolean
 )
