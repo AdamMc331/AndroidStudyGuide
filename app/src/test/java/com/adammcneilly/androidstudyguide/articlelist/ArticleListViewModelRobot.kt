@@ -40,4 +40,9 @@ class ArticleListViewModelRobot {
         val actualCalls = fakeRepository.getFetchedArticlesCallCount()
         assertThat(actualCalls).isEqualTo(expectedCalls)
     }
+
+    fun assertArticleWasPersisted(article: Article) = apply {
+        val wasPersisted = fakeRepository.getPersistedArticles().contains(article)
+        assertThat(wasPersisted).isTrue()
+    }
 }
