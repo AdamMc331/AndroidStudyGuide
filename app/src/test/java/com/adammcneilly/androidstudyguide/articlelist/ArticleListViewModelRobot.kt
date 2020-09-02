@@ -9,11 +9,11 @@ class ArticleListViewModelRobot {
     private lateinit var viewModel: ArticleListViewModel
     private val fakeRepository = FakeArticleRepository()
 
-    fun emitArticles(articles: List<Article>) = apply {
+    suspend fun emitArticles(articles: List<Article>) = apply {
         fakeRepository.emitArticles(articles)
     }
 
-    fun emitFailure(error: Throwable) = apply {
+    suspend fun emitFailure(error: Throwable) = apply {
         fakeRepository.emitFailure(error)
     }
 

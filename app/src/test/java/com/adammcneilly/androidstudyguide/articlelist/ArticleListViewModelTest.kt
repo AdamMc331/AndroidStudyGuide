@@ -5,6 +5,7 @@ import com.adammcneilly.androidstudyguide.CoroutinesTestRule
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
 
@@ -22,7 +23,7 @@ class ArticleListViewModelTest {
     val coroutinesTestRule = CoroutinesTestRule()
 
     @Test
-    fun successfulRequest() {
+    fun successfulRequest() = runBlockingTest {
         val testArticles = listOf(
             Article(htmlTitle = HtmlString("Test Title"))
         )
@@ -40,7 +41,7 @@ class ArticleListViewModelTest {
     }
 
     @Test
-    fun failureRequest() {
+    fun failureRequest() = runBlockingTest {
         val networkError = Throwable("Network Error")
 
         testRobot
@@ -56,7 +57,7 @@ class ArticleListViewModelTest {
     }
 
     @Test
-    fun retryFailedRequest() {
+    fun retryFailedRequest() = runBlockingTest {
         val testArticles = listOf(
             Article(htmlTitle = HtmlString("Test Title"))
         )
@@ -84,14 +85,13 @@ class ArticleListViewModelTest {
     }
 
     @Test
-    fun bookmarkArticle() {
+    fun clickingBookmarkShouldPersistArticle() = runBlockingTest {
         val unbookmarkedArticle = Article(
             htmlTitle = HtmlString("Test Title")
         )
         val bookmarkedArticle = unbookmarkedArticle.copy(bookmarked = true)
 
         val initialArticles = listOf(unbookmarkedArticle)
-        val updatedArticles = listOf(bookmarkedArticle)
 
         testRobot
             .buildViewModel()
@@ -100,9 +100,6 @@ class ArticleListViewModelTest {
                 ArticleListViewState.Success(initialArticles)
             )
             .clickBookmark(unbookmarkedArticle)
-            .assertViewState(
-                ArticleListViewState.Success(updatedArticles)
-            )
             .assertArticleWasPersisted(bookmarkedArticle)
     }
 }

@@ -3,36 +3,34 @@ package com.adammcneilly.androidstudyguide.fakes
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
-import kotlin.coroutines.Continuation
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.consumeAsFlow
 
 class FakeArticleRepository : ArticleRepository {
     private var fetchArticlesCallCount = 0
     private val persistedArticles: MutableList<Article> = mutableListOf()
 
-    private lateinit var articleListContinuation: Continuation<DataResponse<List<Article>>>
+    private val articleListChannel: Channel<DataResponse<List<Article>>> = Channel()
 
-    override suspend fun fetchArticles(): DataResponse<List<Article>> {
+    override fun fetchArticles(): Flow<DataResponse<List<Article>>> {
         fetchArticlesCallCount++
 
-        return suspendCoroutine { continuation ->
-            articleListContinuation = continuation
-        }
+        return articleListChannel.consumeAsFlow()
     }
 
     override suspend fun persistArticle(article: Article) {
         persistedArticles.add(article)
     }
 
-    fun emitArticles(articles: List<Article>) {
+    suspend fun emitArticles(articles: List<Article>) {
         val response = DataResponse.Success(articles)
-        articleListContinuation.resume(response)
+        articleListChannel.send(response)
     }
 
-    fun emitFailure(error: Throwable) {
-        val response = DataResponse.Error<List<Article>>(error)
-        articleListContinuation.resume(response)
+    suspend fun emitFailure(error: Throwable) {
+        val response = DataResponse.Error(error)
+        articleListChannel.send(response)
     }
 
     fun getFetchedArticlesCallCount(): Int {
