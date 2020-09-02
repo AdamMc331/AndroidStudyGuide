@@ -5,7 +5,7 @@ import com.adammcneilly.androidstudyguide.data.local.PersistableArticle
 import com.adammcneilly.androidstudyguide.fakes.FakeArticleDatabase
 import com.adammcneilly.androidstudyguide.models.Article
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.single
 
 class AndroidEssenceArticleServiceTestRobot {
     private val fakeAPI = FakeAndroidEssenceRetrofitAPI()
@@ -28,11 +28,11 @@ class AndroidEssenceArticleServiceTestRobot {
     }
 
     suspend fun assertFetchedArticles(expectedArticles: List<Article>) = apply {
-        service.fetchArticles().collect { response ->
-            val actualArticles = (response as DataResponse.Success<List<Article>>).data
+        val response = service.fetchArticles().single()
 
-            assertThat(actualArticles).isEqualTo(expectedArticles)
-        }
+        val actualArticles = (response as DataResponse.Success<List<Article>>).data
+
+        assertThat(actualArticles).isEqualTo(expectedArticles)
     }
 
     suspend fun persistArticle(article: Article) = apply {
