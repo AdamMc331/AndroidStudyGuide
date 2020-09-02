@@ -40,4 +40,8 @@ class FakeArticleRepository : ArticleRepository {
     fun getPersistedArticles(): List<Article> {
         return persistedArticles.toList()
     }
+
+    fun closeChannels() {
+        articleListChannel.close()
+    }
 }

@@ -6,6 +6,7 @@ import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 
@@ -21,6 +22,11 @@ class ArticleListViewModelTest {
     @JvmField
     @Rule
     val coroutinesTestRule = CoroutinesTestRule()
+
+    @After
+    fun tearDown() {
+        testRobot.cleanUp()
+    }
 
     @Test
     fun successfulRequest() = runBlockingTest {

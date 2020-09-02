@@ -45,4 +45,8 @@ class ArticleListViewModelRobot {
         val wasPersisted = fakeRepository.getPersistedArticles().contains(article)
         assertThat(wasPersisted).isTrue()
     }
+
+    fun cleanUp() = apply {
+        fakeRepository.closeChannels()
+    }
 }
