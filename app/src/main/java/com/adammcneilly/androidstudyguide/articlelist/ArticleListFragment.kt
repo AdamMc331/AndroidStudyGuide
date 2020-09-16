@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.visibleIf
@@ -68,8 +67,6 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
 
     private fun setupRecyclerView() {
         binding.articleList.adapter = adapter
-        val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        binding.articleList.addItemDecoration(dividerItemDecoration)
     }
 
     override fun onArticleClicked(article: Article) {

@@ -47,7 +47,7 @@ class ArticleAdapter(
         private val viewModel = ArticleListItemViewModel()
 
         init {
-            binding.root.setOnClickListener(this)
+            binding.articleContent.setOnClickListener(this)
             binding.bookmarkButton.setOnClickListener(this)
         }
 
