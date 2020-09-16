@@ -1,6 +1,7 @@
 package com.adammcneilly.androidstudyguide.data.remote.androidessence
 
 import org.simpleframework.xml.Element
+import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 @Root(name = "entry", strict = false)
@@ -13,5 +14,8 @@ data class AndroidEssenceFeedItem(
     val author: AndroidEssenceAuthor? = null,
     @field:Element(name = "link")
     @param:Element(name = "link")
-    val link: AndroidEssenceLink? = null
+    val link: AndroidEssenceLink? = null,
+    @field:ElementList(name = "category", inline = true)
+    @param:ElementList(name = "category", inline = true)
+    val categories: List<AndroidEssenceCategory>? = null
 )
