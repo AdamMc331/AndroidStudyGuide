@@ -132,4 +132,27 @@ Twitch Recording: https://www.twitch.tv/videos/715432783
 
 Slido Link: https://admin.sli.do/event/1snexjxj/questions
 
-Twitch Recording: 
+Twitch Recording: https://www.twitch.tv/videos/725252465
+
+### Resources
+
+* Storing Bookmarks in room PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/36
+* Fetching articles/bookmarks in parallel: https://github.com/AdamMc331/AndroidStudyGuide/pull/37
+
+## Stream Eleven - September 2, 2020
+
+Slido Link: https://app.sli.do/event/vlibvpj4
+
+Twitch Recording: https://www.twitch.tv/videos/729509625
+
+### Resources
+
+* Article request flow PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/38
+
+## Stream Twelve - September 16, 2020
+
+Slido Link: https://app.sli.do/event/rqsuzozl
+
+Twitch Recording:
+
+### Resources
