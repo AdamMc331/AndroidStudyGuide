@@ -1,5 +1,7 @@
 package com.adammcneilly.androidstudyguide.data.local
 
+import kotlinx.coroutines.flow.Flow
+
 /**
  * This interface defines the data contract for requesting or inserting any data to a local
  * database on the device.
@@ -8,7 +10,7 @@ package com.adammcneilly.androidstudyguide.data.local
  * (Room -> SQLDelight -> Realm -> ???)
  */
 interface ArticleDatabase {
-    suspend fun fetchBookmarks(): List<PersistableArticle>
+    fun fetchBookmarks(): Flow<List<PersistableArticle>>
 
     suspend fun insertArticle(article: PersistableArticle)
 }

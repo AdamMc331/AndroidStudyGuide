@@ -1,5 +1,7 @@
 package com.adammcneilly.androidstudyguide.data.local
 
+import kotlinx.coroutines.flow.Flow
+
 /**
  * This implementation uses a Room database to request and insert Article information.
  *
@@ -8,7 +10,7 @@ package com.adammcneilly.androidstudyguide.data.local
 class RoomArticleDatabase(
     private val roomDatabase: RoomStudyGuideDatabase
 ) : ArticleDatabase {
-    override suspend fun fetchBookmarks(): List<PersistableArticle> {
+    override fun fetchBookmarks(): Flow<List<PersistableArticle>> {
         return roomDatabase.articleDao().fetchBookmarks()
     }
 

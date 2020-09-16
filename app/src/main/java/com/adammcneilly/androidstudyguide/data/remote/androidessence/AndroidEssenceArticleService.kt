@@ -7,8 +7,11 @@ import com.adammcneilly.androidstudyguide.data.local.toPersistableArticle
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import javax.inject.Inject
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 /**
  * This networking service will request [Article] entities from the Android Essence RSS Feed.
@@ -20,22 +23,17 @@ class AndroidEssenceArticleService @Inject constructor(
     private val database: ArticleDatabase
 ) : ArticleRepository {
 
-    override suspend fun fetchArticles(): DataResponse<List<Article>> {
-        return try {
-            val articlesFetch = GlobalScope.async {
-                api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
-            }
+    override fun fetchArticles(): Flow<DataResponse<List<Article>>> {
+        val apiArticlesFlow = flow {
+            val articles = api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
+            emit(articles)
+        }
 
-            val bookmarksFetch = GlobalScope.async {
-                database.fetchBookmarks()
-            }
+        val bookmarkedArticlesFlow = database.fetchBookmarks()
 
-            val articles = articlesFetch.await()
-            val bookmarks = bookmarksFetch.await()
-
-            // This is not efficient as it has two nested loops, see if we can improve this.
-            val updatedBookmarks = articles.map { article ->
-                val isBookmarked = bookmarks.any {
+        return apiArticlesFlow.combine(bookmarkedArticlesFlow) { apiArticles, bookmarkArticles ->
+            val updatedBookmarks = apiArticles.map { article ->
+                val isBookmarked = bookmarkArticles.any {
                     it.url == article.url
                 }
 
@@ -45,8 +43,8 @@ class AndroidEssenceArticleService @Inject constructor(
             }
 
             DataResponse.Success(updatedBookmarks)
-        } catch (e: Throwable) {
-            DataResponse.Error(e)
+        }.catch { error ->
+            DataResponse.Error(error)
         }
     }
 
