@@ -153,6 +153,10 @@ Twitch Recording: https://www.twitch.tv/videos/729509625
 
 Slido Link: https://app.sli.do/event/rqsuzozl
 
-Twitch Recording:
+Twitch Recording: https://www.twitch.tv/videos/743167354
 
 ### Resources
+
+* Material Components PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/40
+* Material Design site: https://material.io/
+* Android lib: https://github.com/material-components/material-components-android
