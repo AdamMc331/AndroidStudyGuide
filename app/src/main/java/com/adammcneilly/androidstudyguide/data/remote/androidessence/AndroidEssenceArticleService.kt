@@ -59,9 +59,16 @@ class AndroidEssenceArticleService @Inject constructor(
  *  https://github.com/AdamMc331/AndroidStudyGuide/issues/28
  */
 private fun AndroidEssenceFeedItem.toArticle(): Article {
+    val tags = this.categories
+        ?.mapNotNull { category ->
+            category.term
+        }
+        .orEmpty()
+
     return Article(
         htmlTitle = HtmlString(this.title.orEmpty()),
         authorName = this.author?.name.orEmpty(),
-        url = this.link?.href.orEmpty()
+        url = this.link?.href.orEmpty(),
+        tags = tags
     )
 }

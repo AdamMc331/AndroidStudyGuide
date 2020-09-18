@@ -16,5 +16,6 @@ data class Article(
     val htmlTitle: HtmlString = HtmlString(""),
     val authorName: String = "",
     val url: String = "",
-    val bookmarked: Boolean = false
+    val bookmarked: Boolean = false,
+    val tags: List<String> = emptyList()
 )

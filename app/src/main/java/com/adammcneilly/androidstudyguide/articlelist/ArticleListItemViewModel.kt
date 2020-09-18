@@ -18,6 +18,9 @@ class ArticleListItemViewModel {
     val articleTitle: Spanned?
         get() = article?.htmlTitle?.getSpanned()
 
+    val articleTags: List<String>
+        get() = article?.tags.orEmpty()
+
     fun getAuthorText(resources: Resources): String {
         return resources.getString(
             R.string.by_author,

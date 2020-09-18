@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.databinding.ListItemArticleBinding
 import com.adammcneilly.androidstudyguide.models.Article
+import com.google.android.material.chip.Chip
 
 /**
  * This adapter class is responsible for taking a list of [articles] and binding them into a
@@ -46,7 +47,7 @@ class ArticleAdapter(
         private val viewModel = ArticleListItemViewModel()
 
         init {
-            binding.root.setOnClickListener(this)
+            binding.articleContent.setOnClickListener(this)
             binding.bookmarkButton.setOnClickListener(this)
         }
 
@@ -56,6 +57,13 @@ class ArticleAdapter(
             binding.articleAuthor.text = viewModel.getAuthorText(itemView.resources)
 
             binding.bookmarkButton.setImageResource(viewModel.bookmarkButtonRes)
+
+            binding.chipGroup.removeAllViews()
+            viewModel.articleTags.forEach { tag ->
+                val chip = Chip(itemView.context)
+                chip.text = tag
+                binding.chipGroup.addView(chip)
+            }
         }
 
         override fun onClick(v: View?) {
