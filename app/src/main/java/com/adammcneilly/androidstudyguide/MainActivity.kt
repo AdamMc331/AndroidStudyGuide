@@ -26,8 +26,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupNavController() {
         val navController = findNavController(R.id.nav_host_fragment)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
+
         navController.navigatorProvider.addNavigator(
-            KeepStateNavigator(this, supportFragmentManager, R.id.nav_host_fragment)
+            KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
         )
 
         navController.setGraph(R.navigation.nav_graph)
@@ -38,5 +41,9 @@ class MainActivity : AppCompatActivity() {
 
         // https://stackoverflow.com/a/50626510/3131147
         bottomNavigationMenu.setupWithNavController(findNavController(R.id.nav_host_fragment))
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return findNavController(R.id.nav_host_fragment).navigateUp()
     }
 }
