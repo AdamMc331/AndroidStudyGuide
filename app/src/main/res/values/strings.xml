@@ -14,4 +14,6 @@
     <string name="article_fetch_failure">There was an issue requesting articles.</string>
     <string name="retry">Retry</string>
     <string name="bookmark_article">Bookmark Article</string>
+    <string name="all_articles">All Articles</string>
+    <string name="bookmarks">Bookmarks</string>
 </resources>
