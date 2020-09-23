@@ -8,10 +8,20 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
 
+/**
+ * We needed to implement the [KeepStateNavigator] because by default the Navigation Library was
+ * recreating a fragment every time we selected a BottomNavigationView MenuItem. We do not want to
+ * recreate fragments as we switch between tabs, so this custom [FragmentNavigator] will first check
+ * if a fragment already exists for the destination we are moving to.
+ *
+ * **NOTE:** The [manager] that is supplied should be the childFragmentManager of your NavHostFragment.
+ *
+ * Source: https://github.com/STAR-ZERO/navigation-keep-fragment-sample
+ */
 @Navigator.Name("keep_state_fragment")
 class KeepStateNavigator(
     private val context: Context,
-    private val manager: FragmentManager, // Should pass childFragmentManager.
+    private val manager: FragmentManager,
     private val containerId: Int
 ) : FragmentNavigator(context, manager, containerId) {
 
