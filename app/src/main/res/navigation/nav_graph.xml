@@ -5,13 +5,13 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/ArticleListFragment">
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/ArticleListFragment"
         android:name="com.adammcneilly.androidstudyguide.articlelist.ArticleListFragment"
         android:label="@string/all_articles"
         tools:layout="@layout/fragment_article_list" />
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/BookmarkListFragment"
         android:name="com.adammcneilly.androidstudyguide.bookmarks.BookmarkListFragment"
         android:label="@string/bookmarks"

@@ -19,12 +19,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        setupNavController()
+
         setupBottomNavigationMenu()
+    }
+
+    private fun setupNavController() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.navigatorProvider.addNavigator(
+            KeepStateNavigator(this, supportFragmentManager, R.id.nav_host_fragment)
+        )
+
+        navController.setGraph(R.navigation.nav_graph)
     }
 
     private fun setupBottomNavigationMenu() {
         val bottomNavigationMenu: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
+        // https://stackoverflow.com/a/50626510/3131147
         bottomNavigationMenu.setupWithNavController(findNavController(R.id.nav_host_fragment))
     }
 }
