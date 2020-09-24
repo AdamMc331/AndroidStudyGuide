@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/ArticleListFragment">
 
-    <fragment
-        android:id="@+id/FirstFragment"
+    <keep_state_fragment
+        android:id="@+id/ArticleListFragment"
         android:name="com.adammcneilly.androidstudyguide.articlelist.ArticleListFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_article_list">
-    </fragment>
+        android:label="@string/all_articles"
+        tools:layout="@layout/fragment_article_list" />
+
+    <keep_state_fragment
+        android:id="@+id/BookmarkListFragment"
+        android:name="com.adammcneilly.androidstudyguide.bookmarks.BookmarkListFragment"
+        android:label="@string/bookmarks"
+        tools:layout="@layout/fragment_bookmark_list" />
 </navigation>
