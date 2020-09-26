@@ -1,8 +1,10 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
@@ -19,10 +21,19 @@ import kotlinx.coroutines.launch
  */
 class ArticleListViewModel @ViewModelInject constructor(
     @AndroidEssenceArticles
-    private val androidEssenceArticleRepository: ArticleRepository,
+    androidEssenceArticleRepository: ArticleRepository,
     @BookmarkedArticles
-    private val bookmarksArticleRepository: ArticleRepository
+    bookmarksArticleRepository: ArticleRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+    private val articleListType: ArticleListType? =
+        savedStateHandle.get(ArticleListFragment.ARG_ARTICLE_LIST_TYPE)
+
+    private val repository = when (articleListType) {
+        ArticleListType.BOOKMARKS -> bookmarksArticleRepository
+        else -> androidEssenceArticleRepository
+    }
 
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
     val state: LiveData<ArticleListViewState> = _state
@@ -41,7 +52,7 @@ class ArticleListViewModel @ViewModelInject constructor(
         )
 
         viewModelScope.launch {
-            androidEssenceArticleRepository.persistArticle(updatedArticle)
+            repository.persistArticle(updatedArticle)
         }
     }
 
@@ -49,7 +60,7 @@ class ArticleListViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             _state.value = ArticleListViewState.Loading
 
-            bookmarksArticleRepository.fetchArticles().collect { response ->
+            repository.fetchArticles().collect { response ->
                 _state.value = when (response) {
                     is DataResponse.Success -> ArticleListViewState.Success(response.data)
                     is DataResponse.Error -> ArticleListViewState.Error(response.error)

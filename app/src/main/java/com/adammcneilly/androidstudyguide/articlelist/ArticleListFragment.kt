@@ -78,4 +78,8 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     override fun onBookmarkClicked(article: Article) {
         viewModel.bookmarkClicked(article)
     }
+
+    companion object {
+        const val ARG_ARTICLE_LIST_TYPE = "ArticleListType"
+    }
 }

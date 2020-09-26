@@ -2,8 +2,11 @@ package com.adammcneilly.androidstudyguide
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.adammcneilly.androidstudyguide.articlelist.ArticleListFragment
+import com.adammcneilly.androidstudyguide.articlelist.ArticleListType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +34,9 @@ class MainActivity : AppCompatActivity() {
      *
      * In addition, we need to supply the nav graph, which can only be done after we've customized our
      * navController.
+     *
+     * Default args thing:
+     * https://stackoverflow.com/questions/54082036/how-to-pass-arguments-to-a-fragment-using-bottom-navigation-view-and-android-nav
      */
     private fun setupNavController() {
         val navController = findNavController(R.id.nav_host_fragment)
@@ -41,7 +47,23 @@ class MainActivity : AppCompatActivity() {
             KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
         )
 
-        navController.setGraph(R.navigation.nav_graph)
+        // To provide a default argument to our initial navigation destination
+        // We inflate the graph ourselves, add that argument to it, then set this graph on our
+        // nav controller.
+        val graph = navController.navInflater.inflate(R.navigation.nav_graph)
+        val defaultArticleListType = NavArgument.Builder().setDefaultValue(ArticleListType.ALL_ARTICLES).build()
+        graph.addArgument(ArticleListFragment.ARG_ARTICLE_LIST_TYPE, defaultArticleListType)
+        navController.graph = graph
+
+        // If destination changes to BookmarksFragment, we want to provide a new ArticleListType.
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.BookmarkListFragment -> {
+                    val argument = NavArgument.Builder().setDefaultValue(ArticleListType.BOOKMARKS).build()
+                    destination.addArgument(ArticleListFragment.ARG_ARTICLE_LIST_TYPE, argument)
+                }
+            }
+        }
     }
 
     /**
