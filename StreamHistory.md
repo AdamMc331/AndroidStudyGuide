@@ -6,6 +6,17 @@ This page has a record of all of the live streams for this project, and resource
 
 * [Stream One: Detekt & Ktlint](#stream-one---july-8-2020)
 * [Stream Two: Article List RecyclerView](#stream-two---july-15-2020)
+* [Stream Three: MVVM Architecture Setup](#stream-three---july-22-2020)
+* [Stream Four: Retrofit Networking](#stream-four---july-25-2020)
+* [Stream Five: Loading State](#stream-five---july-29-2020)
+* [Stream Six: Error State & Lottie Animation](#stream-six---august-5-2020)
+* [Stream Seven: Dependency Injection Approaches](#stream-seven---august-8-2020)
+* [Stream Eight: Documentation](#stream-eight---august-12-2020)
+* [Stream Nine: Bookmarking UI](#stream-nine---august-19-2020)
+* [Stream Ten: Storing Bookmarks In Room](#stream-ten---august-29-2020)
+* [Stream Eleven: Converting Data Requests To Flows](#stream-eleven---september-2-2020)
+* [Stream Twelve: Material UI Theming](#stream-twelve---september-16-2020)
+* [Stream Thirteen: Bottom Navigation Menu Setup](#stream-thirteen---september-23-2020)
 
 ## Stream One - July 8, 2020
 
