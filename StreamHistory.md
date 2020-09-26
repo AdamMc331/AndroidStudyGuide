@@ -4,8 +4,8 @@ This page has a record of all of the live streams for this project, and resource
 
 ## Table Of Contents
 
-* [Stream One: Detekt & Ktlint](#Stream-One---July-8,-2020)
-* [Stream Two: Article List RecyclerView](#Stream-Two---July-15,-2020)
+* [Stream One: Detekt & Ktlint](#stream-one---july-8-2020)
+* [Stream Two: Article List RecyclerView](#stream-two---july-15-2020)
 
 ## Stream One - July 8, 2020
 
