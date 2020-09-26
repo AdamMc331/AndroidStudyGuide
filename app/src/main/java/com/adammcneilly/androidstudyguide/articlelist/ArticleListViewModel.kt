@@ -1,5 +1,6 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
+import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -39,6 +40,7 @@ class ArticleListViewModel @ViewModelInject constructor(
     val state: LiveData<ArticleListViewState> = _state
 
     init {
+        Log.d("ARM", "Creating ViewModel: $articleListType")
         fetchArticlesFromRepository()
     }
 

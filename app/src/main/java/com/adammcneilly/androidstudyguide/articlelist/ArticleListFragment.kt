@@ -3,6 +3,7 @@ package com.adammcneilly.androidstudyguide.articlelist
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,12 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
     private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
     private val viewModel: ArticleListViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Log.d("ARM", "Creating fragment with type: ${arguments?.get(ARG_ARTICLE_LIST_TYPE)}")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

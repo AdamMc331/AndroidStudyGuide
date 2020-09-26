@@ -1,6 +1,7 @@
 package com.adammcneilly.androidstudyguide
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavArgument
 import androidx.navigation.findNavController
@@ -53,10 +54,11 @@ class MainActivity : AppCompatActivity() {
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
         val defaultArticleListType = NavArgument.Builder().setDefaultValue(ArticleListType.ALL_ARTICLES).build()
         graph.addArgument(ArticleListFragment.ARG_ARTICLE_LIST_TYPE, defaultArticleListType)
-        navController.graph = graph
 
         // If destination changes to BookmarksFragment, we want to provide a new ArticleListType.
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            Log.d("ARM", "Navigating to: ${destination.id}")
+
             when (destination.id) {
                 R.id.BookmarkListFragment -> {
                     val argument = NavArgument.Builder().setDefaultValue(ArticleListType.BOOKMARKS).build()
@@ -64,6 +66,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // Does this need to be last?
+        navController.graph = graph
     }
 
     /**
