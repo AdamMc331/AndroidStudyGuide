@@ -160,3 +160,15 @@ Twitch Recording: https://www.twitch.tv/videos/743167354
 * Material Components PR: https://github.com/AdamMc331/AndroidStudyGuide/pull/40
 * Material Design site: https://material.io/
 * Android lib: https://github.com/material-components/material-components-android
+
+## Stream Thirteen - September 23, 2020
+
+Slido Link: https://app.sli.do/event/uqwfrs4z
+
+Twitch Recording: https://www.twitch.tv/videos/750075105
+
+### Resources
+
+* Bottom Navigation PR: https://www.twitch.tv/videos/750075105
+* KeepStateNavigator: https://github.com/STAR-ZERO/navigation-keep-fragment-sample/blob/master/app/src/main/java/com/star_zero/navigation_keep_fragment_sample/navigation/KeepStateNavigator.kt
+* Bottom Navigation Material Docs: https://material.io/develop/android/components/bottom-navigation
