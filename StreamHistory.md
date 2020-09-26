@@ -1,4 +1,4 @@
-# Steam History
+# Stream History
 
 This page has a record of all of the live streams for this project, and resources for each one.
 
