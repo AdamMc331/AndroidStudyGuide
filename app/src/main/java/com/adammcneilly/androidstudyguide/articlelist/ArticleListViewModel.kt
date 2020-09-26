@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
+import com.adammcneilly.androidstudyguide.di.AndroidEssenceArticles
 import com.adammcneilly.androidstudyguide.models.Article
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
  * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
  */
 class ArticleListViewModel @ViewModelInject constructor(
+    @AndroidEssenceArticles
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 

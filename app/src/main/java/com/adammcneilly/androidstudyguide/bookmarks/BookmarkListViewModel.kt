@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.adammcneilly.androidstudyguide.articlelist.ArticleListViewState
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
+import com.adammcneilly.androidstudyguide.di.BookmarkedArticles
 import com.adammcneilly.androidstudyguide.models.Article
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
  * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
  */
 class BookmarkListViewModel @ViewModelInject constructor(
+    @BookmarkedArticles
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
 
