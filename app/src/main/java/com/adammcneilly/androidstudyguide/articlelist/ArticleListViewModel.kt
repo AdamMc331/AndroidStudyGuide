@@ -7,16 +7,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
+import com.adammcneilly.androidstudyguide.di.AndroidEssenceArticles
+import com.adammcneilly.androidstudyguide.di.BookmarkedArticles
 import com.adammcneilly.androidstudyguide.models.Article
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
- * This class is responsible for requesting articles from the [articleRepository] and mapping
+ * This class is responsible for requesting articles from the [androidEssenceArticleRepository] and mapping
  * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
  */
 class ArticleListViewModel @ViewModelInject constructor(
-    private val articleRepository: ArticleRepository
+    @AndroidEssenceArticles
+    private val androidEssenceArticleRepository: ArticleRepository,
+    @BookmarkedArticles
+    private val bookmarksArticleRepository: ArticleRepository
 ) : ViewModel() {
 
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
@@ -36,7 +41,7 @@ class ArticleListViewModel @ViewModelInject constructor(
         )
 
         viewModelScope.launch {
-            articleRepository.persistArticle(updatedArticle)
+            androidEssenceArticleRepository.persistArticle(updatedArticle)
         }
     }
 
@@ -44,7 +49,7 @@ class ArticleListViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             _state.value = ArticleListViewState.Loading
 
-            articleRepository.fetchArticles().collect { response ->
+            bookmarksArticleRepository.fetchArticles().collect { response ->
                 _state.value = when (response) {
                     is DataResponse.Success -> ArticleListViewState.Success(response.data)
                     is DataResponse.Error -> ArticleListViewState.Error(response.error)

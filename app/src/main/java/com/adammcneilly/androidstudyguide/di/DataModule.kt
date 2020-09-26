@@ -1,9 +1,12 @@
 package com.adammcneilly.androidstudyguide.di
 
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
+import com.adammcneilly.androidstudyguide.data.local.ArticleDatabase
+import com.adammcneilly.androidstudyguide.data.local.BookmarkedArticlesService
 import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEssenceArticleService
-import dagger.Binds
+import com.adammcneilly.androidstudyguide.data.remote.androidessence.AndroidEssenceRetrofitAPI
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 
@@ -15,10 +18,22 @@ import dagger.hilt.android.components.ActivityRetainedComponent
  */
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-abstract class DataModule {
+object DataModule {
 
-    @Binds
-    abstract fun bindArticleRepository(
-        androidEssenceArticleService: AndroidEssenceArticleService
-    ): ArticleRepository
+    @AndroidEssenceArticles
+    @Provides
+    fun provideAndroidEssenceArticleService(
+        api: AndroidEssenceRetrofitAPI,
+        database: ArticleDatabase
+    ): ArticleRepository {
+        return AndroidEssenceArticleService(api, database)
+    }
+
+    @BookmarkedArticles
+    @Provides
+    fun provideBookmarksArticleService(
+        database: ArticleDatabase
+    ): ArticleRepository {
+        return BookmarkedArticlesService(database)
+    }
 }
