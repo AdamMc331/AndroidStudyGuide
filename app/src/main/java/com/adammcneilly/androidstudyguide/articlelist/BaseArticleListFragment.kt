@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.visibleIf
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * This page is responsible for displaying a list of articles to the user. The user should be able
