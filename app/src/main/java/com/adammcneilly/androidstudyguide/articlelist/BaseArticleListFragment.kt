@@ -3,6 +3,7 @@ package com.adammcneilly.androidstudyguide.articlelist
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import androidx.lifecycle.Observer
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.visibleIf
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * This page is responsible for displaying a list of articles to the user. The user should be able
@@ -24,6 +24,12 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
     private lateinit var adapter: ArticleAdapter
 
     abstract val viewModel: BaseArticleListViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("ARM", "Creating fragment: ${this::class.java.simpleName}")
+        Log.d("ARM", "Argument keys: ${this.arguments?.keySet()}")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

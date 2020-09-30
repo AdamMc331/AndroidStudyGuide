@@ -13,7 +13,13 @@
 
     <keep_state_fragment
         android:id="@+id/BookmarkListFragment"
-        android:name="com.adammcneilly.androidstudyguide.bookmarks.BookmarkListFragment"
+        android:name="com.adammcneilly.androidstudyguide.articlelist.AndroidEssenceArticleListFragment"
         android:label="@string/bookmarks"
-        tools:layout="@layout/fragment_bookmark_list" />
+        tools:layout="@layout/fragment_article_list">
+
+        <argument
+            android:name="myArg"
+            app:argType="string"
+            android:defaultValue="bookmark string" />
+    </keep_state_fragment>
 </navigation>

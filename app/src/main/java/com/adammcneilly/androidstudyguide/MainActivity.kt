@@ -1,7 +1,10 @@
 package com.adammcneilly.androidstudyguide
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavArgument
+import androidx.navigation.NavType
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -40,6 +43,21 @@ class MainActivity : AppCompatActivity() {
         navController.navigatorProvider.addNavigator(
             KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
         )
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.ArticleListFragment -> {
+                    Log.d("ARM", "Navigating to ArticleListFragment.")
+
+                    val argument = NavArgument.Builder().setDefaultValue("navigating to ArticleListFrag").build()
+                    destination.addArgument("myArgs", argument)
+                }
+                R.id.BookmarkListFragment -> {
+                    val argument = NavArgument.Builder().setType(NavType.StringType).setDefaultValue("Bookmark String 2").build()
+                    destination.addArgument("myArgs", argument)
+                }
+            }
+        }
 
         navController.setGraph(R.navigation.nav_graph)
     }
