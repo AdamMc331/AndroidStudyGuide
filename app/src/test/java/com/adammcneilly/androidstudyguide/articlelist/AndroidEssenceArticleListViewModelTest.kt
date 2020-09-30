@@ -11,7 +11,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class ArticleListViewModelTest {
+class AndroidEssenceArticleListViewModelTest {
 
     private val testRobot = ArticleListViewModelRobot()
 

@@ -24,7 +24,7 @@ class ArticleListFragment : Fragment(), ArticleClickListener {
 
     private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
-    private val viewModel: ArticleListViewModel by viewModels()
+    private val viewModel: AndroidEssenceArticleListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
