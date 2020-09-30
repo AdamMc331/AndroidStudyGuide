@@ -1,6 +1,5 @@
 package com.adammcneilly.androidstudyguide.bookmarks
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -51,7 +50,6 @@ class BookmarkListViewModel @ViewModelInject constructor(
             articleRepository.fetchArticles().collect { response ->
                 _state.value = when (response) {
                     is DataResponse.Success -> {
-                        Log.d("ARM", "Collected Bookmarks: ${response.data.size}")
                         ArticleListViewState.Success(response.data)
                     }
                     is DataResponse.Error -> ArticleListViewState.Error(response.error)
