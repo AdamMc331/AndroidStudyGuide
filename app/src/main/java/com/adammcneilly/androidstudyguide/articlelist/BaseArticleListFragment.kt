@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
@@ -19,12 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
  * to interact with these articles by clicking on them, which will navigate away from our application
  * and to a web browser for reading the articles.
  */
-@AndroidEntryPoint
-class ArticleListFragment : Fragment(), ArticleClickListener {
+abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
 
     private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
-    private val viewModel: AndroidEssenceArticleListViewModel by viewModels()
+
+    abstract val viewModel: BaseArticleListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
