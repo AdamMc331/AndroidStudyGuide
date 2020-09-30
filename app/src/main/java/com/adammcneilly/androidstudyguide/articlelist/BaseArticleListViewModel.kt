@@ -1,6 +1,5 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,10 +14,9 @@ import kotlinx.coroutines.launch
  * This class is responsible for requesting articles from the [articleRepository] and mapping
  * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
  */
-class ArticleListViewModel @ViewModelInject constructor(
+open class BaseArticleListViewModel(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
-
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
     val state: LiveData<ArticleListViewState> = _state
 
@@ -26,10 +24,18 @@ class ArticleListViewModel @ViewModelInject constructor(
         fetchArticlesFromRepository()
     }
 
+    /**
+     * Whenever an error occurs, the user will be able to click a retry button, which will re-run the
+     * request for articles.
+     */
     fun retryClicked() {
         fetchArticlesFromRepository()
     }
 
+    /**
+     * Whenever the user clicks the bookmark button for a specific [article], we'll toggle
+     * the bookmarked state and persist it locally.
+     */
     fun bookmarkClicked(article: Article) {
         val updatedArticle = article.copy(
             bookmarked = !article.bookmarked
@@ -40,6 +46,9 @@ class ArticleListViewModel @ViewModelInject constructor(
         }
     }
 
+    /**
+     * Requests the articles from our [articleRepository] and maps that response into a [ArticleListViewState].
+     */
     private fun fetchArticlesFromRepository() {
         viewModelScope.launch {
             _state.value = ArticleListViewState.Loading

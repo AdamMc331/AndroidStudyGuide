@@ -7,7 +7,7 @@
 
     <keep_state_fragment
         android:id="@+id/ArticleListFragment"
-        android:name="com.adammcneilly.androidstudyguide.articlelist.ArticleListFragment"
+        android:name="com.adammcneilly.androidstudyguide.articlelist.AndroidEssenceArticleListFragment"
         android:label="@string/all_articles"
         tools:layout="@layout/fragment_article_list" />
 

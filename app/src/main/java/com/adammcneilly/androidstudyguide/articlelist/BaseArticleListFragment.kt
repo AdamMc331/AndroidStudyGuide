@@ -7,24 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.visibleIf
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * This page is responsible for displaying a list of articles to the user. The user should be able
  * to interact with these articles by clicking on them, which will navigate away from our application
  * and to a web browser for reading the articles.
  */
-@AndroidEntryPoint
-class ArticleListFragment : Fragment(), ArticleClickListener {
+abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
 
     private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
-    private val viewModel: ArticleListViewModel by viewModels()
+
+    abstract val viewModel: BaseArticleListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
