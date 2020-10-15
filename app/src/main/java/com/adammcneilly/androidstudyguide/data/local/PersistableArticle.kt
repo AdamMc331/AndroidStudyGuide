@@ -11,7 +11,9 @@ data class PersistableArticle(
     val url: String,
     val title: String = "",
     val authorName: String = "",
-    val bookmarked: Boolean = false
+    val bookmarked: Boolean = false,
+    val tags: List<String> = emptyList(),
+    val publishedDate: String = ""
 ) {
 
     fun toArticle(): Article {
@@ -19,7 +21,9 @@ data class PersistableArticle(
             htmlTitle = HtmlString(this.title),
             url = this.url,
             authorName = this.authorName,
-            bookmarked = this.bookmarked
+            bookmarked = this.bookmarked,
+            tags = this.tags,
+            publishedDate = this.publishedDate
         )
     }
 }
@@ -29,6 +33,8 @@ fun Article.toPersistableArticle(): PersistableArticle {
         url = this.url,
         title = this.htmlTitle.getInput(),
         authorName = this.authorName,
-        bookmarked = this.bookmarked
+        bookmarked = this.bookmarked,
+        tags = this.tags,
+        publishedDate = this.publishedDate
     )
 }
