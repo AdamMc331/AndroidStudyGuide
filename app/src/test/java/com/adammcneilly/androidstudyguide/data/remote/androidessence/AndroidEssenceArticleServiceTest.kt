@@ -21,7 +21,13 @@ class AndroidEssenceArticleServiceTest {
                     ),
                     link = AndroidEssenceLink(
                         href = "Test URL"
-                    )
+                    ),
+                    categories = listOf(
+                        AndroidEssenceCategory(
+                            term = "Testing"
+                        )
+                    ),
+                    publishedDate = "2020-10-14"
                 )
             )
         )
@@ -30,7 +36,9 @@ class AndroidEssenceArticleServiceTest {
             Article(
                 htmlTitle = HtmlString("Test Title"),
                 authorName = "Adam McNeilly",
-                url = "Test URL"
+                url = "Test URL",
+                tags = listOf("Testing"),
+                publishedDate = "2020-10-14"
             )
         )
 
