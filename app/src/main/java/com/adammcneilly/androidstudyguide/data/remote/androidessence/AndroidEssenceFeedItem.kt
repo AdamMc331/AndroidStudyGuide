@@ -17,5 +17,8 @@ data class AndroidEssenceFeedItem(
     val link: AndroidEssenceLink? = null,
     @field:ElementList(name = "category", inline = true)
     @param:ElementList(name = "category", inline = true)
-    val categories: List<AndroidEssenceCategory>? = null
+    val categories: List<AndroidEssenceCategory>? = null,
+    @field:Element(name = "published")
+    @param:Element(name = "published")
+    val publishedDate: String? = null
 )

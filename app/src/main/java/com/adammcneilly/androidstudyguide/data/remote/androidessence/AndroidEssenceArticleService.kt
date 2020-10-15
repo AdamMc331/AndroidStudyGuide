@@ -69,6 +69,7 @@ private fun AndroidEssenceFeedItem.toArticle(): Article {
         htmlTitle = HtmlString(this.title.orEmpty()),
         authorName = this.author?.name.orEmpty(),
         url = this.link?.href.orEmpty(),
-        tags = tags
+        tags = tags,
+        publishedDate = this.publishedDate.orEmpty()
     )
 }

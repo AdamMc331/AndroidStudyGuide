@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticleDAO {
-    @Query("SELECT * FROM PersistableArticle WHERE bookmarked = 1")
+    @Query("SELECT * FROM PersistableArticle WHERE bookmarked = 1 ORDER BY PublishedDate DESC")
     fun fetchBookmarks(): Flow<List<PersistableArticle>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

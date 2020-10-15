@@ -11,11 +11,14 @@ import com.adammcneilly.androidstudyguide.util.HtmlString
  * [HtmlString] class to do the necessary decoding before displaying this on the UI. Any one who creates
  * an instance of an Article will need to encode their title first.
  * @property[bookmarked] True if the user has bookmarked this article to read later, false otherwise.
+ * @property[publishedDate] The date the article was published in ISO-8601 date format
+ * (example: 2020-08-22T00:00:00-04:00)
  */
 data class Article(
     val htmlTitle: HtmlString = HtmlString(""),
     val authorName: String = "",
     val url: String = "",
     val bookmarked: Boolean = false,
-    val tags: List<String> = emptyList()
+    val tags: List<String> = emptyList(),
+    val publishedDate: String = ""
 )
