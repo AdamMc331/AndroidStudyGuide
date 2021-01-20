@@ -17,3 +17,4 @@
 /captures
 .externalNativeBuild
 .cxx
+/.idea/compiler.xml
