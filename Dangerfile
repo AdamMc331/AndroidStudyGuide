@@ -7,7 +7,7 @@ hasUpdates = File.readlines(dependencyReportsFile).grep(/#{dependencyUpdatesHead
 
 if hasUpdates
     file = File.open(dependencyReportsFile, "rb").read
-    index = file.index(dependencyUpdatesHeaader)
+    index = file.index(dependencyUpdatesHeader)
     updates = file.slice(index..-1)
     warn(updates)
 end
