@@ -12,4 +12,4 @@ if hasUpdates
     warn(updates)
 end
 
-failure("Please add labels to this PR." if github.pr_labels.empty?
+failure("Please add labels to this PR.") if github.pr_labels.empty?
