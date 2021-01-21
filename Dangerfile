@@ -11,3 +11,5 @@ if hasUpdates
     updates = file.slice(index..-1)
     warn(updates)
 end
+
+failure("Please add labels to this PR." if github.pr_labels.empty?
