@@ -20,6 +20,7 @@ jobs:
 
       - name: Danger Checks
         run: |
+          ./gradlew dependencyUpdates
           gem install bundler
           bundle install
           bundle exec danger
