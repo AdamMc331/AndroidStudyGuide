@@ -6,12 +6,12 @@ import com.adammcneilly.androidstudyguide.data.local.ArticleDatabase
 import com.adammcneilly.androidstudyguide.data.local.toPersistableArticle
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 /**
  * This networking service will request [Article] entities from the Android Essence RSS Feed.
