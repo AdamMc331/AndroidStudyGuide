@@ -48,9 +48,12 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
     }
 
     private fun subscribeToViewModel() {
-        viewModel.state.observe(viewLifecycleOwner, Observer { viewState ->
-            displayViewState(viewState)
-        })
+        viewModel.state.observe(
+            viewLifecycleOwner,
+            Observer { viewState ->
+                displayViewState(viewState)
+            }
+        )
     }
 
     private fun displayViewState(viewState: ArticleListViewState) {
