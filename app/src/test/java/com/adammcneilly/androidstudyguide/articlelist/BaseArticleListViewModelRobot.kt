@@ -5,8 +5,8 @@ import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.testObserver
 import com.google.common.truth.Truth.assertThat
 
-class ArticleListViewModelRobot {
-    private lateinit var viewModel: AndroidEssenceArticleListViewModel
+class BaseArticleListViewModelRobot {
+    private lateinit var viewModel: BaseArticleListViewModel
     private val fakeRepository = FakeArticleRepository()
 
     suspend fun emitArticles(articles: List<Article>) = apply {
@@ -18,7 +18,7 @@ class ArticleListViewModelRobot {
     }
 
     fun buildViewModel() = apply {
-        viewModel = AndroidEssenceArticleListViewModel(
+        viewModel = BaseArticleListViewModel(
             articleRepository = fakeRepository
         )
     }

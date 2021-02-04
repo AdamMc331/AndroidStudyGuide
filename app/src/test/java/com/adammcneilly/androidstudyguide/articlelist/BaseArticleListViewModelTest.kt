@@ -11,9 +11,9 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class AndroidEssenceArticleListViewModelTest {
+class BaseArticleListViewModelTest {
 
-    private val testRobot = ArticleListViewModelRobot()
+    private val testRobot = BaseArticleListViewModelRobot()
 
     @JvmField
     @Rule
@@ -42,6 +42,22 @@ class AndroidEssenceArticleListViewModelTest {
             .emitArticles(testArticles)
             .assertViewState(
                 expectedViewState = ArticleListViewState.Success(testArticles)
+            )
+            .assertNumberOfCallsToFetchArticles(1)
+    }
+
+    @Test
+    fun emptyArticleListRequest() = runBlockingTest {
+        val emptyArticles: List<Article> = emptyList()
+
+        testRobot
+            .buildViewModel()
+            .assertViewState(
+                expectedViewState = ArticleListViewState.Loading
+            )
+            .emitArticles(emptyArticles)
+            .assertViewState(
+                expectedViewState = ArticleListViewState.Empty
             )
             .assertNumberOfCallsToFetchArticles(1)
     }

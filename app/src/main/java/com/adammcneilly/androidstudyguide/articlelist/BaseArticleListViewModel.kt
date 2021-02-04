@@ -55,10 +55,22 @@ open class BaseArticleListViewModel(
 
             articleRepository.fetchArticles().collect { response ->
                 _state.value = when (response) {
-                    is DataResponse.Success -> ArticleListViewState.Success(response.data)
+                    is DataResponse.Success -> {
+                        handleSuccessfulNetworkResponse(response)
+                    }
                     is DataResponse.Error -> ArticleListViewState.Error(response.error)
                 }
             }
+        }
+    }
+
+    private fun handleSuccessfulNetworkResponse(response: DataResponse.Success<List<Article>>): ArticleListViewState {
+        val articleList = response.data
+
+        return if (articleList.isEmpty()) {
+            ArticleListViewState.Empty
+        } else {
+            ArticleListViewState.Success(response.data)
         }
     }
 }
