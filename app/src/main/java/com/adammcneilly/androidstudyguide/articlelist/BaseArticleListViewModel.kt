@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
@@ -19,6 +20,9 @@ open class BaseArticleListViewModel(
 ) : ViewModel() {
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
     val state: LiveData<ArticleListViewState> = _state
+
+    open val emptyStateMessageTextRes: Int
+        get() = R.string.empty_state_message
 
     init {
         fetchArticlesFromRepository()
