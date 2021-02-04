@@ -16,7 +16,6 @@
     <string name="bookmark_article">Bookmark Article</string>
     <string name="all_articles">All Articles</string>
     <string name="bookmarks">Bookmarks</string>
-    <string name="empty_state_message">There are no articles to read.</string>
     <string name="android_essence_empty_message">Android Essence has no published articles.</string>
     <string name="bookmarks_empty_message">You have no saved bookmarks. </string>
 </resources>

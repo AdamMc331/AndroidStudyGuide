@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
@@ -15,14 +14,13 @@ import kotlinx.coroutines.launch
  * This class is responsible for requesting articles from the [articleRepository] and mapping
  * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
  */
-open class BaseArticleListViewModel(
+abstract class BaseArticleListViewModel(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
     val state: LiveData<ArticleListViewState> = _state
 
-    open val emptyStateMessageTextRes: Int
-        get() = R.string.empty_state_message
+    abstract val emptyStateMessageTextRes: Int
 
     init {
         fetchArticlesFromRepository()
