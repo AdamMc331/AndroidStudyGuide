@@ -14,11 +14,13 @@ import kotlinx.coroutines.launch
  * This class is responsible for requesting articles from the [articleRepository] and mapping
  * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
  */
-open class BaseArticleListViewModel(
+abstract class BaseArticleListViewModel(
     private val articleRepository: ArticleRepository
 ) : ViewModel() {
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
     val state: LiveData<ArticleListViewState> = _state
+
+    abstract val emptyStateMessageTextRes: Int
 
     init {
         fetchArticlesFromRepository()
@@ -55,10 +57,22 @@ open class BaseArticleListViewModel(
 
             articleRepository.fetchArticles().collect { response ->
                 _state.value = when (response) {
-                    is DataResponse.Success -> ArticleListViewState.Success(response.data)
+                    is DataResponse.Success -> {
+                        handleSuccessfulNetworkResponse(response)
+                    }
                     is DataResponse.Error -> ArticleListViewState.Error(response.error)
                 }
             }
+        }
+    }
+
+    private fun handleSuccessfulNetworkResponse(response: DataResponse.Success<List<Article>>): ArticleListViewState {
+        val articleList = response.data
+
+        return if (articleList.isEmpty()) {
+            ArticleListViewState.Empty
+        } else {
+            ArticleListViewState.Success(response.data)
         }
     }
 }
