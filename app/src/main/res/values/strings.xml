@@ -16,4 +16,5 @@
     <string name="bookmark_article">Bookmark Article</string>
     <string name="all_articles">All Articles</string>
     <string name="bookmarks">Bookmarks</string>
+    <string name="empty_state_message">You have no articles.</string>
 </resources>

@@ -60,6 +60,7 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
         binding.progressBar.visibleIf(viewState is ArticleListViewState.Loading)
         binding.articleList.visibleIf(viewState is ArticleListViewState.Success)
         binding.errorGroup.visibleIf(viewState is ArticleListViewState.Error)
+        binding.emptyStateTextView.visibleIf(viewState is ArticleListViewState.Empty)
 
         if (viewState is ArticleListViewState.Success) {
             adapter.articles = viewState.articles
