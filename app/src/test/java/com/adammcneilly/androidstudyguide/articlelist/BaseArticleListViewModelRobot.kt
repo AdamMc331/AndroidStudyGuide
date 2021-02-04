@@ -18,9 +18,15 @@ class BaseArticleListViewModelRobot {
     }
 
     fun buildViewModel() = apply {
-        viewModel = BaseArticleListViewModel(
+        viewModel = object : BaseArticleListViewModel(
             articleRepository = fakeRepository
-        )
+        ) {
+            /**
+             * Supplying default value since it's not needed for these tests.
+             */
+            override val emptyStateMessageTextRes: Int
+                get() = 0
+        }
     }
 
     fun clickRetry() = apply {
