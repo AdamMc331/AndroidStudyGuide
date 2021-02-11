@@ -18,7 +18,7 @@ checkstyle_format.base_path = Dir.pwd
 checkstyle_format.report("app/build/reports/detekt/detekt.xml")
 
 Dir.glob("app/src/main/res/layout").select { |e| File.file? e }.each do |file|
-    hasMaterialBottomView = File.readlines(file).grep(/"com.google.android.material.bottomnavigation.BottomNavigationView"/).any?
+    hasMaterialBottomView = File.readlines(file).grep(/com.google.android.material.bottomnavigation.BottomNavigationView/).any?
 
     if hasMaterialBottomView
         warn("Found reference of Material BottomNavigationView in #{filename}.")
