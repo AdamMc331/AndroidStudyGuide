@@ -17,12 +17,17 @@ failure("Please add labels to this PR.") if github.pr_labels.empty?
 checkstyle_format.base_path = Dir.pwd
 checkstyle_format.report("app/build/reports/detekt/detekt.xml")
 
-Dir.glob("app/src/main/res/layout").select { |e| File.file? e }.each do |file|
-    puts file.filename
+val materialBottomViewClass = "com.google.android.material.bottomnavigation.BottomNavigationView"
 
-    hasMaterialBottomView = File.readlines("app/src/main/res/layout/#{file}").grep(/com.google.android.material.bottomnavigation.BottomNavigationView/).any?
+Dir.foreach("app/src/main/res/layout") do |filename|
+  next if filename == '.' or filename == '..'
 
-    if hasMaterialBottomView
-        warn("Found reference of Material BottomNavigationView in #{filename}.")
-    end
+  completeFileName = "app/src/main/res/layout/#{filename}"
+
+  hasMaterialBottomView = File.readlines(completeFileName).grep(/#{materialBottomViewClass}/).any?
+
+  if hasMaterialBottomView
+      warn("Found reference of Material BottomNavigationView in #{filename}.")
+  end
+
 end
