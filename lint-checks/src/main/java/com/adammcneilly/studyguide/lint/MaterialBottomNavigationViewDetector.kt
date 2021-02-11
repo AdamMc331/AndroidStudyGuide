@@ -4,6 +4,7 @@ import com.android.tools.lint.detector.api.Category
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.LayoutDetector
+import com.android.tools.lint.detector.api.LintFix
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.TextFormat
@@ -23,7 +24,12 @@ class MaterialBottomNavigationViewDetector : LayoutDetector() {
         context.report(
             issue = ISSUE_USING_MATERIAL_BOTTOM_NAVIGATION_VIEW,
             location = context.getLocation(element),
-            message = ISSUE_USING_MATERIAL_BOTTOM_NAVIGATION_VIEW.getExplanation(TextFormat.TEXT)
+            message = ISSUE_USING_MATERIAL_BOTTOM_NAVIGATION_VIEW.getExplanation(TextFormat.TEXT),
+            quickfixData = LintFix.create()
+                .replace()
+                .text("com.google.android.material.bottomnavigation.BottomNavigationView")
+                .with("com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView")
+                .build()
         )
     }
 
@@ -35,7 +41,7 @@ class MaterialBottomNavigationViewDetector : LayoutDetector() {
             explanation = "We override the material BottomNavigationView with our own behaviors and so we should rely on our own implementation.",
             category = Category.CUSTOM_LINT_CHECKS,
             priority = 8,
-            severity = Severity.WARNING,
+            severity = Severity.ERROR,
             implementation = Implementation(
                 MaterialBottomNavigationViewDetector::class.java,
                 Scope.RESOURCE_FILE_SCOPE
