@@ -17,7 +17,7 @@ failure("Please add labels to this PR.") if github.pr_labels.empty?
 checkstyle_format.base_path = Dir.pwd
 checkstyle_format.report("app/build/reports/detekt/detekt.xml")
 
-val materialBottomViewClass = "com.google.android.material.bottomnavigation.BottomNavigationView"
+materialBottomViewClass = "com.google.android.material.bottomnavigation.BottomNavigationView"
 
 Dir.foreach("app/src/main/res/layout") do |filename|
   next if filename == '.' or filename == '..'
