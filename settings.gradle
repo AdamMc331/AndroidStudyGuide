@@ -1,2 +1,3 @@
+include ':lint-checks'
 include ':app'
 rootProject.name = "AndroidStudyGuide"
