@@ -23,7 +23,7 @@ class MaterialBottomNavigationViewDetector : LayoutDetector() {
     override fun visitElement(context: XmlContext, element: Element) {
         context.report(
             issue = ISSUE_USING_MATERIAL_BOTTOM_NAVIGATION_VIEW,
-            location = context.getLocation(element),
+            location = context.getNameLocation(element),
             message = ISSUE_USING_MATERIAL_BOTTOM_NAVIGATION_VIEW.getExplanation(TextFormat.TEXT),
             quickfixData = LintFix.create()
                 .replace()
