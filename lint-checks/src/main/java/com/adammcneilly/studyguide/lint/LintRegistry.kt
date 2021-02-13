@@ -11,6 +11,6 @@ class LintRegistry : IssueRegistry() {
 
     override val issues: List<Issue>
         get() = listOf(
-            MaterialBottomNavigationViewDetector.ISSUE_USING_MATERIAL_BOTTOM_NAVIGATION_VIEW
+            UnusedStudyGuideViewDetector.ISSUE_UNUSED_STUDY_GUIDE_VIEW
         )
 }
