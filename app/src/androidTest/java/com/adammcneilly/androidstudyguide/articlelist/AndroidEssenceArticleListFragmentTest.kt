@@ -1,38 +1,30 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
-import android.view.View
 import androidx.test.core.app.launchActivity
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.adammcneilly.androidstudyguide.MainActivity
-import com.adammcneilly.androidstudyguide.R
-import com.adammcneilly.androidstudyguide.utils.ViewVisibilityIdlingResource
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class AndroidEssenceArticleListFragmentTest {
 
+    /**
+     * Because we can't launch the fragment in its own scenario, we have to first launch an instance
+     * of [MainActivity]. Since the [AndroidEssenceArticleListFragment] is the first fragment
+     * that appears in the app, we can run assertions on it right away.
+     *
+     * https://stackoverflow.com/a/63239932/3131147
+     */
     @Test
     fun createFragment() {
         val scenario = launchActivity<MainActivity>()
 
-        onView(withId(R.id.progress_bar)).check(matches(isDisplayed()))
-
-        scenario.onActivity { mainActivity ->
-            IdlingRegistry.getInstance().register(
-                ViewVisibilityIdlingResource(
-                    mainActivity,
-                    R.id.progress_bar,
-                    View.GONE
-                )
-            )
-        }
-
-        onView(withId(R.id.article_list)).check(matches(isDisplayed()))
+        AndroidEssenceArticleListFragmentRobot(scenario)
+            .assertArticleListGone()
+            .assertProgressBarVisible()
+            .waitForProgressBarToBeGone()
+            .assertProgressBarGone()
+            .assertArticleListVisible()
     }
 }
