@@ -21,6 +21,8 @@ class AndroidEssenceArticleListFragmentTest {
     fun createFragment() {
         val scenario = launchActivity<MainActivity>()
 
+        onView(withId(R.id.progress_bar)).check(matches(isDisplayed()))
+
         scenario.onActivity { mainActivity ->
             IdlingRegistry.getInstance().register(
                 ViewVisibilityIdlingResource(
