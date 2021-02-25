@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.adammcneilly.androidstudyguide.compose.ArticleList
+import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.visibleIf
@@ -40,11 +43,16 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
         val composeView = ComposeView(requireContext())
 
         composeView.setContent {
-            MaterialTheme {
-                Text(
-                    text = "Hello, Twitch!",
-                    color = Color.White,
-                )
+            StudyGuideTheme {
+                val state = viewModel.state.observeAsState()
+
+                val currentState = state.value
+
+                when (currentState) {
+                    is ArticleListViewState.Success -> {
+                        ArticleList(currentState.articles)
+                    }
+                }
             }
         }
 
@@ -64,7 +72,7 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
     private fun subscribeToViewModel() {
         viewModel.state.observe(
             viewLifecycleOwner,
-            Observer { viewState ->
+            { viewState ->
                 displayViewState(viewState)
             }
         )

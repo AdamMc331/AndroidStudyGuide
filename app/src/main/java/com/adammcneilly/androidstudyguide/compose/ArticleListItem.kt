@@ -54,7 +54,7 @@ private fun ArticleTagsRow(article: Article) {
                style = MaterialTheme.typography.caption,
                modifier = Modifier
                    .background(
-                       color = Color.Red,
+                       color = MaterialTheme.colors.primary,
                        shape = CircleShape
                    )
                    .padding(
@@ -103,7 +103,7 @@ private fun ArticleTitleAndAuthor(
             text = "By ${article.authorName}",
             style = MaterialTheme.typography.subtitle1,
             modifier = Modifier
-                .padding(bottom = 8.dp)
+                .padding(bottom = 12.dp)
         )
         ArticleTagsRow(article = article)
     }
