@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
@@ -19,7 +23,7 @@ import com.adammcneilly.androidstudyguide.util.visibleIf
  */
 abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
 
-    private lateinit var binding: FragmentArticleListBinding
+//    private lateinit var binding: FragmentArticleListBinding
     private lateinit var adapter: ArticleAdapter
 
     abstract val viewModel: BaseArticleListViewModel
@@ -32,9 +36,19 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
         adapter = ArticleAdapter(
             clickListener = this
         )
-        binding = FragmentArticleListBinding.inflate(inflater, container, false)
-        setupRecyclerView()
-        return binding.root
+
+        val composeView = ComposeView(requireContext())
+
+        composeView.setContent {
+            MaterialTheme {
+                Text(
+                    text = "Hello, Twitch!",
+                    color = Color.White,
+                )
+            }
+        }
+
+        return composeView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,9 +56,9 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
 
         subscribeToViewModel()
 
-        binding.retryButton.setOnClickListener {
-            viewModel.retryClicked()
-        }
+//        binding.retryButton.setOnClickListener {
+//            viewModel.retryClicked()
+//        }
     }
 
     private fun subscribeToViewModel() {
@@ -57,20 +71,20 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
     }
 
     private fun displayViewState(viewState: ArticleListViewState) {
-        binding.progressBar.visibleIf(viewState is ArticleListViewState.Loading)
-        binding.articleList.visibleIf(viewState is ArticleListViewState.Success)
-        binding.errorGroup.visibleIf(viewState is ArticleListViewState.Error)
-        binding.emptyStateTextView.visibleIf(viewState is ArticleListViewState.Empty)
-
-        binding.emptyStateTextView.setText(viewModel.emptyStateMessageTextRes)
-
-        if (viewState is ArticleListViewState.Success) {
-            adapter.articles = viewState.articles
-        }
+//        binding.progressBar.visibleIf(viewState is ArticleListViewState.Loading)
+//        binding.articleList.visibleIf(viewState is ArticleListViewState.Success)
+//        binding.errorGroup.visibleIf(viewState is ArticleListViewState.Error)
+//        binding.emptyStateTextView.visibleIf(viewState is ArticleListViewState.Empty)
+//
+//        binding.emptyStateTextView.setText(viewModel.emptyStateMessageTextRes)
+//
+//        if (viewState is ArticleListViewState.Success) {
+//            adapter.articles = viewState.articles
+//        }
     }
 
     private fun setupRecyclerView() {
-        binding.articleList.adapter = adapter
+//        binding.articleList.adapter = adapter
     }
 
     override fun onArticleClicked(article: Article) {
