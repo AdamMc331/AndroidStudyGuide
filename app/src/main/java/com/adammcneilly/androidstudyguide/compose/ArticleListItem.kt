@@ -28,20 +28,32 @@ fun ArticleListItem(article: Article) {
         modifier = Modifier
             .padding(all = 16.dp)
             .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         ArticleTitleAndAuthor(
             article = article,
             modifier = Modifier.weight(1f)
         )
-        IconButton(
-            onClick = { /*TODO*/ }
-        ) {
-            Image(
-                painterResource(R.drawable.ic_bookmark_unselected),
-                contentDescription = "Bookmark",
-                colorFilter = ColorFilter.tint(color = Color.Red)
-            )
-        }
+        BookmarkButton(article = article)
+    }
+}
+
+@Composable
+private fun BookmarkButton(article: Article) {
+    val iconRes = if (article.bookmarked) {
+        R.drawable.ic_bookmark_selected
+    } else {
+        R.drawable.ic_bookmark_unselected
+    }
+
+    IconButton(
+        onClick = { /*TODO*/ }
+    ) {
+        Image(
+            painterResource(iconRes),
+            contentDescription = "Bookmark",
+            colorFilter = ColorFilter.tint(color = Color.Red)
+        )
     }
 }
 
@@ -71,7 +83,8 @@ private fun ArticleTitleAndAuthor(
 fun PreviewArticleListItem() {
     val article = Article(
         htmlTitle = HtmlString("Adam's test article."),
-        authorName = "Adam McNeilly"
+        authorName = "Adam McNeilly",
+        bookmarked = true,
     )
 
     MaterialTheme {
