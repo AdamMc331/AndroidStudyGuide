@@ -16,7 +16,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +25,10 @@ import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 
 @Composable
-fun ArticleListItem(article: Article) {
+fun ArticleListItem(
+    article: Article,
+    onBookmarkClicked: (Article) -> Unit,
+) {
     Card {
         Row(
             modifier = Modifier
@@ -38,7 +40,10 @@ fun ArticleListItem(article: Article) {
                 article = article,
                 modifier = Modifier.weight(1f)
             )
-            BookmarkButton(article = article)
+            BookmarkButton(
+                article = article,
+                onClick = onBookmarkClicked,
+            )
         }
     }
 }
@@ -67,7 +72,10 @@ private fun ArticleTagsRow(article: Article) {
 }
 
 @Composable
-private fun BookmarkButton(article: Article) {
+private fun BookmarkButton(
+    article: Article,
+    onClick: (Article) -> Unit,
+) {
     val iconRes = if (article.bookmarked) {
         R.drawable.ic_bookmark_selected
     } else {
@@ -75,7 +83,9 @@ private fun BookmarkButton(article: Article) {
     }
 
     IconButton(
-        onClick = { /*TODO*/ }
+        onClick = {
+            onClick(article)
+        }
     ) {
         Image(
             painterResource(iconRes),
@@ -121,7 +131,7 @@ fun PreviewArticleListItem() {
 
     StudyGuideTheme {
         Surface {
-            ArticleListItem(article = article)
+            ArticleListItem(article = article, onBookmarkClicked = {})
         }
     }
 }

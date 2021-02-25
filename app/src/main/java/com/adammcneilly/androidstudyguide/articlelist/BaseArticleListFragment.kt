@@ -50,7 +50,12 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
 
                 when (currentState) {
                     is ArticleListViewState.Success -> {
-                        ArticleList(currentState.articles)
+                        ArticleList(
+                            articles = currentState.articles,
+                            onBookmarkClicked = { article ->
+                                viewModel.bookmarkClicked(article)
+                            }
+                        )
                     }
                 }
             }
