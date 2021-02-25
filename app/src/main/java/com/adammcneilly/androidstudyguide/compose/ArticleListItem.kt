@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Card
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -26,17 +27,19 @@ import com.adammcneilly.androidstudyguide.util.HtmlString
 
 @Composable
 fun ArticleListItem(article: Article) {
-    Row(
-        modifier = Modifier
-            .padding(all = 16.dp)
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        ArticleTitleAndAuthor(
-            article = article,
-            modifier = Modifier.weight(1f)
-        )
-        BookmarkButton(article = article)
+    Card {
+        Row(
+            modifier = Modifier
+                .padding(all = 16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            ArticleTitleAndAuthor(
+                article = article,
+                modifier = Modifier.weight(1f)
+            )
+            BookmarkButton(article = article)
+        }
     }
 }
 
