@@ -2,6 +2,7 @@ package com.adammcneilly.androidstudyguide.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,8 +29,14 @@ import com.adammcneilly.androidstudyguide.util.HtmlString
 fun ArticleListItem(
     article: Article,
     onBookmarkClicked: (Article) -> Unit,
+    onArticleClicked: (Article) -> Unit,
 ) {
-    Card {
+    Card(
+        modifier = Modifier
+            .clickable {
+                onArticleClicked(article)
+            }
+    ) {
         Row(
             modifier = Modifier
                 .padding(all = 16.dp)
@@ -131,7 +138,11 @@ fun PreviewArticleListItem() {
 
     StudyGuideTheme {
         Surface {
-            ArticleListItem(article = article, onBookmarkClicked = {})
+            ArticleListItem(
+                article = article,
+                onBookmarkClicked = {},
+                onArticleClicked = {}
+            )
         }
     }
 }

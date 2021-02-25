@@ -14,6 +14,7 @@ import com.adammcneilly.androidstudyguide.util.HtmlString
 fun ArticleList(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
+    onArticleClicked: (Article) -> Unit,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(all = 16.dp),
@@ -23,6 +24,7 @@ fun ArticleList(
             ArticleListItem(
                 article = article,
                 onBookmarkClicked = onBookmarkClicked,
+                onArticleClicked = onArticleClicked,
             )
         }
     }
@@ -49,6 +51,10 @@ fun PreviewArticleList() {
     val articleList = listOf(firstArticle, secondArticle, thirdArticle)
 
     StudyGuideTheme(isInDarkMode = true) {
-        ArticleList(articleList, onBookmarkClicked = {})
+        ArticleList(
+            articleList,
+            onBookmarkClicked = {},
+            onArticleClicked = {}
+        )
     }
 }

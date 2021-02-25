@@ -54,6 +54,9 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
                             articles = currentState.articles,
                             onBookmarkClicked = { article ->
                                 viewModel.bookmarkClicked(article)
+                            },
+                            onArticleClicked = { article ->
+                                this.onArticleClicked(article)
                             }
                         )
                     }
