@@ -29,21 +29,30 @@ fun ArticleListItem(article: Article) {
             .padding(all = 16.dp)
             .fillMaxWidth(),
     ) {
-        ArticleTitleAndAuthor(article = article)
+        ArticleTitleAndAuthor(
+            article = article,
+            modifier = Modifier.weight(1f)
+        )
         IconButton(
             onClick = { /*TODO*/ }
         ) {
             Image(
                 painterResource(R.drawable.ic_bookmark_unselected),
                 contentDescription = "Bookmark",
+                colorFilter = ColorFilter.tint(color = Color.Red)
             )
         }
     }
 }
 
 @Composable
-private fun ArticleTitleAndAuthor(article: Article) {
-    Column {
+private fun ArticleTitleAndAuthor(
+    article: Article,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+    ) {
         Text(
             text = article.htmlTitle.getInput(),
             style = MaterialTheme.typography.h5,
