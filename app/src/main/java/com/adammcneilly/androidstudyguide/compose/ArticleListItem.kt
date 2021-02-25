@@ -1,11 +1,13 @@
 package com.adammcneilly.androidstudyguide.compose
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -35,6 +37,29 @@ fun ArticleListItem(article: Article) {
             modifier = Modifier.weight(1f)
         )
         BookmarkButton(article = article)
+    }
+}
+
+@Composable
+private fun ArticleTagsRow(article: Article) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+       article.tags.forEach { tag ->
+           Text(
+               text = tag,
+               style = MaterialTheme.typography.caption,
+               modifier = Modifier
+                   .background(
+                       color = Color.Red,
+                       shape = CircleShape
+                   )
+                   .padding(
+                       horizontal = 8.dp,
+                       vertical = 4.dp,
+                   )
+           )
+       }
     }
 }
 
@@ -74,7 +99,10 @@ private fun ArticleTitleAndAuthor(
         Text(
             text = "By ${article.authorName}",
             style = MaterialTheme.typography.subtitle1,
+            modifier = Modifier
+                .padding(bottom = 8.dp)
         )
+        ArticleTagsRow(article = article)
     }
 }
 
@@ -85,6 +113,7 @@ fun PreviewArticleListItem() {
         htmlTitle = HtmlString("Adam's test article."),
         authorName = "Adam McNeilly",
         bookmarked = true,
+        tags = listOf("Jetpack", "Compose")
     )
 
     MaterialTheme {
