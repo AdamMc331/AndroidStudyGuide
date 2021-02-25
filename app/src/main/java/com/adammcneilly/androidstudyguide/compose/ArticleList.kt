@@ -43,7 +43,7 @@ fun PreviewArticleList() {
     
     val articleList = listOf(firstArticle, secondArticle, thirdArticle)
 
-    MaterialTheme {
+    StudyGuideTheme(isInDarkMode = true) {
         ArticleList(articleList)
     }
 }

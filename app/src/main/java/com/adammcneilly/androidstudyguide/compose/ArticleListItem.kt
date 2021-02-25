@@ -80,7 +80,7 @@ private fun BookmarkButton(article: Article) {
         Image(
             painterResource(iconRes),
             contentDescription = "Bookmark",
-            colorFilter = ColorFilter.tint(color = Color.Red)
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.secondary)
         )
     }
 }
@@ -119,7 +119,7 @@ fun PreviewArticleListItem() {
         tags = listOf("Jetpack", "Compose")
     )
 
-    MaterialTheme {
+    StudyGuideTheme {
         Surface {
             ArticleListItem(article = article)
         }
