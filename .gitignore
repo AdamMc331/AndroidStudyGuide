@@ -18,3 +18,4 @@
 .externalNativeBuild
 .cxx
 /.idea/compiler.xml
+/.idea/deploymentTargetDropDown.xml
