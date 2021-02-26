@@ -60,21 +60,21 @@ private fun ArticleTagsRow(article: Article) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_tags_spacing)),
     ) {
-       article.tags.forEach { tag ->
-           Text(
-               text = tag,
-               style = MaterialTheme.typography.caption,
-               modifier = Modifier
-                   .background(
-                       color = MaterialTheme.colors.primary,
-                       shape = CircleShape
-                   )
-                   .padding(
-                       horizontal = dimensionResource(id = R.dimen.article_tag_horizontal_padding),
-                       vertical = dimensionResource(id = R.dimen.article_tag_vertical_padding),
-                   )
-           )
-       }
+        article.tags.forEach { tag ->
+            Text(
+                text = tag,
+                style = MaterialTheme.typography.caption,
+                modifier = Modifier
+                    .background(
+                        color = MaterialTheme.colors.primary,
+                        shape = CircleShape
+                    )
+                    .padding(
+                        horizontal = dimensionResource(id = R.dimen.article_tag_horizontal_padding),
+                        vertical = dimensionResource(id = R.dimen.article_tag_vertical_padding),
+                    )
+            )
+        }
     }
 }
 

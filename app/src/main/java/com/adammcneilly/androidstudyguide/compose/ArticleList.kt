@@ -40,15 +40,15 @@ fun PreviewArticleList() {
         bookmarked = true,
         tags = listOf("Jetpack", "Compose")
     )
-    
+
     val secondArticle = firstArticle.copy(
         bookmarked = false,
     )
-    
+
     val thirdArticle = secondArticle.copy(
         tags = listOf("Android"),
     )
-    
+
     val articleList = listOf(firstArticle, secondArticle, thirdArticle)
 
     StudyGuideTheme(isInDarkMode = true) {
