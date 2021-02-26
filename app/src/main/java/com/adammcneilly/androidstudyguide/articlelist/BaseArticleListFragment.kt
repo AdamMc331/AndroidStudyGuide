@@ -6,28 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.adammcneilly.androidstudyguide.compose.ArticleList
 import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
-import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
 import com.adammcneilly.androidstudyguide.models.Article
-import com.adammcneilly.androidstudyguide.util.visibleIf
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieAnimationSpec
-import com.airbnb.lottie.compose.rememberLottieAnimationState
 
 /**
  * This page is responsible for displaying a list of articles to the user. The user should be able

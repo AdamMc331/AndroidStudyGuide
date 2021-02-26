@@ -5,8 +5,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 
@@ -17,8 +18,8 @@ fun ArticleList(
     onArticleClicked: (Article) -> Unit,
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(all = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.article_list_padding)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_list_spacing)),
     ) {
         items(articles) { article ->
             ArticleListItem(

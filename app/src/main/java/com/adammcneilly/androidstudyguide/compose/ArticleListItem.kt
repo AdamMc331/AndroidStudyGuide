@@ -18,9 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
@@ -39,7 +39,7 @@ fun ArticleListItem(
     ) {
         Row(
             modifier = Modifier
-                .padding(all = 16.dp)
+                .padding(all = dimensionResource(id = R.dimen.article_list_item_padding))
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -58,7 +58,7 @@ fun ArticleListItem(
 @Composable
 private fun ArticleTagsRow(article: Article) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_tags_spacing)),
     ) {
        article.tags.forEach { tag ->
            Text(
@@ -70,8 +70,8 @@ private fun ArticleTagsRow(article: Article) {
                        shape = CircleShape
                    )
                    .padding(
-                       horizontal = 8.dp,
-                       vertical = 4.dp,
+                       horizontal = dimensionResource(id = R.dimen.article_tag_horizontal_padding),
+                       vertical = dimensionResource(id = R.dimen.article_tag_vertical_padding),
                    )
            )
        }
@@ -114,13 +114,13 @@ private fun ArticleTitleAndAuthor(
             text = article.htmlTitle.getInput(),
             style = MaterialTheme.typography.h5,
             modifier = Modifier
-                .padding(bottom = 8.dp)
+                .padding(bottom = dimensionResource(id = R.dimen.article_title_bottom_padding))
         )
         Text(
             text = "By ${article.authorName}",
             style = MaterialTheme.typography.subtitle1,
             modifier = Modifier
-                .padding(bottom = 12.dp)
+                .padding(bottom = dimensionResource(id = R.dimen.article_author_bottom_padding))
         )
         ArticleTagsRow(article = article)
     }

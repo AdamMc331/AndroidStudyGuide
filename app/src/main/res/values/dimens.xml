@@ -1,4 +1,12 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="bookmark_icon_size">48dp</dimen>
+    <dimen name="article_list_padding">16dp</dimen>
+    <dimen name="article_list_spacing">16dp</dimen>
+    <dimen name="article_list_item_padding">16dp</dimen>
+    <dimen name="article_tags_spacing">8dp</dimen>
+    <dimen name="article_tag_horizontal_padding">8dp</dimen>
+    <dimen name="article_tag_vertical_padding">4dp</dimen>
+    <dimen name="article_title_bottom_padding">8dp</dimen>
+    <dimen name="article_author_bottom_padding">12dp</dimen>
 </resources>
