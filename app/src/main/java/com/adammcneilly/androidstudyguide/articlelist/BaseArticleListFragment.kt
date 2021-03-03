@@ -6,11 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import com.adammcneilly.androidstudyguide.databinding.FragmentArticleListBinding
+import com.adammcneilly.androidstudyguide.compose.ArticleList
+import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
 import com.adammcneilly.androidstudyguide.models.Article
-import com.adammcneilly.androidstudyguide.util.visibleIf
 
 /**
  * This page is responsible for displaying a list of articles to the user. The user should be able
@@ -19,9 +24,6 @@ import com.adammcneilly.androidstudyguide.util.visibleIf
  */
 abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
 
-    private lateinit var binding: FragmentArticleListBinding
-    private lateinit var adapter: ArticleAdapter
-
     abstract val viewModel: BaseArticleListViewModel
 
     override fun onCreateView(
@@ -29,48 +31,37 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        adapter = ArticleAdapter(
-            clickListener = this
-        )
-        binding = FragmentArticleListBinding.inflate(inflater, container, false)
-        setupRecyclerView()
-        return binding.root
-    }
+        val composeView = ComposeView(requireContext())
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        composeView.setContent {
+            StudyGuideTheme {
+                val state = viewModel.state.observeAsState()
 
-        subscribeToViewModel()
+                val currentState = state.value
 
-        binding.retryButton.setOnClickListener {
-            viewModel.retryClicked()
-        }
-    }
-
-    private fun subscribeToViewModel() {
-        viewModel.state.observe(
-            viewLifecycleOwner,
-            Observer { viewState ->
-                displayViewState(viewState)
+                when (currentState) {
+                    is ArticleListViewState.Success -> {
+                        ArticleList(
+                            articles = currentState.articles,
+                            onBookmarkClicked = { article ->
+                                this.onBookmarkClicked(article)
+                            },
+                            onArticleClicked = { article ->
+                                this.onArticleClicked(article)
+                            }
+                        )
+                    }
+                    is ArticleListViewState.Loading -> {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .wrapContentSize(align = Alignment.Center)
+                        )
+                    }
+                }
             }
-        )
-    }
-
-    private fun displayViewState(viewState: ArticleListViewState) {
-        binding.progressBar.visibleIf(viewState is ArticleListViewState.Loading)
-        binding.articleList.visibleIf(viewState is ArticleListViewState.Success)
-        binding.errorGroup.visibleIf(viewState is ArticleListViewState.Error)
-        binding.emptyStateTextView.visibleIf(viewState is ArticleListViewState.Empty)
-
-        binding.emptyStateTextView.setText(viewModel.emptyStateMessageTextRes)
-
-        if (viewState is ArticleListViewState.Success) {
-            adapter.articles = viewState.articles
         }
-    }
 
-    private fun setupRecyclerView() {
-        binding.articleList.adapter = adapter
+        return composeView
     }
 
     override fun onArticleClicked(article: Article) {
