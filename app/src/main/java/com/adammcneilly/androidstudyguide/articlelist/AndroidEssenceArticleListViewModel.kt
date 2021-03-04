@@ -1,11 +1,13 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
-import androidx.hilt.lifecycle.ViewModelInject
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.di.AndroidEssenceArticles
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AndroidEssenceArticleListViewModel @ViewModelInject constructor(
+@HiltViewModel
+class AndroidEssenceArticleListViewModel @Inject constructor(
     @AndroidEssenceArticles
     private val articleRepository: ArticleRepository
 ) : BaseArticleListViewModel(articleRepository) {

@@ -2,6 +2,7 @@ package com.adammcneilly.androidstudyguide
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
@@ -16,6 +17,7 @@ import androidx.compose.material.icons.filled.LibraryBooks
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.KEY_ROUTE
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,6 +26,8 @@ import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.adammcneilly.androidstudyguide.articlelist.AndroidEssenceArticleListViewModel
+import com.adammcneilly.androidstudyguide.bookmarks.BookmarkListViewModel
 import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,10 +87,14 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     NavHost(navController, startDestination = HomeScreenTab.AllArticles.route) {
                         composable(HomeScreenTab.AllArticles.route) {
-                            Text("This is the all articles screen.")
+                            val viewModel: AndroidEssenceArticleListViewModel by viewModels()
+
+                            ArticleListScreen(viewModel = viewModel)
                         }
                         composable(HomeScreenTab.Bookmarks.route) {
-                            Text("This is the bookmarks screen.")
+                            val viewModel: BookmarkListViewModel by viewModels()
+
+                            ArticleListScreen(viewModel = viewModel)
                         }
                     }
                 }
