@@ -10,8 +10,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Article
+import androidx.compose.material.icons.filled.Bookmarks
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             onClick = { /*TODO*/ },
             icon = {
                 Icon(
-                    painterResource(id = R.drawable.ic_bookmarks),
+                    Icons.Default.Bookmarks,
                     contentDescription = null,
                 )
             },
@@ -79,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             onClick = { /*TODO*/ },
             icon = {
                 Icon(
-                    painterResource(id = R.drawable.ic_articles),
+                    Icons.Default.Article,
                     contentDescription = null,
                 )
             },
