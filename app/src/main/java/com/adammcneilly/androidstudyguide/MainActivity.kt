@@ -4,17 +4,24 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Article
 import androidx.compose.material.icons.filled.Bookmarks
+import androidx.compose.material.icons.filled.LibraryBooks
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.KEY_ROUTE
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
@@ -33,18 +40,55 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             StudyGuideTheme {
+                val navController = rememberNavController()
+
+                val homeScreenTabs = listOf(
+                    HomeScreenTab.AllArticles,
+                    HomeScreenTab.Bookmarks,
+                )
+
                 Scaffold(
                     topBar = {
                         StudyGuideAppBar()
                     },
                     bottomBar = {
-                        BottomAppBar {
-                            AllArticlesNavigationIcon()
-                            BookmarksNavigationIcon()
+                        BottomNavigation {
+                            val navBackStackEntry by navController.currentBackStackEntryAsState()
+                            val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
+                            homeScreenTabs.forEach { tab ->
+                                BottomNavigationItem(
+                                    icon = {
+                                        Icon(
+                                            tab.icon,
+                                            contentDescription = stringResource(id = tab.labelResourceId)
+                                        )
+                                    },
+                                    label = { Text(stringResource(tab.labelResourceId)) },
+                                    selected = (currentRoute == tab.route),
+                                    onClick = {
+                                        navController.navigate(tab.route) {
+                                            // Pop up to the start destination of the graph to
+                                            // avoid building up a large stack of destinations
+                                            // on the back stack as users select items
+                                            popUpTo = navController.graph.startDestination
+                                            // Avoid multiple copies of the same destination when
+                                            // reselecting the same item
+                                            launchSingleTop = true
+                                        }
+                                    }
+                                )
+                            }
                         }
                     }
                 ) {
-                    Text(text = "Hello Twitch!")
+                    NavHost(navController, startDestination = HomeScreenTab.AllArticles.route) {
+                        composable(HomeScreenTab.AllArticles.route) {
+                            Text("This is the all articles screen.")
+                        }
+                        composable(HomeScreenTab.Bookmarks.route) {
+                            Text("This is the bookmarks screen.")
+                        }
+                    }
                 }
             }
         }
@@ -81,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             onClick = { /*TODO*/ },
             icon = {
                 Icon(
-                    Icons.Default.Article,
+                    Icons.Default.LibraryBooks,
                     contentDescription = null,
                 )
             },
