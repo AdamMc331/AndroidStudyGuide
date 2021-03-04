@@ -1,9 +1,21 @@
 package com.adammcneilly.androidstudyguide
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,12 +28,74 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
-        setupNavController()
+        setContent {
+            StudyGuideTheme {
+                Scaffold(
+                    topBar = {
+                        StudyGuideAppBar()
+                    },
+                    bottomBar = {
+                        BottomAppBar {
+                            AllArticlesNavigationIcon()
+                            BookmarksNavigationIcon()
+                        }
+                    }
+                ) {
+                    Text(text = "Hello Twitch!")
+                }
+            }
+        }
 
-        setupBottomNavigationMenu()
+//        setContentView(R.layout.activity_main)
+//        setSupportActionBar(findViewById(R.id.toolbar))
+//
+//        setupNavController()
+//
+//        setupBottomNavigationMenu()
+    }
+
+    @Composable
+    private fun RowScope.BookmarksNavigationIcon() {
+        BottomNavigationItem(
+            selected = false,
+            onClick = { /*TODO*/ },
+            icon = {
+                Icon(
+                    painterResource(id = R.drawable.ic_bookmarks),
+                    contentDescription = null,
+                )
+            },
+            label = {
+                Text(text = stringResource(id = R.string.bookmarks))
+            }
+        )
+    }
+
+    @Composable
+    private fun RowScope.AllArticlesNavigationIcon() {
+        BottomNavigationItem(
+            selected = true,
+            onClick = { /*TODO*/ },
+            icon = {
+                Icon(
+                    painterResource(id = R.drawable.ic_articles),
+                    contentDescription = null,
+                )
+            },
+            label = {
+                Text(text = stringResource(id = R.string.all_articles))
+            }
+        )
+    }
+
+    @Composable
+    private fun StudyGuideAppBar() {
+        TopAppBar(
+            title = {
+                Text(stringResource(id = R.string.app_name))
+            }
+        )
     }
 
     /**
