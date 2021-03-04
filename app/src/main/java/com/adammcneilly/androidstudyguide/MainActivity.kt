@@ -1,5 +1,7 @@
 package com.adammcneilly.androidstudyguide
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -29,6 +31,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.adammcneilly.androidstudyguide.articlelist.AndroidEssenceArticleListViewModel
 import com.adammcneilly.androidstudyguide.bookmarks.BookmarkListViewModel
 import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
+import com.adammcneilly.androidstudyguide.models.Article
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -89,12 +92,20 @@ class MainActivity : AppCompatActivity() {
                         composable(HomeScreenTab.AllArticles.route) {
                             val viewModel: AndroidEssenceArticleListViewModel by viewModels()
 
-                            ArticleListScreen(viewModel = viewModel)
+                            ArticleListScreen(
+                                viewModel = viewModel,
+                                onBookmarkClicked = viewModel::bookmarkClicked,
+                                onArticleClicked = ::showArticleInBrowser,
+                            )
                         }
                         composable(HomeScreenTab.Bookmarks.route) {
                             val viewModel: BookmarkListViewModel by viewModels()
 
-                            ArticleListScreen(viewModel = viewModel)
+                            ArticleListScreen(
+                                viewModel = viewModel,
+                                onBookmarkClicked = viewModel::bookmarkClicked,
+                                onArticleClicked = ::showArticleInBrowser,
+                            )
                         }
                     }
                 }
@@ -194,5 +205,11 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp()
+    }
+
+    private fun showArticleInBrowser(article: Article) {
+        val uri = Uri.parse(article.url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 }

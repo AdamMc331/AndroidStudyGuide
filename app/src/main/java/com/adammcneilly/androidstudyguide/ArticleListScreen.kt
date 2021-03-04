@@ -11,10 +11,13 @@ import androidx.compose.ui.Modifier
 import com.adammcneilly.androidstudyguide.articlelist.ArticleListViewState
 import com.adammcneilly.androidstudyguide.articlelist.BaseArticleListViewModel
 import com.adammcneilly.androidstudyguide.compose.ArticleList
+import com.adammcneilly.androidstudyguide.models.Article
 
 @Composable
 fun ArticleListScreen(
-    viewModel: BaseArticleListViewModel
+    viewModel: BaseArticleListViewModel,
+    onBookmarkClicked: (Article) -> Unit,
+    onArticleClicked: (Article) -> Unit,
 ) {
     val state = viewModel.state.observeAsState()
 
@@ -24,12 +27,8 @@ fun ArticleListScreen(
         is ArticleListViewState.Success -> {
             ArticleList(
                 articles = currentState.articles,
-                onBookmarkClicked = { article ->
-//                    this.onBookmarkClicked(article)
-                },
-                onArticleClicked = { article ->
-//                    this.onArticleClicked(article)
-                }
+                onBookmarkClicked = onBookmarkClicked,
+                onArticleClicked = onArticleClicked,
             )
         }
         is ArticleListViewState.Loading -> {
