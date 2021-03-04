@@ -1,5 +1,7 @@
 package com.adammcneilly.androidstudyguide
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -31,10 +33,16 @@ fun ArticleListScreen(
             )
         }
         is ArticleListViewState.Loading -> {
-            CircularProgressIndicator(
+            Box(
                 modifier = Modifier
-                    .wrapContentSize(align = Alignment.Center)
-            )
+                    .fillMaxSize()
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .align(Alignment.Center)
+                )
+            }
         }
     }
 }
