@@ -13,13 +13,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Bookmarks
-import androidx.compose.material.icons.filled.LibraryBooks
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.KEY_ROUTE
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -27,12 +24,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.adammcneilly.androidstudyguide.articlelist.AndroidEssenceArticleListViewModel
 import com.adammcneilly.androidstudyguide.bookmarks.BookmarkListViewModel
 import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
 import com.adammcneilly.androidstudyguide.models.Article
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -63,27 +58,7 @@ class MainActivity : AppCompatActivity() {
                             val navBackStackEntry by navController.currentBackStackEntryAsState()
                             val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
                             homeScreenTabs.forEach { tab ->
-                                BottomNavigationItem(
-                                    icon = {
-                                        Icon(
-                                            tab.icon,
-                                            contentDescription = stringResource(id = tab.labelResourceId)
-                                        )
-                                    },
-                                    label = { Text(stringResource(tab.labelResourceId)) },
-                                    selected = (currentRoute == tab.route),
-                                    onClick = {
-                                        navController.navigate(tab.route) {
-                                            // Pop up to the start destination of the graph to
-                                            // avoid building up a large stack of destinations
-                                            // on the back stack as users select items
-                                            popUpTo = navController.graph.startDestination
-                                            // Avoid multiple copies of the same destination when
-                                            // reselecting the same item
-                                            launchSingleTop = true
-                                        }
-                                    }
-                                )
+                                BottomNavigationItemForTab(tab, currentRoute, navController)
                             }
                         }
                     }
@@ -111,45 +86,33 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-//        setContentView(R.layout.activity_main)
-//        setSupportActionBar(findViewById(R.id.toolbar))
-//
-//        setupNavController()
-//
-//        setupBottomNavigationMenu()
     }
 
     @Composable
-    private fun RowScope.BookmarksNavigationIcon() {
+    private fun RowScope.BottomNavigationItemForTab(
+        tab: HomeScreenTab,
+        currentRoute: String?,
+        navController: NavHostController
+    ) {
         BottomNavigationItem(
-            selected = false,
-            onClick = { /*TODO*/ },
             icon = {
                 Icon(
-                    Icons.Default.Bookmarks,
-                    contentDescription = null,
+                    tab.icon,
+                    contentDescription = stringResource(id = tab.labelResourceId)
                 )
             },
-            label = {
-                Text(text = stringResource(id = R.string.bookmarks))
-            }
-        )
-    }
-
-    @Composable
-    private fun RowScope.AllArticlesNavigationIcon() {
-        BottomNavigationItem(
-            selected = true,
-            onClick = { /*TODO*/ },
-            icon = {
-                Icon(
-                    Icons.Default.LibraryBooks,
-                    contentDescription = null,
-                )
-            },
-            label = {
-                Text(text = stringResource(id = R.string.all_articles))
+            label = { Text(stringResource(tab.labelResourceId)) },
+            selected = (currentRoute == tab.route),
+            onClick = {
+                navController.navigate(tab.route) {
+                    // Pop up to the start destination of the graph to
+                    // avoid building up a large stack of destinations
+                    // on the back stack as users select items
+                    popUpTo = navController.graph.startDestination
+                    // Avoid multiple copies of the same destination when
+                    // reselecting the same item
+                    launchSingleTop = true
+                }
             }
         )
     }
@@ -161,39 +124,6 @@ class MainActivity : AppCompatActivity() {
                 Text(stringResource(id = R.string.app_name))
             }
         )
-    }
-
-    /**
-     * Here we supply a custom [KeepStateNavigator] into our NavController for this activity.
-     *
-     * Note that to set up this navigator, we want to supply the childFragmentManager from our navHostFragment.
-     *
-     * In addition, we need to supply the nav graph, which can only be done after we've customized our
-     * navController.
-     */
-    private fun setupNavController() {
-        val navController = findNavController(R.id.nav_host_fragment)
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
-
-        navController.navigatorProvider.addNavigator(
-            KeepStateNavigator(this, navHostFragment.childFragmentManager, R.id.nav_host_fragment)
-        )
-
-        navController.setGraph(R.navigation.nav_graph)
-    }
-
-    /**
-     * Here we connect our [BottomNavigationView] with the NavController for this activity so that
-     * the navigation library can handle navigation for us.
-     *
-     * NOTE: In order for this to work, we had to make sure the fragment ids in `bottom_navigation_menu.xml`
-     * matched the fragment ids in `nav_graph.xml`.
-     */
-    private fun setupBottomNavigationMenu() {
-        val bottomNavigationMenu: BottomNavigationView = findViewById(R.id.bottom_navigation)
-
-        bottomNavigationMenu.setupWithNavController(findNavController(R.id.nav_host_fragment))
     }
 
     /**
