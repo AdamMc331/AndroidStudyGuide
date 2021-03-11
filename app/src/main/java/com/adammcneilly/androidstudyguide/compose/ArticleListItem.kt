@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
@@ -59,6 +61,10 @@ fun ArticleListItem(
 private fun ArticleTagsRow(article: Article) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_tags_spacing)),
+        modifier = Modifier
+            .semantics {
+                contentDescription = "Article Tags"
+            }
     ) {
         article.tags.forEach { tag ->
             Text(
@@ -89,6 +95,12 @@ private fun BookmarkButton(
         R.drawable.ic_bookmark_unselected
     }
 
+    val contentDescription = if (article.bookmarked) {
+        "Bookmarked"
+    } else {
+        "Not Bookmarked"
+    }
+
     IconButton(
         onClick = {
             onClick(article)
@@ -96,7 +108,7 @@ private fun BookmarkButton(
     ) {
         Image(
             painterResource(iconRes),
-            contentDescription = "Bookmark",
+            contentDescription = contentDescription,
             colorFilter = ColorFilter.tint(color = MaterialTheme.colors.secondary)
         )
     }
@@ -122,7 +134,9 @@ private fun ArticleTitleAndAuthor(
             modifier = Modifier
                 .padding(bottom = dimensionResource(id = R.dimen.article_author_bottom_padding))
         )
-        ArticleTagsRow(article = article)
+        if (article.tags.isNotEmpty()) {
+            ArticleTagsRow(article = article)
+        }
     }
 }
 
