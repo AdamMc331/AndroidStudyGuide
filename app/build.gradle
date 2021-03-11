@@ -94,6 +94,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation "com.google.truth:truth:1.1.2"
     androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
 
     def room_version = "2.2.6"
 
