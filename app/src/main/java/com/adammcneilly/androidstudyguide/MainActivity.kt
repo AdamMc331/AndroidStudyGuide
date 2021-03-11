@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     }
-                ) {
+                ) { paddingValues ->
                     NavHost(navController, startDestination = HomeScreenTab.AllArticles.route) {
                         composable(HomeScreenTab.AllArticles.route) {
                             val viewModel: AndroidEssenceArticleListViewModel by viewModels()
@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                                 viewModel = viewModel,
                                 onBookmarkClicked = viewModel::bookmarkClicked,
                                 onArticleClicked = ::showArticleInBrowser,
+                                paddingValues = paddingValues,
                             )
                         }
                         composable(HomeScreenTab.Bookmarks.route) {
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                                 viewModel = viewModel,
                                 onBookmarkClicked = viewModel::bookmarkClicked,
                                 onArticleClicked = ::showArticleInBrowser,
+                                paddingValues = paddingValues,
                             )
                         }
                     }

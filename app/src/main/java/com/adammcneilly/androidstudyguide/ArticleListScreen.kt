@@ -1,7 +1,9 @@
 package com.adammcneilly.androidstudyguide
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -18,29 +20,36 @@ fun ArticleListScreen(
     viewModel: BaseArticleListViewModel,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    paddingValues: PaddingValues,
 ) {
     val state = viewModel.state.observeAsState()
 
     val currentState = state.value
 
-    when (currentState) {
-        is ArticleListViewState.Success -> {
-            ArticleList(
-                articles = currentState.articles,
-                onBookmarkClicked = onBookmarkClicked,
-                onArticleClicked = onArticleClicked,
-            )
-        }
-        is ArticleListViewState.Loading -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .wrapContentSize()
-                        .align(Alignment.Center)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+    ) {
+        when (currentState) {
+            is ArticleListViewState.Success -> {
+                ArticleList(
+                    articles = currentState.articles,
+                    onBookmarkClicked = onBookmarkClicked,
+                    onArticleClicked = onArticleClicked,
                 )
+            }
+            is ArticleListViewState.Loading -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .align(Alignment.Center)
+                    )
+                }
             }
         }
     }
