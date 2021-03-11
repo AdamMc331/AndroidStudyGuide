@@ -6,6 +6,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.printToLog
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import com.google.common.truth.Truth.assertThat
@@ -35,6 +36,8 @@ class ArticleListItemTest {
                 onArticleClicked = { /*TODO*/ }
             )
         }
+
+        composeTestRule.onRoot().printToLog("ArticleListItemTest")
 
         composeTestRule.onNodeWithText(title, useUnmergedTree = true).assertIsDisplayed()
         composeTestRule.onNodeWithText("By Adam McNeilly", useUnmergedTree = true)
