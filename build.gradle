@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha09'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha12'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jlleitschuh.gradle:ktlint-gradle:10.0.0"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_plugin_version"
