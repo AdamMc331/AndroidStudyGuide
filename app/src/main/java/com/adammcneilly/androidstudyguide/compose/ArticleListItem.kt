@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -27,6 +28,7 @@ import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ArticleListItem(
     article: Article,
@@ -34,10 +36,9 @@ fun ArticleListItem(
     onArticleClicked: (Article) -> Unit,
 ) {
     Card(
-        modifier = Modifier
-            .clickable {
-                onArticleClicked(article)
-            }
+        onClick = {
+            onArticleClicked(article)
+        }
     ) {
         Row(
             modifier = Modifier
