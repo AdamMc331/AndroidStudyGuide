@@ -2,7 +2,6 @@ package com.adammcneilly.androidstudyguide
 
 import android.app.Application
 import com.segment.analytics.Analytics
-import com.segment.analytics.AnalyticsContext
 import dagger.hilt.android.HiltAndroidApp
 
 /**
