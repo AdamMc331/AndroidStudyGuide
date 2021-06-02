@@ -17,11 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.KEY_ROUTE
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import com.adammcneilly.androidstudyguide.articlelist.AndroidEssenceArticleListViewModel
@@ -56,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     bottomBar = {
                         BottomNavigation {
                             val navBackStackEntry by navController.currentBackStackEntryAsState()
-                            val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
+                            val currentRoute = navBackStackEntry?.destination?.route
                             homeScreenTabs.forEach { tab ->
                                 BottomNavigationItemForTab(tab, currentRoute, navController)
                             }
@@ -110,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                     // Pop up to the start destination of the graph to
                     // avoid building up a large stack of destinations
                     // on the back stack as users select items
-                    popUpTo = navController.graph.startDestination
+                    popUpTo(navController.graph.startDestinationId)
                     // Avoid multiple copies of the same destination when
                     // reselecting the same item
                     launchSingleTop = true
