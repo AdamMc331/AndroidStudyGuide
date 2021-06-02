@@ -11,6 +11,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
     defaultConfig {
         applicationId "com.adammcneilly.androidstudyguide"
         minSdkVersion 21
@@ -19,6 +22,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SEGMENT_API_KEY", properties.getProperty("SegmentKey"))
     }
 
     buildTypes {
@@ -84,6 +89,7 @@ dependencies {
     implementation "com.airbnb.android:lottie-compose:1.0.0-alpha06"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_plugin_version"
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    implementation 'com.segment.analytics.android:analytics:4.9.4'
     // When using Kotlin.
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha03'
     testImplementation 'junit:junit:4.13.2'
