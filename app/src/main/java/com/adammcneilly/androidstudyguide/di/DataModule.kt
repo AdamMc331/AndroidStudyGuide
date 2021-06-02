@@ -1,5 +1,7 @@
 package com.adammcneilly.androidstudyguide.di
 
+import com.adammcneilly.androidstudyguide.analytics.AnalyticsTracker
+import com.adammcneilly.androidstudyguide.analytics.FirebaseAnalyticsTracker
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.local.ArticleDatabase
 import com.adammcneilly.androidstudyguide.data.local.BookmarkedArticlesService
@@ -35,5 +37,10 @@ object DataModule {
         database: ArticleDatabase
     ): ArticleRepository {
         return BookmarkedArticlesService(database)
+    }
+
+    @Provides
+    fun provideAnalyticsTracker(): AnalyticsTracker {
+        return FirebaseAnalyticsTracker()
     }
 }

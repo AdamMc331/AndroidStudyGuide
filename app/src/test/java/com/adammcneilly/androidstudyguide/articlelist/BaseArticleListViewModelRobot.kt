@@ -1,5 +1,6 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
+import com.adammcneilly.androidstudyguide.fakes.FakeAnalyticsTracker
 import com.adammcneilly.androidstudyguide.fakes.FakeArticleRepository
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.testObserver
@@ -8,6 +9,7 @@ import com.google.common.truth.Truth.assertThat
 class BaseArticleListViewModelRobot {
     private lateinit var viewModel: BaseArticleListViewModel
     private val fakeRepository = FakeArticleRepository()
+    private val fakeAnalyticsTracker = FakeAnalyticsTracker()
 
     suspend fun emitArticles(articles: List<Article>) = apply {
         fakeRepository.emitArticles(articles)
@@ -19,7 +21,8 @@ class BaseArticleListViewModelRobot {
 
     fun buildViewModel() = apply {
         viewModel = object : BaseArticleListViewModel(
-            articleRepository = fakeRepository
+            articleRepository = fakeRepository,
+            analyticsTracker = fakeAnalyticsTracker,
         ) {
             /**
              * Supplying default value since it's not needed for these tests.
