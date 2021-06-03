@@ -10,10 +10,10 @@ import com.google.firebase.ktx.Firebase
  */
 class FirebaseAnalyticsTracker : AnalyticsTracker {
 
-    override fun trackEvent(eventName: String, properties: Map<String, Any>) {
+    override fun trackEvent(event: AnalyticsEvent) {
         Firebase.analytics.logEvent(
-            eventName,
-            bundleOf(*properties.toList().toTypedArray())
+            event.eventName,
+            bundleOf(*event.properties.toList().toTypedArray())
         )
     }
 }

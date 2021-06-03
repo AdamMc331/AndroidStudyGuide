@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adammcneilly.androidstudyguide.analytics.AnalyticsTracker
+import com.adammcneilly.androidstudyguide.analytics.BookmarkedArticleAnalyticsEvent
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
@@ -51,13 +52,12 @@ abstract class BaseArticleListViewModel(
             articleRepository.persistArticle(updatedArticle)
         }
 
-        analyticsTracker.trackEvent(
-            eventName = "article_bookmarked",
-            properties = mapOf(
-                "article_title" to article.htmlTitle.getInput(),
-                "is_bookmarked" to updatedArticle.bookmarked,
-            ),
+        val event = BookmarkedArticleAnalyticsEvent(
+            articleTitle = updatedArticle.htmlTitle.getInput(),
+            isBookmarked = updatedArticle.bookmarked,
         )
+
+        analyticsTracker.trackEvent(event)
     }
 
     /**

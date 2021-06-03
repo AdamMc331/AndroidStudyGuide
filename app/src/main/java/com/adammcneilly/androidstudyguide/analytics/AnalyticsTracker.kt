@@ -14,13 +14,8 @@ interface AnalyticsTracker {
 
     /**
      * This method should be called for any event in the application that we want to track.
-     *
-     * @param[eventName] A unique identifier for the event being tracked.
-     * @param[properties] A map of properties related to the event that provide more
-     * detailed information, such as which item was clicked or how a switch was toggled.
      */
     fun trackEvent(
-        eventName: String,
-        properties: Map<String, Any> = emptyMap(),
+        event: AnalyticsEvent,
     )
 }

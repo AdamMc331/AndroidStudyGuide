@@ -2,6 +2,7 @@ package com.adammcneilly.androidstudyguide.articlelist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.adammcneilly.androidstudyguide.CoroutinesTestRule
+import com.adammcneilly.androidstudyguide.analytics.BookmarkedArticleAnalyticsEvent
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -115,6 +116,11 @@ class BaseArticleListViewModelTest {
 
         val initialArticles = listOf(unbookmarkedArticle)
 
+        val expectedEvent = BookmarkedArticleAnalyticsEvent(
+            articleTitle = "Test Title",
+            isBookmarked = true,
+        )
+
         testRobot
             .buildViewModel()
             .emitArticles(initialArticles)
@@ -123,5 +129,6 @@ class BaseArticleListViewModelTest {
             )
             .clickBookmark(unbookmarkedArticle)
             .assertArticleWasPersisted(bookmarkedArticle)
+            .assertEventTracked(expectedEvent)
     }
 }

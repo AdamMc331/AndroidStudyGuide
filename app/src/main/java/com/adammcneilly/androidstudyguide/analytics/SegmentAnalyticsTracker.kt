@@ -7,15 +7,15 @@ class SegmentAnalyticsTracker(
     private val segmentInstance: Analytics,
 ) : AnalyticsTracker {
 
-    override fun trackEvent(eventName: String, properties: Map<String, Any>) {
+    override fun trackEvent(event: AnalyticsEvent) {
         val segmentProperties = Properties()
 
-        properties.forEach { (key, value) ->
+        event.properties.forEach { (key, value) ->
             segmentProperties[key] = value
         }
 
         segmentInstance.track(
-            eventName,
+            event.eventName,
             segmentProperties,
         )
     }

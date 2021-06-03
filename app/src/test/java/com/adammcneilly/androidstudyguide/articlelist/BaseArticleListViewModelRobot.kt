@@ -1,5 +1,6 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
+import com.adammcneilly.androidstudyguide.analytics.AnalyticsEvent
 import com.adammcneilly.androidstudyguide.fakes.FakeAnalyticsTracker
 import com.adammcneilly.androidstudyguide.fakes.FakeArticleRepository
 import com.adammcneilly.androidstudyguide.models.Article
@@ -53,6 +54,10 @@ class BaseArticleListViewModelRobot {
     fun assertArticleWasPersisted(article: Article) = apply {
         val wasPersisted = fakeRepository.getPersistedArticles().contains(article)
         assertThat(wasPersisted).isTrue()
+    }
+
+    fun assertEventTracked(expectedEvent: AnalyticsEvent) = apply {
+        fakeAnalyticsTracker.assertEventTracked(expectedEvent)
     }
 
     fun cleanUp() = apply {
