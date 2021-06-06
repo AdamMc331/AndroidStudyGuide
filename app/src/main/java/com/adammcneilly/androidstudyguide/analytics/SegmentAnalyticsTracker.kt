@@ -3,6 +3,9 @@ package com.adammcneilly.androidstudyguide.analytics
 import com.segment.analytics.Analytics
 import com.segment.analytics.Properties
 
+/**
+ * A concrete implementation of an [AnalyticsTracker] that will send all events to our [segmentInstance].
+ */
 class SegmentAnalyticsTracker(
     private val segmentInstance: Analytics,
 ) : AnalyticsTracker {
