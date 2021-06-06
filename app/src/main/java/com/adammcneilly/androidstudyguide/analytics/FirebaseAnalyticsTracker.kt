@@ -10,6 +10,7 @@ import com.google.firebase.ktx.Firebase
  */
 class FirebaseAnalyticsTracker : AnalyticsTracker {
 
+    @Suppress("SpreadOperator")
     override fun trackEvent(event: AnalyticsEvent) {
         Firebase.analytics.logEvent(
             event.eventName,
