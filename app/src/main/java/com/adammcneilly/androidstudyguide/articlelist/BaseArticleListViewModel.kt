@@ -1,9 +1,12 @@
 package com.adammcneilly.androidstudyguide.articlelist
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.adammcneilly.androidstudyguide.analytics.AnalyticsTracker
+import com.adammcneilly.androidstudyguide.analytics.BookmarkedArticleAnalyticsEvent
 import com.adammcneilly.androidstudyguide.data.ArticleRepository
 import com.adammcneilly.androidstudyguide.data.DataResponse
 import com.adammcneilly.androidstudyguide.models.Article
@@ -15,11 +18,13 @@ import kotlinx.coroutines.launch
  * those requests into an [ArticleListViewState] which is then exposed through our [state] LiveData.
  */
 abstract class BaseArticleListViewModel(
-    private val articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository,
+    private val analyticsTracker: AnalyticsTracker,
 ) : ViewModel() {
     private val _state: MutableLiveData<ArticleListViewState> = MutableLiveData()
     val state: LiveData<ArticleListViewState> = _state
 
+    @get:StringRes
     abstract val emptyStateMessageTextRes: Int
 
     init {
@@ -46,6 +51,13 @@ abstract class BaseArticleListViewModel(
         viewModelScope.launch {
             articleRepository.persistArticle(updatedArticle)
         }
+
+        val event = BookmarkedArticleAnalyticsEvent(
+            articleTitle = updatedArticle.htmlTitle.getInput(),
+            isBookmarked = updatedArticle.bookmarked,
+        )
+
+        analyticsTracker.trackEvent(event)
     }
 
     /**
