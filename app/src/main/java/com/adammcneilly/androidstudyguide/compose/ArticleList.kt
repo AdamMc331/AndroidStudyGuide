@@ -1,5 +1,6 @@
 package com.adammcneilly.androidstudyguide.compose
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,9 +32,16 @@ fun ArticleList(
     }
 }
 
-@Preview
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
 @Composable
-fun PreviewArticleList() {
+private fun ArticleListPreview() {
     val firstArticle = Article(
         htmlTitle = HtmlString("Adam's test article."),
         authorName = "Adam McNeilly",

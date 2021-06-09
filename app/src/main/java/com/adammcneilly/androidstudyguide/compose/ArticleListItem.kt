@@ -1,5 +1,6 @@
 package com.adammcneilly.androidstudyguide.compose
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -140,9 +141,16 @@ private fun ArticleTitleAndAuthor(
     }
 }
 
-@Preview
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
 @Composable
-fun PreviewArticleListItem() {
+private fun ArticleListItemPreview() {
     val article = Article(
         htmlTitle = HtmlString("Adam's test article."),
         authorName = "Adam McNeilly",
