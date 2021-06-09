@@ -1,14 +1,18 @@
 package com.adammcneilly.androidstudyguide.compose
 
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.hasScrollToIndexAction
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToIndex
 import androidx.compose.ui.test.printToLog
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
@@ -20,6 +24,7 @@ class ArticleListTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun displayArticleList() {
         val articles = (0..10).map { index ->
@@ -27,10 +32,13 @@ class ArticleListTest {
         }
 
         composeTestRule.setContent {
+            val listState = rememberLazyListState()
+
             ArticleList(
                 articles = articles,
                 onBookmarkClicked = { /*TODO*/ },
-                onArticleClicked = { /*TODO*/ }
+                onArticleClicked = { /*TODO*/ },
+                state = listState,
             )
         }
 
@@ -40,12 +48,18 @@ class ArticleListTest {
         composeTestRule.onNodeWithText("Article Number: 1", useUnmergedTree = true).assertExists()
         composeTestRule.onNodeWithText("Article Number: 2", useUnmergedTree = true).assertExists()
         composeTestRule.onNodeWithText("Article Number: 3", useUnmergedTree = true).assertExists()
-//        composeTestRule.onNodeWithText("Article Number: 4", useUnmergedTree = true).assertExists()
-//        composeTestRule.onNodeWithText("Article Number: 5", useUnmergedTree = true).assertExists()
-//        composeTestRule.onNodeWithText("Article Number: 6", useUnmergedTree = true).assertExists()
-//        composeTestRule.onNodeWithText("Article Number: 7", useUnmergedTree = true).assertExists()
-//        composeTestRule.onNodeWithText("Article Number: 8", useUnmergedTree = true).assertExists()
-//        composeTestRule.onNodeWithText("Article Number: 9", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Article Number: 4", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Article Number: 5", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Article Number: 6", useUnmergedTree = true).assertExists()
+
+        composeTestRule
+            .onNode(hasScrollToIndexAction())
+            .performScrollToIndex(7)
+
+        composeTestRule.onNodeWithText("Article Number: 7", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Article Number: 8", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Article Number: 9", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Article Number: 10", useUnmergedTree = true).assertExists()
     }
 
     @Test
