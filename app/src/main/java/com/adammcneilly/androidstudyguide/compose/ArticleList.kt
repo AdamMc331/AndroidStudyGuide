@@ -22,7 +22,12 @@ fun ArticleList(
         contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.article_list_padding)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_list_spacing)),
     ) {
-        items(articles) { article ->
+        items(
+            items = articles,
+            key = { article ->
+                article.toString()
+            },
+        ) { article ->
             ArticleListItem(
                 article = article,
                 onBookmarkClicked = onBookmarkClicked,
