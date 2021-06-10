@@ -44,22 +44,17 @@ class ArticleListTest {
 
         composeTestRule.onRoot().printToLog("ArticleListItemTest")
 
-        composeTestRule.onNodeWithText("Article Number: 0", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 1", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 2", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 3", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 4", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 5", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 6", useUnmergedTree = true).assertExists()
+        val indexes = (0..10)
 
-        composeTestRule
-            .onNode(hasScrollToIndexAction())
-            .performScrollToIndex(7)
+        indexes.forEach { index ->
+            composeTestRule
+                .onNode(hasScrollToIndexAction())
+                .performScrollToIndex(index)
 
-        composeTestRule.onNodeWithText("Article Number: 7", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 8", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 9", useUnmergedTree = true).assertExists()
-        composeTestRule.onNodeWithText("Article Number: 10", useUnmergedTree = true).assertExists()
+            composeTestRule
+                .onNodeWithText("Article Number: $index", useUnmergedTree = true)
+                .assertExists()
+        }
     }
 
     @Test
