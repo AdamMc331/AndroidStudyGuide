@@ -4,9 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,12 +17,10 @@ fun ArticleList(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
-    state: LazyListState = rememberLazyListState(),
 ) {
     LazyColumn(
         contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.article_list_padding)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_list_spacing)),
-        state = state,
     ) {
         items(
             items = articles,

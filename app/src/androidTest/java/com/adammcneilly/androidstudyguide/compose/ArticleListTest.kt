@@ -1,6 +1,5 @@
 package com.adammcneilly.androidstudyguide.compose
 
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,13 +31,10 @@ class ArticleListTest {
         }
 
         composeTestRule.setContent {
-            val listState = rememberLazyListState()
-
             ArticleList(
                 articles = articles,
                 onBookmarkClicked = { /*TODO*/ },
                 onArticleClicked = { /*TODO*/ },
-                state = listState,
             )
         }
 
