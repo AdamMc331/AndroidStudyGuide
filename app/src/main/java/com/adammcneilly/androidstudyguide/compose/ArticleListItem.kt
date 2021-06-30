@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
@@ -35,6 +36,8 @@ fun ArticleListItem(
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
 ) {
+    val widthPercentage = getItemWidthPercentage()
+
     Card(
         onClick = {
             onArticleClicked(article)
@@ -43,7 +46,7 @@ fun ArticleListItem(
         Row(
             modifier = Modifier
                 .padding(all = dimensionResource(id = R.dimen.article_list_item_padding))
-                .fillMaxWidth(),
+                .fillMaxWidth(widthPercentage),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ArticleTitleAndAuthor(
@@ -55,6 +58,32 @@ fun ArticleListItem(
                 onClick = onBookmarkClicked,
             )
         }
+    }
+}
+
+/**
+ * Get a reference to the screen configuration, and determine if we're on a tablet or any large
+ * width device (like a phone in landscape).
+ *
+ * If so, we're going to return a width percentage of 0.5 so articles take up 50% of the screen.
+ * Otherwise, we can return 1, to take up the whole screen.
+ *
+ * The centering of article items is handled inside [ArticleList].
+ */
+@Composable
+private fun getItemWidthPercentage(): Float {
+    val configuration = LocalConfiguration.current
+
+    val screenWidth = configuration.screenWidthDp
+
+    // https://developer.android.com/training/multiscreen/screensizes#TaskUseSWQuali
+    // 600dp is the smallest width for a standard 7" tablet.
+    val isTablet = (screenWidth >= 600)
+
+    return if (isTablet) {
+        0.5F
+    } else {
+        1F
     }
 }
 
@@ -148,6 +177,11 @@ private fun ArticleTitleAndAuthor(
 @Preview(
     name = "Day Mode",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
+@Preview(
+    name = "Day Mode - Tablet",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    widthDp = 600,
 )
 @Composable
 private fun ArticleListItemPreview() {

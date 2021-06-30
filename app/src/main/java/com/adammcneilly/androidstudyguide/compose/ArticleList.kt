@@ -3,9 +3,12 @@ package com.adammcneilly.androidstudyguide.compose
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.androidstudyguide.R
@@ -21,6 +24,10 @@ fun ArticleList(
     LazyColumn(
         contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.article_list_padding)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_list_spacing)),
+        // Horizontally align items, in case they don't take up the full width.
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize(),
     ) {
         items(
             items = articles,
@@ -44,6 +51,11 @@ fun ArticleList(
 @Preview(
     name = "Day Mode",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
+@Preview(
+    name = "Day Mode - Tablet",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    widthDp = 600,
 )
 @Composable
 private fun ArticleListPreview() {
