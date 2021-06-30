@@ -2,13 +2,16 @@ package com.adammcneilly.androidstudyguide.compose
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Devices.PIXEL_C
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,13 +25,39 @@ fun ArticleList(
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
 ) {
+    val itemWidthPercentage = getColumnWidthPercentage()
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+    ) {
+        ArticleListColumn(
+            articles,
+            onBookmarkClicked,
+            onArticleClicked,
+            modifier = Modifier
+                .fillMaxWidth(itemWidthPercentage)
+                .align(Alignment.Center),
+        )
+    }
+}
+
+/**
+ * This was extracted into a separate function, so that it can be wrapped by
+ * [ArticleList] to make sure it is centered on the screen.
+ */
+@Composable
+private fun ArticleListColumn(
+    articles: List<Article>,
+    onBookmarkClicked: (Article) -> Unit,
+    onArticleClicked: (Article) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+
     LazyColumn(
         contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.article_list_padding)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_list_spacing)),
-        // Horizontally align items, in case they don't take up the full width.
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = modifier,
     ) {
         items(
             items = articles,
@@ -42,6 +71,30 @@ fun ArticleList(
                 onArticleClicked = onArticleClicked,
             )
         }
+    }
+}
+
+/**
+ * Get a reference to the screen configuration, and determine if we're on a tablet or any large
+ * width device (like a phone in landscape).
+ *
+ * If so, we're going to return a width percentage of 0.5 so articles take up 50% of the screen.
+ * Otherwise, we can return 1, to take up the whole screen.
+ */
+@Composable
+private fun getColumnWidthPercentage(): Float {
+    val configuration = LocalConfiguration.current
+
+    val screenWidth = configuration.screenWidthDp
+
+    // https://developer.android.com/training/multiscreen/screensizes#TaskUseSWQuali
+    // 600dp is the smallest width for a standard 7" tablet.
+    val isTablet = (screenWidth >= 600)
+
+    return if (isTablet) {
+        0.5F
+    } else {
+        1F
     }
 }
 
