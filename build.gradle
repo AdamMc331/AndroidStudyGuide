@@ -2,7 +2,7 @@
 buildscript {
     ext.kotlin_version = "1.5.10"
     ext.compose_version = "1.0.0-beta09"
-    ext.hilt_plugin_version = "2.31-alpha"
+    ext.hilt_plugin_version = "2.37"
 
     repositories {
         google()
@@ -14,7 +14,7 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-beta02'
+        classpath 'com.android.tools.build:gradle:7.1.0-alpha02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jlleitschuh.gradle:ktlint-gradle:10.0.0"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_plugin_version"
