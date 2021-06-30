@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.tooling.preview.Devices.PIXEL_C
 import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
@@ -55,7 +56,7 @@ fun ArticleList(
 @Preview(
     name = "Day Mode - Tablet",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
-    widthDp = 600,
+    device = PIXEL_C,
 )
 @Composable
 private fun ArticleListPreview() {
@@ -76,7 +77,7 @@ private fun ArticleListPreview() {
 
     val articleList = listOf(firstArticle, secondArticle, thirdArticle)
 
-    StudyGuideTheme(isInDarkMode = true) {
+    StudyGuideTheme {
         ArticleList(
             articleList,
             onBookmarkClicked = {},

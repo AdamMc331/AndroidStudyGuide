@@ -24,6 +24,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
@@ -181,7 +182,7 @@ private fun ArticleTitleAndAuthor(
 @Preview(
     name = "Day Mode - Tablet",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
-    widthDp = 600,
+    device = Devices.PIXEL_C,
 )
 @Composable
 private fun ArticleListItemPreview() {
