@@ -25,7 +25,7 @@ fun ArticleGrid(
     onArticleClicked: (Article) -> Unit,
 ) {
     LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
+        cells = GridCells.Fixed(3),
         modifier = Modifier
             .fillMaxSize(),
     ) {
