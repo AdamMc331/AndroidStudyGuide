@@ -13,11 +13,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Devices.PIXEL_C
 import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
+
+val ColumnWidthKey = SemanticsPropertyKey<Float>("ColumnWidth")
+var SemanticsPropertyReceiver.columnWidth by ColumnWidthKey
 
 @Composable
 fun ArticleList(
@@ -25,7 +31,7 @@ fun ArticleList(
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
 ) {
-    val itemWidthPercentage = getColumnWidthPercentage()
+    val columnWidthPercentage = getColumnWidthPercentage()
 
     Box(
         modifier = Modifier
@@ -36,8 +42,11 @@ fun ArticleList(
             onBookmarkClicked,
             onArticleClicked,
             modifier = Modifier
-                .fillMaxWidth(itemWidthPercentage)
-                .align(Alignment.Center),
+                .fillMaxWidth(columnWidthPercentage)
+                .align(Alignment.Center)
+                .semantics {
+                    columnWidth = columnWidthPercentage
+                },
         )
     }
 }
