@@ -141,6 +141,8 @@ private fun ArticleTitleAndAuthor(
     modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
+    val authorLabelWidthRatio = 0.75F
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -156,7 +158,7 @@ private fun ArticleTitleAndAuthor(
             text = "By ${article.authorName}",
             style = MaterialTheme.typography.subtitle1,
             modifier = childModifier
-                .fillMaxWidth(0.75F)
+                .fillMaxWidth(authorLabelWidthRatio)
                 .padding(bottom = dimensionResource(id = R.dimen.article_author_bottom_padding))
         )
         if (article.tags.isNotEmpty()) {
