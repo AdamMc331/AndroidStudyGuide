@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -44,6 +45,7 @@ fun ArticleListScreen(
                 val placeholderArticles = (1..5).map { index ->
                     Article(
                         htmlTitle = HtmlString("Placeholder article $index"),
+                        tags = listOf("testing", "testing"),
                     )
                 }
 
@@ -54,6 +56,7 @@ fun ArticleListScreen(
                     childModifier = Modifier.placeholder(
                         visible = true,
                         highlight = PlaceholderHighlight.fade(),
+                        shape = CircleShape,
                     ),
                 )
             }

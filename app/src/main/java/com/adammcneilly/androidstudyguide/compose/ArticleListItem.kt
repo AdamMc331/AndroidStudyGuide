@@ -25,6 +25,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
@@ -56,13 +57,17 @@ fun ArticleListItem(
             BookmarkButton(
                 article = article,
                 onClick = onBookmarkClicked,
+                childModifier = childModifier,
             )
         }
     }
 }
 
 @Composable
-private fun ArticleTagsRow(article: Article) {
+private fun ArticleTagsRow(
+    article: Article,
+    childModifier: Modifier = Modifier,
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_tags_spacing)),
         modifier = Modifier
@@ -74,7 +79,7 @@ private fun ArticleTagsRow(article: Article) {
             Text(
                 text = tag,
                 style = MaterialTheme.typography.caption,
-                modifier = Modifier
+                modifier = childModifier
                     .background(
                         color = MaterialTheme.colors.primary,
                         shape = CircleShape
@@ -92,6 +97,7 @@ private fun ArticleTagsRow(article: Article) {
 private fun BookmarkButton(
     article: Article,
     onClick: (Article) -> Unit,
+    childModifier: Modifier = Modifier,
 ) {
     val iconRes = if (article.bookmarked) {
         R.drawable.ic_bookmark_selected
@@ -108,7 +114,8 @@ private fun BookmarkButton(
     IconButton(
         onClick = {
             onClick(article)
-        }
+        },
+        modifier = childModifier,
     ) {
         Image(
             painterResource(iconRes),
@@ -125,22 +132,28 @@ private fun ArticleTitleAndAuthor(
     childModifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Text(
             text = article.htmlTitle.getInput(),
             style = MaterialTheme.typography.h5,
             modifier = childModifier
+                .fillMaxWidth()
                 .padding(bottom = dimensionResource(id = R.dimen.article_title_bottom_padding))
         )
         Text(
             text = "By ${article.authorName}",
             style = MaterialTheme.typography.subtitle1,
             modifier = childModifier
+                .fillMaxWidth(0.75F)
                 .padding(bottom = dimensionResource(id = R.dimen.article_author_bottom_padding))
         )
         if (article.tags.isNotEmpty()) {
-            ArticleTagsRow(article = article)
+            ArticleTagsRow(
+                article = article,
+                childModifier = childModifier,
+            )
         }
     }
 }
