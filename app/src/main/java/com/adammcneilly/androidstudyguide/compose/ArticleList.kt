@@ -98,7 +98,8 @@ private fun getColumnWidthPercentage(): Float {
 
     // https://developer.android.com/training/multiscreen/screensizes#TaskUseSWQuali
     // 600dp is the smallest width for a standard 7" tablet.
-    val isTablet = (screenWidth >= 600)
+    val tabletWidthDp = 600
+    val isTablet = (screenWidth >= tabletWidthDp)
 
     // Alternatively, if you don't want to do this conditional logic inside your Kotlin code,
     // you can put a boolean inside your resource folders and reference it here.

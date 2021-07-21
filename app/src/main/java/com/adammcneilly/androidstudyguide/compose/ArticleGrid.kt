@@ -24,8 +24,10 @@ fun ArticleGrid(
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
 ) {
+    val numColumns = 3
+
     LazyVerticalGrid(
-        cells = GridCells.Fixed(3),
+        cells = GridCells.Fixed(numColumns),
         modifier = Modifier
             .fillMaxSize(),
     ) {
