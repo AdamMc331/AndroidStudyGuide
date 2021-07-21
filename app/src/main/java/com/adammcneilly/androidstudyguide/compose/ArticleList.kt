@@ -25,17 +25,22 @@ import com.adammcneilly.androidstudyguide.util.HtmlString
 val ColumnWidthKey = SemanticsPropertyKey<Float>("ColumnWidth")
 var SemanticsPropertyReceiver.columnWidth by ColumnWidthKey
 
+/**
+ * The [childModifier] is a separate modifier applied to the children inside list items to show a
+ * placeholder while data is loading.
+ */
 @Composable
 fun ArticleList(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
     val columnWidthPercentage = getColumnWidthPercentage()
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
     ) {
         ArticleListColumn(

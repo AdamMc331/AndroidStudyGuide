@@ -11,19 +11,23 @@ import com.adammcneilly.androidstudyguide.models.Article
  * This is based on the width of the screen.
  *
  * This composable will go into the article collection composable based on said boolean.
+ *
+ * @param[childModifier] This is a separate modifier applied to child items inside the list items
+ * to show a placeholder UI while data is loading.
  */
 @Composable
 fun ArticleCollection(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
     val shouldShowGrid = booleanResource(id = R.bool.showArticleGrid)
 
     if (shouldShowGrid) {
-        ArticleGrid(articles, onBookmarkClicked, onArticleClicked)
+        ArticleGrid(articles, onBookmarkClicked, onArticleClicked, modifier, childModifier)
     } else {
-        ArticleList(articles, onBookmarkClicked, onArticleClicked, childModifier)
+        ArticleList(articles, onBookmarkClicked, onArticleClicked, modifier, childModifier)
     }
 }

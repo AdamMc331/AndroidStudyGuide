@@ -30,12 +30,18 @@ import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 
+/**
+ * @param[childModifier] This is a modifier that should be passed the children of an article
+ * list item composable (such as the texts and button items). In practice, this is used to show a
+ * placeholder effect until data has loaded for an article.
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ArticleListItem(
     article: Article,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
     Card(
@@ -44,7 +50,7 @@ fun ArticleListItem(
         }
     ) {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .padding(all = dimensionResource(id = R.dimen.article_list_item_padding))
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -57,20 +63,24 @@ fun ArticleListItem(
             BookmarkButton(
                 article = article,
                 onClick = onBookmarkClicked,
-                childModifier = childModifier,
+                modifier = childModifier,
             )
         }
     }
 }
 
+/**
+ * See [ArticleListItem] documentation for an understanding of why we need [childModifier].
+ */
 @Composable
 private fun ArticleTagsRow(
     article: Article,
+    modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_tags_spacing)),
-        modifier = Modifier
+        modifier = modifier
             .semantics {
                 contentDescription = "Article Tags"
             }
@@ -97,7 +107,7 @@ private fun ArticleTagsRow(
 private fun BookmarkButton(
     article: Article,
     onClick: (Article) -> Unit,
-    childModifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
     val iconRes = if (article.bookmarked) {
         R.drawable.ic_bookmark_selected
@@ -115,7 +125,7 @@ private fun BookmarkButton(
         onClick = {
             onClick(article)
         },
-        modifier = childModifier,
+        modifier = modifier,
     ) {
         Image(
             painterResource(iconRes),
