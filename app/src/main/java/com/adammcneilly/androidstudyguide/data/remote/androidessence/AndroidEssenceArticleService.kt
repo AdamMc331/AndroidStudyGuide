@@ -6,6 +6,7 @@ import com.adammcneilly.androidstudyguide.data.local.ArticleDatabase
 import com.adammcneilly.androidstudyguide.data.local.toPersistableArticle
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
@@ -25,6 +26,8 @@ class AndroidEssenceArticleService @Inject constructor(
 
     override fun fetchArticles(): Flow<DataResponse<List<Article>>> {
         val apiArticlesFlow = flow {
+            delay(2500)
+
             val articles = api.getFeed().items?.map(AndroidEssenceFeedItem::toArticle).orEmpty()
             emit(articles)
         }

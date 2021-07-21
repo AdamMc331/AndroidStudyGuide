@@ -4,16 +4,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.adammcneilly.androidstudyguide.articlelist.ArticleListViewState
 import com.adammcneilly.androidstudyguide.articlelist.BaseArticleListViewModel
 import com.adammcneilly.androidstudyguide.compose.ArticleCollection
 import com.adammcneilly.androidstudyguide.models.Article
+import com.adammcneilly.androidstudyguide.util.HtmlString
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.fade
+import com.google.accompanist.placeholder.material.placeholder
 
 @Composable
 fun ArticleListScreen(
@@ -40,16 +41,21 @@ fun ArticleListScreen(
                 )
             }
             is ArticleListViewState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .align(Alignment.Center)
+                val placeholderArticles = (1..5).map { index ->
+                    Article(
+                        htmlTitle = HtmlString("Placeholder article $index"),
                     )
                 }
+
+                ArticleCollection(
+                    articles = placeholderArticles,
+                    onBookmarkClicked = {},
+                    onArticleClicked = {},
+                    childModifier = Modifier.placeholder(
+                        visible = true,
+                        highlight = PlaceholderHighlight.fade(),
+                    ),
+                )
             }
         }
     }

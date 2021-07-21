@@ -30,6 +30,7 @@ fun ArticleList(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    childModifier: Modifier = Modifier,
 ) {
     val columnWidthPercentage = getColumnWidthPercentage()
 
@@ -47,6 +48,7 @@ fun ArticleList(
                 .semantics {
                     columnWidth = columnWidthPercentage
                 },
+            childModifier = childModifier,
         )
     }
 }
@@ -61,6 +63,7 @@ private fun ArticleListColumn(
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
     modifier: Modifier = Modifier,
+    childModifier: Modifier = Modifier,
 ) {
 
     LazyColumn(
@@ -78,6 +81,7 @@ private fun ArticleListColumn(
                 article = article,
                 onBookmarkClicked = onBookmarkClicked,
                 onArticleClicked = onArticleClicked,
+                childModifier = childModifier,
             )
         }
     }

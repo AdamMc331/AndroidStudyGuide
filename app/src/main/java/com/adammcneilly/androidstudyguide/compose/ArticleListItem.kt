@@ -35,6 +35,7 @@ fun ArticleListItem(
     article: Article,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    childModifier: Modifier = Modifier,
 ) {
     Card(
         onClick = {
@@ -49,7 +50,8 @@ fun ArticleListItem(
         ) {
             ArticleTitleAndAuthor(
                 article = article,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                childModifier = childModifier,
             )
             BookmarkButton(
                 article = article,
@@ -119,7 +121,8 @@ private fun BookmarkButton(
 @Composable
 private fun ArticleTitleAndAuthor(
     article: Article,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    childModifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
@@ -127,13 +130,13 @@ private fun ArticleTitleAndAuthor(
         Text(
             text = article.htmlTitle.getInput(),
             style = MaterialTheme.typography.h5,
-            modifier = Modifier
+            modifier = childModifier
                 .padding(bottom = dimensionResource(id = R.dimen.article_title_bottom_padding))
         )
         Text(
             text = "By ${article.authorName}",
             style = MaterialTheme.typography.subtitle1,
-            modifier = Modifier
+            modifier = childModifier
                 .padding(bottom = dimensionResource(id = R.dimen.article_author_bottom_padding))
         )
         if (article.tags.isNotEmpty()) {
