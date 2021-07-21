@@ -3,6 +3,7 @@ package com.adammcneilly.androidstudyguide.articlelist
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import com.adammcneilly.androidstudyguide.compose.ArticleList
+import com.adammcneilly.androidstudyguide.compose.ArticleGrid
 import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
 import com.adammcneilly.androidstudyguide.models.Article
 
@@ -41,7 +42,8 @@ abstract class BaseArticleListFragment : Fragment(), ArticleClickListener {
 
                 when (currentState) {
                     is ArticleListViewState.Success -> {
-                        ArticleList(
+                        Log.d("ARM", "Creating Article Screen")
+                        ArticleGrid(
                             articles = currentState.articles,
                             onBookmarkClicked = { article ->
                                 this.onBookmarkClicked(article)

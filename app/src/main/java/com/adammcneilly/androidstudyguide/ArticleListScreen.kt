@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.adammcneilly.androidstudyguide.articlelist.ArticleListViewState
 import com.adammcneilly.androidstudyguide.articlelist.BaseArticleListViewModel
-import com.adammcneilly.androidstudyguide.compose.ArticleList
+import com.adammcneilly.androidstudyguide.compose.ArticleCollection
 import com.adammcneilly.androidstudyguide.models.Article
 
 @Composable
@@ -33,7 +33,7 @@ fun ArticleListScreen(
     ) {
         when (currentState) {
             is ArticleListViewState.Success -> {
-                ArticleList(
+                ArticleCollection(
                     articles = currentState.articles,
                     onBookmarkClicked = onBookmarkClicked,
                     onArticleClicked = onArticleClicked,
