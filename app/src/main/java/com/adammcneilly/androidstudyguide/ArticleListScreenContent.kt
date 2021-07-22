@@ -1,6 +1,7 @@
 package com.adammcneilly.androidstudyguide
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -42,6 +43,7 @@ fun ArticleListScreenContent(
                     articles = placeholderArticles,
                     onBookmarkClicked = {},
                     onArticleClicked = {},
+                    modifier = Modifier.progressSemantics(),
                     childModifier = Modifier.placeholder(
                         visible = true,
                         highlight = PlaceholderHighlight.fade(),
