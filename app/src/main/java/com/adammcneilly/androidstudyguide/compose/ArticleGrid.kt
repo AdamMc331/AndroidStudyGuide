@@ -23,12 +23,14 @@ fun ArticleGrid(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    modifier: Modifier = Modifier,
+    childModifier: Modifier = Modifier,
 ) {
     val numColumns = 3
 
     LazyVerticalGrid(
         cells = GridCells.Fixed(numColumns),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
     ) {
         items(
@@ -42,6 +44,7 @@ fun ArticleGrid(
                     article = article,
                     onBookmarkClicked = onBookmarkClicked,
                     onArticleClicked = onArticleClicked,
+                    childModifier = childModifier,
                 )
             }
         }

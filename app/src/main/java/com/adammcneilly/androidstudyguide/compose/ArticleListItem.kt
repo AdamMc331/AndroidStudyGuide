@@ -25,16 +25,24 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
 
+/**
+ * @param[childModifier] This is a modifier that should be passed the children of an article
+ * list item composable (such as the texts and button items). In practice, this is used to show a
+ * placeholder effect until data has loaded for an article.
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ArticleListItem(
     article: Article,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    modifier: Modifier = Modifier,
+    childModifier: Modifier = Modifier,
 ) {
     Card(
         onClick = {
@@ -42,28 +50,37 @@ fun ArticleListItem(
         }
     ) {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .padding(all = dimensionResource(id = R.dimen.article_list_item_padding))
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ArticleTitleAndAuthor(
                 article = article,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                childModifier = childModifier,
             )
             BookmarkButton(
                 article = article,
                 onClick = onBookmarkClicked,
+                modifier = childModifier,
             )
         }
     }
 }
 
+/**
+ * See [ArticleListItem] documentation for an understanding of why we need [childModifier].
+ */
 @Composable
-private fun ArticleTagsRow(article: Article) {
+private fun ArticleTagsRow(
+    article: Article,
+    modifier: Modifier = Modifier,
+    childModifier: Modifier = Modifier,
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_tags_spacing)),
-        modifier = Modifier
+        modifier = modifier
             .semantics {
                 contentDescription = "Article Tags"
             }
@@ -72,7 +89,7 @@ private fun ArticleTagsRow(article: Article) {
             Text(
                 text = tag,
                 style = MaterialTheme.typography.caption,
-                modifier = Modifier
+                modifier = childModifier
                     .background(
                         color = MaterialTheme.colors.primary,
                         shape = CircleShape
@@ -90,6 +107,7 @@ private fun ArticleTagsRow(article: Article) {
 private fun BookmarkButton(
     article: Article,
     onClick: (Article) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val iconRes = if (article.bookmarked) {
         R.drawable.ic_bookmark_selected
@@ -106,7 +124,8 @@ private fun BookmarkButton(
     IconButton(
         onClick = {
             onClick(article)
-        }
+        },
+        modifier = modifier,
     ) {
         Image(
             painterResource(iconRes),
@@ -119,25 +138,34 @@ private fun BookmarkButton(
 @Composable
 private fun ArticleTitleAndAuthor(
     article: Article,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    childModifier: Modifier = Modifier,
 ) {
+    val authorLabelWidthRatio = 0.75F
+
     Column(
-        modifier = modifier
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Text(
             text = article.htmlTitle.getInput(),
             style = MaterialTheme.typography.h5,
-            modifier = Modifier
+            modifier = childModifier
+                .fillMaxWidth()
                 .padding(bottom = dimensionResource(id = R.dimen.article_title_bottom_padding))
         )
         Text(
             text = "By ${article.authorName}",
             style = MaterialTheme.typography.subtitle1,
-            modifier = Modifier
+            modifier = childModifier
+                .fillMaxWidth(authorLabelWidthRatio)
                 .padding(bottom = dimensionResource(id = R.dimen.article_author_bottom_padding))
         )
         if (article.tags.isNotEmpty()) {
-            ArticleTagsRow(article = article)
+            ArticleTagsRow(
+                article = article,
+                childModifier = childModifier,
+            )
         }
     }
 }
