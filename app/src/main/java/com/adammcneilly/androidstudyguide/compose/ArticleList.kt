@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -49,6 +50,7 @@ fun ArticleList(
             onArticleClicked,
             modifier = Modifier
                 .fillMaxWidth(columnWidthPercentage)
+                .fillMaxHeight()
                 .align(Alignment.Center)
                 .semantics {
                     columnWidth = columnWidthPercentage
