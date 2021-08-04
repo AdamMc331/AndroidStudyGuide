@@ -21,5 +21,5 @@ val StudyGuideLightColors = lightColors(
 val StudyGuideDarkColors = darkColors(
     primary = SlateGray,
     secondary = GreenSheen,
-    background = RichBlack,
+    surface = RichBlack,
 )
