@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 val SlateGray = Color(0xFF6C809A)
 val DeepTaupe = Color(0xFF795663)
 val Cultured = Color(0xFFF3F5F7)
+val GreenSheen = Color(0xFF75BBA7)
 
 val StudyGuideLightColors = lightColors(
     primary = SlateGray,
@@ -18,5 +19,5 @@ val StudyGuideLightColors = lightColors(
 
 val StudyGuideDarkColors = darkColors(
     primary = SlateGray,
-    secondary = DeepTaupe,
+    secondary = GreenSheen,
 )

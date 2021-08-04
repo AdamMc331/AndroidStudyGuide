@@ -19,6 +19,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -101,7 +102,7 @@ private fun ArticleTagsRow(
                         horizontal = dimensionResource(id = R.dimen.article_tag_horizontal_padding),
                         vertical = dimensionResource(id = R.dimen.article_tag_vertical_padding),
                     ),
-                color = MaterialTheme.colors.onPrimary,
+                color = Color.White,
             )
         }
     }
