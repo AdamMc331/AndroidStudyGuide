@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -88,16 +89,19 @@ private fun ArticleTagsRow(
         article.tags.forEach { tag ->
             Text(
                 text = tag,
-                style = MaterialTheme.typography.caption,
+                style = MaterialTheme.typography.body2,
                 modifier = childModifier
                     .background(
-                        color = MaterialTheme.colors.primary,
+                        color = MaterialTheme.colors.primary.copy(
+                            alpha = ContentAlpha.medium,
+                        ),
                         shape = CircleShape
                     )
                     .padding(
                         horizontal = dimensionResource(id = R.dimen.article_tag_horizontal_padding),
                         vertical = dimensionResource(id = R.dimen.article_tag_vertical_padding),
-                    )
+                    ),
+                color = MaterialTheme.colors.onPrimary,
             )
         }
     }
