@@ -29,3 +29,6 @@ Dir.foreach("app/src/main/res/layout") do |filename|
   end
 
 end
+
+
+# Testing
