@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package com.adammcneilly.androidstudyguide.compose
 
 import androidx.compose.material.darkColors
