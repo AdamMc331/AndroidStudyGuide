@@ -6,5 +6,5 @@
     so that the bottom navigation will have the same color as the navigation bar, creating a
     seamless edge to edge experience. -->
     <color name="colorPrimary">#2D3134</color>
-    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryDark">#272A30</color>
 </resources>
