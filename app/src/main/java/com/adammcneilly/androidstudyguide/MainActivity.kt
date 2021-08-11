@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
@@ -25,7 +27,10 @@ import androidx.navigation.findNavController
 import com.adammcneilly.androidstudyguide.articlelist.AndroidEssenceArticleListViewModel
 import com.adammcneilly.androidstudyguide.bookmarks.BookmarkListViewModel
 import com.adammcneilly.androidstudyguide.compose.StudyGuideTheme
+import com.adammcneilly.androidstudyguide.compose.navigationBarColor
+import com.adammcneilly.androidstudyguide.compose.statusBarColor
 import com.adammcneilly.androidstudyguide.models.Article
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -40,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             StudyGuideTheme {
+                ColorSystemBars()
+
                 val navController = rememberNavController()
 
                 val homeScreenTabs = listOf(
@@ -85,6 +92,27 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    @Composable
+    private fun ColorSystemBars() {
+        val systemUiController = rememberSystemUiController()
+        val useDarkIcons = MaterialTheme.colors.isLight
+
+        val statusBarColor = MaterialTheme.colors.statusBarColor
+        val navigationBarColor = MaterialTheme.colors.navigationBarColor
+
+        SideEffect {
+            systemUiController.setStatusBarColor(
+                color = statusBarColor,
+                darkIcons = useDarkIcons,
+            )
+
+            systemUiController.setNavigationBarColor(
+                color = navigationBarColor,
+                darkIcons = useDarkIcons,
+            )
         }
     }
 

@@ -89,6 +89,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation "com.google.accompanist:accompanist-placeholder-material:0.14.0"
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.16.1"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_plugin_version"
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
     implementation 'com.segment.analytics.android:analytics:4.10.0'
