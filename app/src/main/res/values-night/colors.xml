@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- This is a magic hex code found using the color picker app on Mac. This is because
+    the material design system
+    is doing some manipulation to color a bottom nav when using dark theme. This hex code is designed
+    so that the bottom navigation will have the same color as the navigation bar, creating a
+    seamless edge to edge experience. -->
+    <color name="colorPrimary">#2D3134</color>
+    <color name="colorPrimaryDark">#1F2226</color>
+</resources>
