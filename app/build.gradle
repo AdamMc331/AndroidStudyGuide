@@ -24,7 +24,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "SEGMENT_API_KEY", properties.getProperty("SegmentKey"))
+        // If you want to talk to a real Segment instance, provide the `SegmentKey` in your local.properties
+        // file.
+//        buildConfigField("String", "SEGMENT_API_KEY", properties.getProperty("SegmentKey"))
+        buildConfigField("String", "SEGMENT_API_KEY", "TEST_API_KEY")
     }
 
     buildTypes {
