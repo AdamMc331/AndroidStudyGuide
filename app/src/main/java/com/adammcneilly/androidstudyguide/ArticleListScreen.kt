@@ -27,5 +27,8 @@ fun ArticleListScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues),
+        onRefresh = {
+            viewModel.refresh()
+        },
     )
 }

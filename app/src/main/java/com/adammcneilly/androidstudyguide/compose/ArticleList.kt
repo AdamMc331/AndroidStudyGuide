@@ -22,6 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.androidstudyguide.R
 import com.adammcneilly.androidstudyguide.models.Article
 import com.adammcneilly.androidstudyguide.util.HtmlString
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 val ColumnWidthKey = SemanticsPropertyKey<Float>("ColumnWidth")
 var SemanticsPropertyReceiver.columnWidth by ColumnWidthKey
@@ -35,6 +37,8 @@ fun ArticleList(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
@@ -56,6 +60,8 @@ fun ArticleList(
                     columnWidth = columnWidthPercentage
                 },
             childModifier = childModifier,
+            isRefreshing = isRefreshing,
+            onRefresh = onRefresh,
         )
     }
 }
@@ -69,27 +75,33 @@ private fun ArticleListColumn(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
-
-    LazyColumn(
-        contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.article_list_padding)),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_list_spacing)),
-        modifier = modifier,
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing),
+        onRefresh = onRefresh,
     ) {
-        items(
-            items = articles,
-            key = { article ->
-                article.toString()
-            },
-        ) { article ->
-            ArticleListItem(
-                article = article,
-                onBookmarkClicked = onBookmarkClicked,
-                onArticleClicked = onArticleClicked,
-                childModifier = childModifier,
-            )
+        LazyColumn(
+            contentPadding = PaddingValues(all = dimensionResource(id = R.dimen.article_list_padding)),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.article_list_spacing)),
+            modifier = modifier,
+        ) {
+            items(
+                items = articles,
+                key = { article ->
+                    article.toString()
+                },
+            ) { article ->
+                ArticleListItem(
+                    article = article,
+                    onBookmarkClicked = onBookmarkClicked,
+                    onArticleClicked = onArticleClicked,
+                    childModifier = childModifier,
+                )
+            }
         }
     }
 }
@@ -159,7 +171,9 @@ private fun ArticleListPreview() {
         ArticleList(
             articleList,
             onBookmarkClicked = {},
-            onArticleClicked = {}
+            onArticleClicked = {},
+            isRefreshing = false,
+            onRefresh = {},
         )
     }
 }

@@ -18,6 +18,7 @@ fun ArticleListScreenContent(
     currentState: ArticleListViewState?,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -29,6 +30,8 @@ fun ArticleListScreenContent(
                     articles = currentState.articles,
                     onBookmarkClicked = onBookmarkClicked,
                     onArticleClicked = onArticleClicked,
+                    isRefreshing = currentState.refreshing,
+                    onRefresh = onRefresh,
                 )
             }
             is ArticleListViewState.Loading -> {
@@ -49,6 +52,8 @@ fun ArticleListScreenContent(
                         highlight = PlaceholderHighlight.fade(),
                         shape = CircleShape,
                     ),
+                    isRefreshing = false,
+                    onRefresh = {},
                 )
             }
         }
