@@ -7,7 +7,10 @@ import com.adammcneilly.androidstudyguide.models.Article
  */
 sealed class ArticleListViewState {
     object Loading : ArticleListViewState()
-    data class Success(val articles: List<Article>) : ArticleListViewState()
+    data class Success(
+        val articles: List<Article>,
+        val refreshing: Boolean = false,
+    ) : ArticleListViewState()
     object Empty : ArticleListViewState()
     data class Error(val error: Throwable) : ArticleListViewState()
 }

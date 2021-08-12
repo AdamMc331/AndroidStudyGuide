@@ -20,14 +20,30 @@ fun ArticleCollection(
     articles: List<Article>,
     onBookmarkClicked: (Article) -> Unit,
     onArticleClicked: (Article) -> Unit,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
     childModifier: Modifier = Modifier,
 ) {
     val shouldShowGrid = booleanResource(id = R.bool.showArticleGrid)
 
     if (shouldShowGrid) {
-        ArticleGrid(articles, onBookmarkClicked, onArticleClicked, modifier, childModifier)
+        ArticleGrid(
+            articles = articles,
+            onBookmarkClicked = onBookmarkClicked,
+            onArticleClicked = onArticleClicked,
+            modifier = modifier,
+            childModifier = childModifier
+        )
     } else {
-        ArticleList(articles, onBookmarkClicked, onArticleClicked, modifier, childModifier)
+        ArticleList(
+            articles = articles,
+            onBookmarkClicked = onBookmarkClicked,
+            onArticleClicked = onArticleClicked,
+            isRefreshing = isRefreshing,
+            onRefresh = onRefresh,
+            modifier = modifier,
+            childModifier = childModifier
+        )
     }
 }

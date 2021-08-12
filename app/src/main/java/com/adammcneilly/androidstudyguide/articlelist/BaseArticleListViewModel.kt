@@ -39,6 +39,23 @@ abstract class BaseArticleListViewModel(
         fetchArticlesFromRepository()
     }
 
+    fun refresh() {
+        viewModelScope.launch {
+            val currentSuccessState = (_state.value as? ArticleListViewState.Success)
+            if (currentSuccessState != null) {
+                _state.value = currentSuccessState.copy(refreshing = true)
+            }
+
+            articleRepository.fetchArticles().collect { response ->
+                if (response is DataResponse.Success) {
+                    _state.value = ArticleListViewState.Success(
+                        articles = response.data,
+                    )
+                }
+            }
+        }
+    }
+
     /**
      * Whenever the user clicks the bookmark button for a specific [article], we'll toggle
      * the bookmarked state and persist it locally.
